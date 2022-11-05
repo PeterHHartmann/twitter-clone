@@ -1,0 +1,12 @@
+.app {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 4fr auto;
+  margin: auto;
+  width: fit-content;
+  height: 150vh;
+
+  @media (max-width: 1021px) {
+    grid-template-columns: 1fr 19fr;
+  }
+}

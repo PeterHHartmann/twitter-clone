@@ -1,0 +1,21 @@
+.container {
+  position: sticky;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.95);
+  $space-sides: 1rem;
+  width: 100%;
+  padding: 0 $space-sides;
+}
+
+.link {
+  font-weight: 700;
+  color: black;
+}
+
+.icon {
+  width: 1.2rem;
+}
