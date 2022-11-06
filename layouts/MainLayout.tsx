@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import LeftSidebar from '../components/LeftSidebar/LeftSidebar';
-import RightSidebar from '../components/RightSidebar';
+import NavLeft from '../components/NavLeft/NavLeft';
+import NavRight from '../components/NavRight/NavRight';
 import style from '../styles/layouts/Main.module.scss';
 
 type MainLayoutProps = {
@@ -10,9 +10,9 @@ type MainLayoutProps = {
 export default function Layout({ children }: MainLayoutProps) {
   return (
     <div className={style.app}>
-      <LeftSidebar page="/"/>
+      <NavLeft page='/' />
       {children}
-      <RightSidebar />
+      <NavRight />
     </div>
   );
 }

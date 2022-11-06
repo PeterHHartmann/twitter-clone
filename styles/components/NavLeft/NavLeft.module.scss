@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100vh;
+  padding: 0 1rem 1rem 1rem;
+  z-index: 9;
+  grid-column: 1;
+  position: sticky;
+  top: 0;
+
+  @media (max-width: 1021px) {
+    padding: 0;
+  }
+
+}
+
+.newTweet {
+  border: none;
+  padding: 1rem;
+  color: white;
+  background-color: rgb(29, 155, 240);
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 4rem;
+  margin: 0 3rem .3rem 0;
+  width: 14rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(19, 145, 230);
+    transition: all ease-in-out .1s;
+  }
+
+  @media (max-width: 1021px) {
+    margin: auto;
+
+    span {
+      display: none;
+    }
+
+    svg {
+        display: block !important;
+    }
+  }
+
+  svg {
+    fill: white;
+    width: 1.4rem;
+    height: 1.4rem;
+    display: none;
+  }
+}

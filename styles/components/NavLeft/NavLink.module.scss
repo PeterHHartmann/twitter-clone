@@ -1,0 +1,48 @@
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  border-radius: 4rem;
+  gap: 1.2rem;
+  margin: 0 3rem .3rem 0;
+  font-size: 1.275rem;
+  white-space: nowrap;
+  color: black;
+  font-weight: 400;
+
+  &[active] {
+    font-weight: 700;
+
+    svg {
+        stroke: black;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  > *:not(svg){
+    margin: .8rem;
+  }
+
+  &:first-child {
+    width: min-content;
+    padding: .7rem;
+
+    &:hover {
+        background-color: rgba(29, 155, 240, 0.1);
+    }
+
+    svg {
+        fill: rgb(29, 155, 240);
+        width: 2rem;
+    }
+  }
+
+}
+
+.icon {
+  width: 1.7rem;
+}
