@@ -1,5 +1,6 @@
 import style from '../../styles/components/NavLeft/NavLeft.module.scss'
 import NavLink from "./NavLink";
+import UserWidget from "./UserWidget";
 
 type Props = {
   page: string;
@@ -32,16 +33,19 @@ export default function NavLeft({ page }: Props) {
           <NavLink path='/profile' icon='profile'>
             <p>Profile</p>
           </NavLink>
-          <NavLink path='/' icon='misc'>
+          <NavLink path='/' icon='more'>
             <p>More</p>
           </NavLink>
+
+          {/* make this a component */}
           <button id='new-tweet-open' className={style.newTweet}>
             <span>Tweet</span>
             <svg viewBox='0 0 24 24'>
-              <use href="/icons.svg#newTweet"></use>
+              <use href='/icons.svg#newTweet'></use>
             </svg>
           </button>
         </div>
+        <UserWidget/>
       </nav>
     </div>
   );
