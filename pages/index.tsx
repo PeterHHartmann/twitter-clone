@@ -8,7 +8,7 @@ import TweetWidget from '../components/TweetWidget/TweetWidget';
 const Page: NextPageWithLayout = () => {
   return (
     <>
-      <Header name='Home' href='/' icon='/svg/stars.svg' />
+      <Header name='Home' href='/' icon='stars' />
       <TweetWidget />
     </>
   );

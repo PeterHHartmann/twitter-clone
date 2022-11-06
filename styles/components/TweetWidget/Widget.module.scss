@@ -15,77 +15,12 @@
 
 .form {
   width: calc(100% - 3rem - 1rem);
-
-  textarea {
-    display: flex;
-    justify-content: center;
-    border: none;
-    outline: none;
-    padding: 0.225rem 0;
-    font-size: 1.2rem;
-    width: 100%;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 1rem;
-    resize: none;
-    overflow: hidden;
-    min-height: 2rem;
-  }
-
 }
 
-.imgsContainer {
+.imgs {
   display: grid;
   grid-auto-flow: column;
   gap: .5rem;
-
-  // > div {
-  //   > img {
-  //       width: 100%;
-  //       max-width: 500px;
-  //       border-radius: 1rem;
-
-  //       &:only-child {
-  //         width: 100%;
-  //         max-width: 500px;
-  //         border-radius: 1rem;
-  //       }
-  //     }
-  //   > button {
-  //     width: 2.2rem;
-  //     height: 2.2rem;
-  //     border-radius: 100%;
-  //     background: rgba(0, 0, 0, 0.7);
-  //     border: none;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     transform: translateY(calc(2.2rem + 1rem));
-  //     margin-left: 1rem;
-
-  //     svg {
-  //         width: 1.2rem;
-  //         fill: white;
-  //         pointer-events: none;
-  //     }
-  //   }
-
-  // > button {
-  //   width: 2.2rem;
-  //   height: 2.2rem;
-  //   border-radius: 100%;
-  //   background: rgba(0, 0, 0, 0.7);
-  //   border: none;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   transform: translateY(calc(2.2rem + 1rem));
-  //   margin-left: 1rem;
-
-  //   svg {
-  //     width: 1.2rem;
-  //     fill: white;
-  //   }
-  // }
 }
 
 .bottom {

@@ -1,0 +1,18 @@
+.textarea {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.225rem 0;
+    padding-top: 1rem;
+
+    border: none;
+    outline: none;
+
+    font-size: 1.2rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    resize: none;
+    line-height: 1.4;
+    overflow: auto;
+    height: inherit;
+}
