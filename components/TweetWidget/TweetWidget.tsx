@@ -17,7 +17,7 @@ export default function TweetWidget() {
 
   return (
     <section className={style.section}>
-      <Image className={style.profile} src={default_pfp} alt='' width={100}/>
+      <Image className={style.profile} src={default_pfp} alt='' />
       <form className={style.form} action='POST' onSubmit={handleSubmit}>
         <TweetTextarea value={text} setValue={setText}/>
         <div className={style.imgs}>
