@@ -3,7 +3,6 @@
     "next/core-web-vitals",
     "prettier",
     "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended",
     "eslint-config-prettier"
     ]
 }
