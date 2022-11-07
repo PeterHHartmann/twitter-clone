@@ -3,6 +3,8 @@ import ButtonUploadImage from './ButtonUploadImage'
 import RemovableImage from "./RemovableImage";
 import React, { useState } from 'react';
 import TweetTextarea from "./TweetTextarea";
+import Image from 'next/image';
+import default_pfp from '../../public/img/default-pfp.jpg'
 
 export default function TweetWidget() {
   const [text, setText] = useState<string | undefined>("")
@@ -15,7 +17,7 @@ export default function TweetWidget() {
 
   return (
     <section className={style.section}>
-      <img className={style.profile} src='/img/default-pfp.jpg'></img>
+      <Image className={style.profile} src={default_pfp} alt='' width={100}/>
       <form className={style.form} action='POST' onSubmit={handleSubmit}>
         <TweetTextarea value={text} setValue={setText}/>
         <div className={style.imgs}>

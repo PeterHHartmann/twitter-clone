@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import style from '../../styles/components/TweetWidget/RemovableImage.module.scss'
 
 type Props = {
@@ -23,7 +24,7 @@ export default function RemovableImage({ images, setImages, index }: Props) {
           <use href="/icons.svg#remove"></use>
         </svg>
       </button>
-      <img className={style.img} src={images[index]} />
+      <Image className={style.img} src={images[index]} alt='' width={100} height={100}/>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import style from '../../styles/components/NavLeft/UserWidget.module.scss'
 
 import { useState } from 'react';
 import Image from 'next/image';
+import default_pfp from '../../public/img/default-pfp.jpg'
 
 export default function UserWidget() {
   const [displayLogout, setDisplayLogout] = useState(false);
@@ -20,7 +21,7 @@ export default function UserWidget() {
         </div>
       )}
       <div className={style.user} onClick={handleClick}>
-        <Image src='/img/default-pfp.jpg' alt='profile picture'/>
+        <Image src={default_pfp} alt='profile picture' />
         <div className={style.info}>
           <div>Display Name</div>
           <div>@Username</div>
