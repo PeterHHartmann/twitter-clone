@@ -25,11 +25,20 @@
 
   > *:not(svg){
     margin: 0.8rem 0;
+
+    @media (max-width: 1021px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1021px) {
+    margin: 0;
+    padding: 1rem;
   }
 
   &:first-child {
     width: min-content;
-    padding: .7rem;
+    padding: 1rem;
 
     &:hover {
         background-color: rgba(29, 155, 240, 0.1);
@@ -45,4 +54,7 @@
 
 .icon {
   width: 1.7rem;
+  @media (max-width: 1021px) {
+    width: 100%;
+  }
 }

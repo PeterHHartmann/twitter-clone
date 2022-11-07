@@ -20,6 +20,11 @@
     padding: 0;
   }
 
+  > div {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem .5rem 0 .5rem;
+  }
 }
 
 .newTweet {
@@ -41,6 +46,7 @@
 
   @media (max-width: 1021px) {
     margin: auto;
+    width: auto;
 
     span {
       display: none;
