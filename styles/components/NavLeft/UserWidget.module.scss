@@ -1,14 +1,17 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 2rem);
   border-radius: 2rem;
   cursor: pointer;
+  margin-bottom: 1rem;
+  margin-inline: 1rem;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
     transition: all ease-in-out .1s;
   }
+  
 }
 
 .logout {
