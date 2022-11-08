@@ -10,7 +10,7 @@ export default function NavLeft({ page }: Props) {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
-        <div className='nav-links'>
+        <div className={style.links}>
           <NavLink path='/' icon='logo' />
           <NavLink path='/' icon='home'>
             <p>Home</p>
@@ -38,7 +38,7 @@ export default function NavLeft({ page }: Props) {
           </NavLink>
 
           {/* make this a component */}
-          <button id='new-tweet-open' className={style.newTweet}>
+          <button className={style.newTweet}>
             <span>Tweet</span>
             <svg viewBox='0 0 24 24'>
               <use href='/icons.svg#newTweet'></use>

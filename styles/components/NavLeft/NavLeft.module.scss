@@ -10,20 +10,19 @@
   justify-content: space-between;
   align-items: flex-end;
   height: 100vh;
-  padding: 0 1rem 1rem 1rem;
+
   z-index: 9;
   grid-column: 1;
   position: sticky;
   top: 0;
+}
+
+.links {
+  display: grid;
+  padding: 0 1rem;
 
   @media (max-width: 1021px) {
-    padding: 0;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    padding: .5rem .5rem 0 .5rem;
+    padding-inline: .2rem;
   }
 }
 
@@ -35,7 +34,8 @@
   font-size: 1.2rem;
   font-weight: 500;
   border-radius: 4rem;
-  margin: 1.2rem 3rem .3rem 0;
+  margin-block: 1rem;
+  // margin: 1.2rem 3rem .3rem 0;
   width: 14rem;
   cursor: pointer;
 
@@ -46,7 +46,8 @@
 
   @media (max-width: 1021px) {
     margin: auto;
-    margin-top: .5rem;
+    margin-block: 1rem;
+    // margin-top: .5rem;
     width: auto;
 
     span {

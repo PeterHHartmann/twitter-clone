@@ -6,10 +6,18 @@
   border-radius: 4rem;
   gap: 1.2rem;
   margin: 0 3rem .3rem 0;
+  margin-block: 0 .3rem;
+  margin-inline: 0 3rem;
   font-size: 1.275rem;
   white-space: nowrap;
   color: black;
   font-weight: 400;
+
+  @media (max-width: 1021px) {
+    padding: .8rem;
+    margin-inline: 0;
+    width: min-content;
+  }
 
   &[active] {
     font-weight: 700;
@@ -23,22 +31,9 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  > *:not(svg){
-    margin: 0.8rem 0;
-
-    @media (max-width: 1021px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 1021px) {
-    margin: 0;
-    padding: 1rem;
-  }
-
   &:first-child {
     width: min-content;
-    padding: 1rem;
+    padding: .8rem;
 
     &:hover {
         background-color: rgba(29, 155, 240, 0.1);
@@ -46,15 +41,18 @@
 
     svg {
         fill: rgb(29, 155, 240);
-        width: 2rem;
     }
   }
 
+  > *:not(svg){
+    margin: 0.8rem 0;
+
+    @media (max-width: 1021px) {
+      display: none;
+    }
+  }
 }
 
 .icon {
-  width: 1.7rem;
-  @media (max-width: 1021px) {
-    width: 100%;
-  }
+  width: 1.75rem;
 }
