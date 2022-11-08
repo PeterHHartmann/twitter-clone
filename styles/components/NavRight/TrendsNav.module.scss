@@ -1,0 +1,39 @@
+.nav {
+  margin-top: 0.7rem;
+  background: rgba(0, 100, 100, 0.05);
+  border-radius: 1.1rem;
+  padding-inline: 1rem;
+
+  h3 {
+    margin-block: 1rem 0
+  }
+}
+
+.trend {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-block: 1rem;
+}
+
+.text {
+  font-size: .825rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+
+  :nth-child(2) {
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+  }
+
+  p {
+    margin-block: 0;
+  }
+}
+
+.icon {
+  width: 1.325rem;
+  fill: rgba(0, 0, 0, 0.7);
+}
+
