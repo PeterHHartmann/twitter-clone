@@ -1,13 +1,9 @@
-import type { ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
 import NavLeft from '../components/NavLeft/NavLeft';
 import NavRight from '../components/NavRight/NavRight';
 import style from '../styles/layouts/Main.module.scss';
 
-type MainLayoutProps = {
-  children: ReactNode | ReactNode[];
-};
-
-export default function Layout({ children }: MainLayoutProps) {
+export const Layout: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <div className={style.app}>
       <NavLeft page='/' />
@@ -16,3 +12,5 @@ export default function Layout({ children }: MainLayoutProps) {
     </div>
   );
 }
+
+export default Layout;
