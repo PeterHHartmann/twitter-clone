@@ -1,13 +1,12 @@
-import { ReactNode } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import style from '../../styles/components/NavLeft/NavLink.module.scss';
 
-type Props = {
+type NavLinkProps = {
   path: string;
   icon: string;
-  children?: ReactNode | ReactNode[];
 };
 
-export default function NavLink({ path, icon, children }: Props) {
+export const NavLink: React.FC<PropsWithChildren<NavLinkProps>> = ({ path, icon, children }) => {
   return (
     <a className={style.link} href={path}>
       <svg className={style.icon} viewBox='0 0 24 24'>
@@ -17,3 +16,5 @@ export default function NavLink({ path, icon, children }: Props) {
     </a>
   );
 }
+
+export default NavLink

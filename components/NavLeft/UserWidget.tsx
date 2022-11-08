@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 
-export default function UserWidget() {
+export const UserWidget: React.FC = () => {
   const [displayLogout, setDisplayLogout] = useState(false);
 
   function handleClick() {
@@ -33,3 +33,5 @@ export default function UserWidget() {
     </div>
   );
 }
+
+export default UserWidget

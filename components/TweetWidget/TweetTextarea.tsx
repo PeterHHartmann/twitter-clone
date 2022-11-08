@@ -1,12 +1,12 @@
 import style from '../../styles/components/TweetWidget/TweetTextarea.module.scss';
 import { useRef, useState } from 'react';
 
-type Props = {
+type TextareaProps = {
   value: string | undefined;
   setValue: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-export default function TweetTextarea({ value, setValue }: Props) {
+export const TweetTextarea: React.FC<TextareaProps> = ({ value, setValue }) => {
   const [rows, setRows] = useState(1);
   const textarea = useRef<HTMLTextAreaElement>(null);
 
@@ -38,3 +38,5 @@ export default function TweetTextarea({ value, setValue }: Props) {
     ></textarea>
   );
 }
+
+export default TweetTextarea

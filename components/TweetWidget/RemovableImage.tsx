@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import style from '../../styles/components/TweetWidget/RemovableImage.module.scss'
 
-type Props = {
+type RemovableImageProps = {
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   index: number
 };
 
-export default function RemovableImage({ images, setImages, index }: Props) {
+export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImages, index }) => {
 
   function handleDeleteClicked(e: React.MouseEvent) {
     e.preventDefault();
@@ -28,3 +28,5 @@ export default function RemovableImage({ images, setImages, index }: Props) {
     </div>
   );
 }
+
+export default RemovableImage

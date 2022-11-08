@@ -4,10 +4,9 @@ type HeaderProps = {
   name: string;
   href: string;
   icon?: string;
-  alt?: string;
 };
 
-export default function Header({ name, href, icon, alt }: HeaderProps) {
+export const Header: React.FC<HeaderProps> = ({ name, href, icon}) => {
   return (
     <header className={style.container}>
       <a className={style.link} href={href}>
@@ -19,3 +18,5 @@ export default function Header({ name, href, icon, alt }: HeaderProps) {
     </header>
   );
 }
+
+export default Header

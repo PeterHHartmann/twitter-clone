@@ -2,11 +2,11 @@ import style from '../../styles/components/NavLeft/NavLeft.module.scss'
 import NavLink from "./NavLink";
 import UserWidget from "./UserWidget";
 
-type Props = {
+type NavLeftProps = {
   page: string;
 };
 
-export default function NavLeft({ page }: Props) {
+export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
@@ -50,3 +50,5 @@ export default function NavLeft({ page }: Props) {
     </div>
   );
 }
+
+export default NavLeft

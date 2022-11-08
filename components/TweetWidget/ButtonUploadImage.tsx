@@ -1,12 +1,12 @@
 import React from "react";
 import style from '../../styles/components/TweetWidget/ButtonUploadImage.module.scss';
 
-type Props =  {
+type ButtonProps =  {
   images: string[]
   setImages: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-export default function ButtonUploadImage({images, setImages} : Props){
+export const ButtonUploadImage: React.FC<ButtonProps>= ({images, setImages}) => {
 
   function handleImageUpload(e: React.ChangeEvent) {
     const target = e.target as HTMLInputElement;
@@ -36,3 +36,5 @@ export default function ButtonUploadImage({images, setImages} : Props){
     </div>
   );
 }
+
+export default ButtonUploadImage

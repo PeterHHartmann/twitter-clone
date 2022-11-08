@@ -6,7 +6,7 @@ import TweetTextarea from "./TweetTextarea";
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 
-export default function TweetWidget() {
+export const TweetWidget: React.FC = () => {
   const [text, setText] = useState<string | undefined>("")
   const [images, setImages] = useState<string[]>([]);
 
@@ -35,3 +35,5 @@ export default function TweetWidget() {
     </section>
   );
 }
+
+export default TweetWidget
