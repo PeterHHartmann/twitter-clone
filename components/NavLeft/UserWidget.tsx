@@ -15,13 +15,13 @@ export const UserWidget: React.FC = () => {
     <div className={style.container}>
       {displayLogout && (
         <div className={style.logout}>
-          <a href='/logout'>
-            Logout
-          </a>
+          <a href='/logout'>Logout</a>
         </div>
       )}
       <div className={style.user} onClick={handleClick}>
-        <Image src={default_pfp} alt='profile picture' />
+        <div>
+          <Image src={default_pfp} alt='your profile picture' width={48} height={48}/>
+        </div>
         <div className={style.info}>
           <div>Display Name</div>
           <div>@Username</div>

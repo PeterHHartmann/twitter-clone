@@ -2,10 +2,11 @@
   margin-top: 0.7rem;
   background: rgba(0, 100, 100, 0.05);
   border-radius: 1.1rem;
-  padding-inline: 1rem;
+  overflow: hidden;
 
   h3 {
-    margin-block: 1rem 0
+    margin-block: 1rem .5rem;
+    padding-inline: 1rem
   }
 }
 
@@ -13,7 +14,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding-block: 1rem;
+  padding: 1rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 }
 
 .text {
@@ -35,5 +40,6 @@
 .icon {
   width: 1.325rem;
   fill: rgba(0, 0, 0, 0.7);
+  margin-block: auto;
 }
 

@@ -22,6 +22,7 @@ export const FollowNav: React.FC = () => {
       <UserLink />
       <UserLink />
       <UserLink />
+      <UserLink />
     </nav>
   );
 };

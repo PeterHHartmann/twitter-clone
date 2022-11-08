@@ -3,12 +3,12 @@ import { PropsWithChildren } from 'react';
 
 const Trend: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className={style.trend}>
+    <a className={style.trend} href="/">
       <div className={style.text}>{children}</div>
       <svg className={style.icon} viewBox='0 0 24 24'>
         <use href='/icons.svg#more'></use>
       </svg>
-    </div>
+    </a>
   );
 };
 
