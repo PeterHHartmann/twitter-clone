@@ -47,8 +47,6 @@ export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
           <NavLink path='/' icon={more}>
             <p>More</p>
           </NavLink>
-
-          {/* make this a component */}
           <button className={style.newTweet}>
             <span>Tweet</span>
             <Image src={iconPen} alt='' width={22.5} height={22.5}/>
