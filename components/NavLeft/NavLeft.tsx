@@ -22,8 +22,10 @@ export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
     <div className={style.container}>
       <nav className={style.nav}>
         <div className={style.links}>
-          <NavLink path='/' icon={logo} />
-          <NavLink path='/' icon={home}>
+          <a className={style.logo}>
+            <Image src={logo} alt='' width={28} height={28} priority={true}/>
+          </a>
+          <NavLink path='/' icon={home} isActive={true}>
             <p>Home</p>
           </NavLink>
           <NavLink path='/' icon={hashtag}>
@@ -52,7 +54,7 @@ export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
             <Image src={iconPen} alt='' width={22.5} height={22.5}/>
           </button>
         </div>
-        <UserWidget/>
+        <UserWidget></UserWidget>
       </nav>
     </div>
   );

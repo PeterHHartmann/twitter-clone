@@ -19,22 +19,8 @@
     width: min-content;
   }
 
-  &[active] {
-    font-weight: 700;
-  }
-
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  &:first-child {
-    width: min-content;
-    padding: .8rem;
-
-    &:hover {
-        background-color: rgba(29, 155, 240, 0.1);
-    }
-
   }
 
   > *:not(img){
@@ -44,4 +30,14 @@
       display: none;
     }
   }
+}
+
+.activelink {
+  @extend .link;
+  font-weight: 700;
+}
+
+.inactivelink {
+  @extend .link;
+  font-weight: 400;
 }

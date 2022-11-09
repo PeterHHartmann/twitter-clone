@@ -63,3 +63,14 @@
   }
 
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: min-content;
+  padding: 1rem;
+  border-radius: 100%;
+  &:hover {
+    background-color: rgba(29, 155, 240, 0.1);
+  }
+}
