@@ -7,7 +7,7 @@ import mail from '../../public/icon/mail.svg'
 import bookmark from '../../public/icon/bookmark.svg'
 import list from '../../public/icon/list.svg'
 import profile from '../../public/icon/profile.svg'
-import more from '../../public/icon/more.svg'
+import more from '../../public/icon/more-circle.svg'
 import iconPen from '../../public/icon/pen.svg'
 import NavLink from "./NavLink";
 import UserWidget from "./UserWidget";
