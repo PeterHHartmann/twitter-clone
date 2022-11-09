@@ -8,8 +8,10 @@ import bookmark from '../../public/icon/bookmark.svg'
 import list from '../../public/icon/list.svg'
 import profile from '../../public/icon/profile.svg'
 import more from '../../public/icon/more.svg'
+import iconPen from '../../public/icon/pen.svg'
 import NavLink from "./NavLink";
 import UserWidget from "./UserWidget";
+import Image from 'next/image'
 
 type NavLeftProps = {
   page: string;
@@ -49,9 +51,7 @@ export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
           {/* make this a component */}
           <button className={style.newTweet}>
             <span>Tweet</span>
-            <svg viewBox='0 0 24 24'>
-              <use href='/icons.svg#newTweet'></use>
-            </svg>
+            <Image src={iconPen} alt='' width={22.5} height={22.5}/>
           </button>
         </div>
         <UserWidget/>
