@@ -1,16 +1,25 @@
 import style from '../../styles/components/NavLeft/UserWidget.module.scss'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 import icon from '../../public/icon/more.svg'
 
 export const UserWidget: React.FC = () => {
   const [displayLogout, setDisplayLogout] = useState(false);
-
+  
   function handleClick() {
     setDisplayLogout(!displayLogout);
   }
+
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/account/peter@email.com', { method: 'GET', headers: {"Access-Control-Allow-Origin": "*", 'Origin': "http://localhost:8000"}})
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch(error => console.log(error))
+  // },[])
 
   return (
     <div className={style.container}>
