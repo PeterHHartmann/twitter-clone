@@ -17,9 +17,8 @@
   transform: translateY(calc(2.2rem + 1rem));
   margin-left: 1rem;  
 
-  svg {
-      width: 1.2rem;
-      pointer-events: none;
-      fill: white;
+  img {
+    pointer-events: none;
+    width: 1.2rem;
   }
 }

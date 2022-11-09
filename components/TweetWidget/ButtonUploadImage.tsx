@@ -1,5 +1,7 @@
-import React from "react";
 import style from '../../styles/components/TweetWidget/ButtonUploadImage.module.scss';
+import icon from '../../public/icon/photo.svg'
+import Image from "next/image";
+import React from "react";
 
 type ButtonProps =  {
   images: string[]
@@ -23,9 +25,7 @@ export const ButtonUploadImage: React.FC<ButtonProps>= ({images, setImages}) => 
   return (
     <div className={style.container}>
       <label className={style.label} htmlFor='upload-tweet-img'>
-        <svg className={style.icon} viewBox='0 0 24 24'>
-          <use href="/icons.svg#photo"></use>
-        </svg>
+        <Image src={icon} alt='' width={21} height={21} priority={true}/>
         <input className={style.input}
           type='file'
           accept='image/jpeg,image/png,image/webp,image/gif'

@@ -1,4 +1,6 @@
 import style from '../../styles/components/NavRight/SearchBar.module.scss'
+import icon from '../../public/icon/search.svg'
+import Image from 'next/image'
 
 export const SearchBar: React.FC = () => {
 
@@ -9,9 +11,7 @@ export const SearchBar: React.FC = () => {
     return (
         <div className={style.container}>
             <form className={style.form} onSubmit={handleSubmit}>
-                <svg className={style.icon} viewBox="0 0 24 24">
-                    <use href="/icons.svg#search"></use>
-                </svg>
+                <Image className={style.icon} src={icon} alt='' width={19} height={19} priority={true}/>
                 <input className={style.input} type='text' placeholder="Search Twitter"></input>
             </form>
         </div>

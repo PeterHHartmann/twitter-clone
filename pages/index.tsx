@@ -1,3 +1,4 @@
+import icon from '../public/icon/stars.svg'
 import type { ReactElement } from 'react';
 import type { NextPageWithLayout } from './_app';
 import DeckLayout from '../layouts/DeckLayout';
@@ -8,7 +9,7 @@ import TweetWidget from '../components/TweetWidget/TweetWidget';
 const Page: NextPageWithLayout = () => {
   return (
     <>
-      <Header name='Home' href='/' icon='stars' />
+      <Header name='Home' href='/' icon={icon} />
       <TweetWidget />
     </>
   );

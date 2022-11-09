@@ -21,10 +21,6 @@
 
   &[active] {
     font-weight: 700;
-
-    svg {
-        stroke: black;
-    }
   }
 
   &:hover {
@@ -39,9 +35,6 @@
         background-color: rgba(29, 155, 240, 0.1);
     }
 
-    svg {
-        fill: rgb(29, 155, 240);
-    }
   }
 
   > *:not(svg){
@@ -51,8 +44,4 @@
       display: none;
     }
   }
-}
-
-.icon {
-  width: 1.75rem;
 }
