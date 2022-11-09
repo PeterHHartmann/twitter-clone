@@ -14,10 +14,10 @@ import UserWidget from "./UserWidget";
 import Image from 'next/image'
 
 type NavLeftProps = {
-  page: string;
+  path: string;
 };
 
-export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
+export const NavLeft: React.FC<NavLeftProps> = ({ path }) => {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
@@ -25,28 +25,28 @@ export const NavLeft: React.FC<NavLeftProps> = ({ page }) => {
           <a className={style.logo}>
             <Image src={logo} alt='' width={28} height={28} priority={true}/>
           </a>
-          <NavLink path='/' icon={home} isActive={true}>
+          <NavLink path='/' icon={home} isActive={path === '/' ? true : false}>
             <p>Home</p>
           </NavLink>
-          <NavLink path='/' icon={hashtag}>
+          <NavLink path='/' icon={hashtag} isActive={path === '/explore' ? true : false}>
             <p>Explore</p>
           </NavLink>
-          <NavLink path='/' icon={bell}>
+          <NavLink path='/' icon={bell} isActive={path === '/notifications' ? true : false}>
             <p>Notifications</p>
           </NavLink>
-          <NavLink path='/' icon={mail}>
+          <NavLink path='/' icon={mail} isActive={path === '/messages' ? true : false}>
             <p>Messages</p>
           </NavLink>
-          <NavLink path='/' icon={bookmark}>
+          <NavLink path='/' icon={bookmark} isActive={path === '/bookmarks' ? true : false}>
             <p>Bookmarks</p>
           </NavLink>
-          <NavLink path='/' icon={list}>
+          <NavLink path='/' icon={list} isActive={path === '/lists' ? true : false}>
             <p>Lists</p>
           </NavLink>
-          <NavLink path='/profile' icon={profile}>
+          <NavLink path='/profile' icon={profile} isActive={path === '/profile' ? true : false}>
             <p>Profile</p>
           </NavLink>
-          <NavLink path='/' icon={more}>
+          <NavLink path='/' icon={more} isActive={path === '/more' ? true : false}>
             <p>More</p>
           </NavLink>
           <button className={style.newTweet}>

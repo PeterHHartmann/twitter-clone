@@ -17,7 +17,7 @@ const Page: NextPageWithLayout = () => {
 
 Page.getLayout = function getLayout(page: ReactElement) {
   return (
-    <MainLayout>
+    <MainLayout path='/'>
       <DeckLayout>{page}</DeckLayout>
     </MainLayout>
   );
