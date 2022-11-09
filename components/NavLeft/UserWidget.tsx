@@ -20,17 +20,12 @@ export const UserWidget: React.FC = () => {
         </div>
       )}
       <div className={style.user} onClick={handleClick}>
-        <div className={style.profile}>
-          <Image src={default_pfp} alt='your profile picture' width={48} height={48}/>
-        </div>
+        <Image className={style.profile} src={default_pfp} alt='your profile picture' width={48} height={48}/>
         <div className={style.info}>
-          <div>Display Name</div>
-          <div>@Username</div>
+          <div className={style.displayname}>Display Name</div>
+          <div className={style.username}>@Username</div>
         </div>
-        <svg viewBox='0 0 24 24'>
-          <use href='/icons.svg#more'></use>
-        </svg>
-        <Image src={icon} alt='' width={19} height={19} priority={true}/>
+        <Image className={style.more} src={icon} alt='' width={19} height={19} priority={true}/>
       </div>
     </div>
   );

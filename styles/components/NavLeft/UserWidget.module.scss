@@ -50,37 +50,36 @@
   gap: 1rem;
   padding: .5rem;
   border-radius: 4rem;
+}
 
-  > img {
-    margin-inline: auto 1rem;
-    filter: invert(30%);
-    @media (max-width: 1021px) {
-      display: none;
-    }
+.more {
+  margin-inline: auto 1rem;
+  filter: invert(30%);
+  @media (max-width: 1021px) {
+    display: none;
   }
 }
 
 .profile {
-  > img {
-    border-radius: 100%;
-  }
+  border-radius: 100%;
 }
 
-.info {
-  font-size: 1rem;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
-
-  > * {
-    white-space: nowrap;
-  }
-
-  div:first-child {
-    font-weight: 500;
-    color: black;
-  }
-    
+.info {    
   @media (max-width: 1021px) {
     display: none;
   }
+}
+
+.displayname {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  white-space: no-wrap;
+}
+
+.username {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  white-space: no-wrap;
 }
