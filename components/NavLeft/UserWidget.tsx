@@ -4,22 +4,14 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 import icon from '../../public/icon/more.svg'
+import { Session } from "next-auth";
 
-export const UserWidget: React.FC = () => {
+export const UserWidget: React.FC<{user: any}> = ({user}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
   
   function handleClick() {
     setDisplayLogout(!displayLogout);
   }
-
-  // useEffect(() => {
-  //   fetch('http://localhost:8000/account/peter@email.com', { method: 'GET', headers: {"Access-Control-Allow-Origin": "*", 'Origin': "http://localhost:8000"}})
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch(error => console.log(error))
-  // },[])
 
   return (
     <div className={style.container}>
@@ -31,8 +23,8 @@ export const UserWidget: React.FC = () => {
       <div className={style.user} onClick={handleClick}>
         <Image className={style.profile} src={default_pfp} alt='your profile picture' width={48} height={48}/>
         <div className={style.info}>
-          <div className={style.displayname}>Display Name</div>
-          <div className={style.username}>@Username</div>
+          <div className={style.displayname}>{user?.displayname}</div>
+          <div className={style.username}>{user?.username}</div>
         </div>
         <Image className={style.more} src={icon} alt='' width={19} height={19} priority={true}/>
       </div>

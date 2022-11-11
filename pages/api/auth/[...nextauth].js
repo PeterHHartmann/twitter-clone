@@ -23,9 +23,11 @@ export const authOptions = {
           );
           const data = await response.json()
           const user = {
-            name: data.user,
+            username: data.username,
+            displayname: data.displayname,
             access_token: data.access_token
           }
+          
           if (user) {
             return user
           }
@@ -33,7 +35,7 @@ export const authOptions = {
           return null;
           // return data.email;
         } catch(e) { 
-          // console.log(e);
+          console.log(e);
           return null;
         }
       },
@@ -42,15 +44,17 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.data = user;
-        token.access_token = user.access_token;
+        token.user = {
+          username: user.username,
+          displayname: user.displayname,
+          access_token: user.access_token
+        }
       }
       return token;
     },
     async session({ session, token }) {
-      if (token.data) {
-        session.user = token.data;
-        session.maxAge = 300;
+      if (token.user) {
+        session.user = token.user
       }
       return session;
     },

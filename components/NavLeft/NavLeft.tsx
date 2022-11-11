@@ -12,12 +12,14 @@ import iconPen from '../../public/icon/pen.svg'
 import NavLink from "./NavLink";
 import UserWidget from "./UserWidget";
 import Image from 'next/image'
+import { DefaultSession, Session } from "next-auth"
 
 type NavLeftProps = {
   path: string;
+  user: any;
 };
 
-export const NavLeft: React.FC<NavLeftProps> = ({ path }) => {
+export const NavLeft: React.FC<NavLeftProps> = ({ path, user }) => {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
@@ -54,7 +56,7 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path }) => {
             <Image src={iconPen} alt='' width={22.5} height={22.5}/>
           </button>
         </div>
-        <UserWidget></UserWidget>
+        <UserWidget user={user}></UserWidget>
       </nav>
     </div>
   );

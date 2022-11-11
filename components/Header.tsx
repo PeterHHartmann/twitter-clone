@@ -6,19 +6,17 @@ type HeaderProps = {
   name: string;
   href: string;
   icon?: any;
-  session: any;
 };
 
-export const Header: React.FC<HeaderProps> = ({ name, href, icon, session}) => {
+export const Header: React.FC<HeaderProps> = ({ name, href, icon }) => {
   return (
     <header className={style.container}>
       <a className={style.link} href={href}>
-        {/* {name} */}
-        {session.user}
-      </a>  
-      <Image src={icon} alt='' width={19} height={19} priority={true}/>
+        {name}
+      </a>
+      <Image src={icon} alt='' width={19} height={19} priority={true} />
     </header>
   );
-}
+};
 
 export default Header
