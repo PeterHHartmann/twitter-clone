@@ -1,10 +1,10 @@
 import style from '../../styles/components/NavLeft/UserWidget.module.scss'
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 import icon from '../../public/icon/more.svg'
-import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
 export const UserWidget: React.FC<{user: any}> = ({user}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
@@ -17,7 +17,7 @@ export const UserWidget: React.FC<{user: any}> = ({user}) => {
     <div className={style.container}>
       {displayLogout && (
         <div className={style.logout}>
-          <a href='/logout'>Logout</a>
+          <button onClick={() => signOut()}>Sign out</button>
         </div>
       )}
       <div className={style.user} onClick={handleClick}>

@@ -12,7 +12,7 @@ export const authOptions = {
       async authorize(credentials, _req) {
         try {
           const response = await fetch(
-            'http://localhost:8000/auth/login', 
+            'http://localhost:8000/auth/signin', 
             {
               method: 'POST', 
               headers: {
@@ -41,6 +41,9 @@ export const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/signin"
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
