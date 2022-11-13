@@ -1,6 +1,4 @@
-import style from '../styles/layouts/AuthLayout.module.scss'
 import { GetServerSideProps } from 'next';
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from 'react';
 import AuthLayout from "../layouts/AuthLayout";
