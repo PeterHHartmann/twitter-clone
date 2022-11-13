@@ -11,17 +11,20 @@ export const Home = () => {
   const { data } = useSession({
     required: true,
   });
-
-  return (
-    <MainLayout>
-      <NavLeft path="/" user={data?.user}/>
-      <DeckLayout>
-        <Header name='Home' href='/' icon={icon}/>
-        <TweetWidget />
-      </DeckLayout>
-      <NavRight />
-    </MainLayout>
-  );
+  if (data)  {
+    return (
+      <MainLayout>
+        <NavLeft path='/' user={data.user} />
+        <DeckLayout>
+          <Header name='Home' href='/' icon={icon} />
+          <TweetWidget />
+        </DeckLayout>
+        <NavRight />
+      </MainLayout>
+    );
+  } else {
+    return null
+  }
 };
 
 export default Home;
