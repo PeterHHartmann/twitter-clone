@@ -1,8 +1,9 @@
+import style from '../styles/AuthForm.module.scss';
 import { GetServerSideProps } from 'next';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
-import AuthLayout from "../layouts/AuthLayout";
-
+import AuthLayout from '../layouts/AuthLayout';
+import Link from 'next/link';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ export const SignUp = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch('http://localhost:8000/auth/signup', {
         method: 'post',
@@ -42,33 +43,85 @@ export const SignUp = () => {
         }),
       });
       if (response.status === 201) {
-        router.push('/signin')
+        router.push('/signin');
       } else if (response.status === 409) {
-        const error = await response.json();
-        setError(error.msg)
+        const body = await response.json();
+        setError(body.field);
       }
-    } catch(e) { console.log(e) }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <AuthLayout>
       {/* TODO add minmax to inputs */}
-      <form action='' method='post' onSubmit={handleSubmit}>
-        <h1>Join Twitter today</h1>
-        {error && <span>error: {error}</span>}
-        <label htmlFor='email'>
-          <span>Email</span>
-          <input type='email' name='email' value={email} onChange={handleEmailChange} required />
+      <form className={style.form} action='' method='post' onSubmit={handleSubmit}>
+        <h1 className={style.heading}>Join Twitter today</h1>
+        <label className={style.label} htmlFor='email'>
+          <span
+            className={
+              email ? (error === 'email' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
+            }
+          >
+            Email
+          </span>
+          <input
+            className={style.input}
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
         </label>
-        <label htmlFor='username'>
-          <span>Username</span>
-          <input type='text' name='username' value={username} onChange={handleUsernameChange} required />
+        <span className={style.error}>{error === 'email' ? 'Email is already taken' : ''}</span>
+        <label className={style.label} htmlFor='username'>
+          <span
+            className={
+              username ? (error === 'username' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
+            }
+          >
+            Username
+          </span>
+          <input
+            className={style.input}
+            type='text'
+            name='username'
+            value={username}
+            onChange={handleUsernameChange}
+            maxLength={50}
+            required
+          />
         </label>
-        <label htmlFor='password'>
-          <span>Password</span>
-          <input type='password' name='password' value={password} onChange={handlePasswordChange} required />
+        <span className={style.error}>{error === 'username' ? 'Username is already taken' : ''}</span>
+        <label className={style.label} htmlFor='password'>
+          <span
+            className={
+              password ? (error === 'password' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
+            }
+          >
+            Password
+          </span>
+          <input
+            className={style.input}
+            type='password'
+            name='password'
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
         </label>
-        <button type='submit'>Sign Up</button>
+        <span className={style.error}>{}</span>
+        <button className={style.button} type='submit'>
+          Sign Up
+        </button>
+        <span className={style.option}>
+          Already have an account?{' '}
+          <Link href={'/signin'} prefetch={false}>
+            Sign in
+          </Link>
+        </span>
       </form>
     </AuthLayout>
   );

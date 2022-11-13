@@ -1,7 +1,9 @@
+import style from '../styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getCsrfToken, getSession } from "next-auth/react";
-import { FormEvent, useState } from "react";
-import AuthLayout from "../layouts/AuthLayout";
+import { getCsrfToken, getSession } from 'next-auth/react';
+import { FormEvent, useState } from 'react';
+import AuthLayout from '../layouts/AuthLayout';
+import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req, res } = context;
@@ -12,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       redirect: {
         destination: '/',
       },
-      props: {}
+      props: {},
     };
   }
   const csrfToken = await getCsrfToken(context);
@@ -25,51 +27,50 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
   const [error, setError] = useState('');
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleUsernameChange = (e: FormEvent<HTMLInputElement>) => {
-    setUsername(e.currentTarget.value)
-  }
+  const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+  };
 
   const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value)
-  }
+    setPassword(e.currentTarget.value);
+  };
 
   return (
     <AuthLayout>
-      <h1>Sign in to Twitter</h1>
+      <h1 className={style.heading}>Sign in to Twitter</h1>
       {error && <span>error: {error}</span>}
-      <form action='/api/auth/callback/credentials' method='post' autoComplete='off'>
-        <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete="off"/>
-        <input type='hidden' value='something' />
-        <label htmlFor='email'>
-          <span>Username</span>
-          <input 
-            name='email' 
-            type='text' 
-            value={ username } 
-            onChange={handleUsernameChange} 
-            autoComplete="off"
-            required 
-            />
+      <form className={style.form} action='/api/auth/callback/credentials' method='post' autoComplete='off'>
+        <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
+        <label className={style.label} htmlFor='email'>
+          <span className={email ? style.spanAfterInput : style.spanNoInput}>Email</span>
+          <input className={style.input} name='email' type='text' value={email} onChange={handleEmailChange} required />
         </label>
-        <label htmlFor='password'>
-          <span>Password</span>
-          <input 
-            type='password' 
-            name='password' 
-            value={ password } 
-            onChange={handlePasswordChange} 
-            autoComplete="off"
-            required />
+        <label className={style.label} htmlFor='password'>
+          <span className={password ? style.spanAfterInput : style.spanNoInput}>Password</span>
+          <input
+            className={style.input}
+            type='password'
+            name='password'
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
         </label>
-        <button type='submit'>Sign in</button>
+        <button className={style.button} type='submit'>
+          Sign in
+        </button>
+        <span className={style.option}>
+          Don't have an account?{' '}
+          <Link href={'/signup'} prefetch={false}>
+            Sign up
+          </Link>
+        </span>
       </form>
     </AuthLayout>
   );
 };
-
-
 
 export default SignIn;

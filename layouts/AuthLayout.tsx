@@ -7,7 +7,7 @@ export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <main className={style.main}>
       <div className={style.container}>
-        <Image src={logo} alt='' width={28} height={28} priority={true}/>
+        <Image src={logo} alt='' width={28} height={28} />
         {children}
       </div>
     </main>
