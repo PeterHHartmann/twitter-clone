@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
 
+//TODO maybe get rid of next auth, manage session only on API
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -21,19 +23,21 @@ export const authOptions = {
               body: JSON.stringify(credentials)
             }
           );
-          const data = await response.json()
-          const user = {
-            username: data.username,
-            displayname: data.displayname,
-            access_token: data.access_token
+          if (response.status === 200) {
+            console.log('we got here');
+            const data = await response.json();
+            // const user = {
+            //   username: data.username,
+            //   displayname: data.displayname,
+            //   access_token: data.access_token,
+            // };
+            return {
+              username: data.username,
+              displayname: data.displayname,
+              access_token: data.access_token,
+            };
           }
-          
-          if (user) {
-            return user
-          }
-
-          return null;
-          // return data.email;
+          return Promise.reject(new Error('Wrong email or password'))
         } catch(e) { 
           console.log(e);
           return null;
