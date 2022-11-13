@@ -55,7 +55,6 @@ export const SignUp = () => {
 
   return (
     <AuthLayout>
-      {/* TODO add minmax to inputs */}
       <form className={style.form} action='' method='post' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Join Twitter today</h1>
         <label className={style.label} htmlFor='email'>
