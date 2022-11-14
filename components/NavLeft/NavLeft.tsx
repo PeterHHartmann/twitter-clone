@@ -12,7 +12,7 @@ import iconPen from '../../public/icon/pen.svg'
 import NavLink from "./NavLink";
 import UserWidget from "./UserWidget";
 import Image from 'next/image'
-import { DefaultSession, Session } from "next-auth"
+import Link from "next/link"
 
 type NavLeftProps = {
   path: string;
@@ -24,9 +24,9 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, user }) => {
     <div className={style.container}>
       <nav className={style.nav}>
         <div className={style.links}>
-          <a className={style.logo}>
+          <Link className={style.logo} href='/' prefetch={false}>
             <Image src={logo} alt='' width={28} height={28} priority={true}/>
-          </a>
+          </Link>
           <NavLink path='/' icon={home} isActive={path === '/' ? true : false}>
             <p>Home</p>
           </NavLink>
