@@ -1,0 +1,65 @@
+.nav {
+  margin-top: 1rem;
+  background: rgba(0, 100, 100, 0.05);
+  border-radius: 1.1rem;
+  overflow: hidden;
+
+  h3 {
+    margin-block: 1rem .75rem;
+    padding-inline: 1rem;
+  }
+
+  > .user {
+    padding: 1rem;
+  }
+}
+
+.user {
+  display: flex;
+  gap: .8rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.img {
+  border-radius: 100%;
+}
+
+.displayname {
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  margin: 0;
+
+  &:hover {
+      text-decoration: underline;
+  }
+}
+
+.username {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.button {
+  height: fit-content;
+  padding: .5rem 1rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: auto;
+  margin-block: auto;
+
+  background: black;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+      background: rgba(0, 0, 0, .8);
+  }
+}

@@ -1,10 +1,8 @@
-import style from '../styles/layouts/Deck.module.scss';
-import type { ReactNode } from 'react';
+import style from '../styles/layouts/DeckLayout.module.scss';
+import type { PropsWithChildren } from 'react';
 
-type DeckLayoutProps = {
-  children: ReactNode | ReactNode[];
+export const DeckLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  return <main className={style.deck}>{children}</main>;
 };
 
-export default function DeckLayout({ children }: DeckLayoutProps) {
-  return <main className={style.deck}>{children}</main>;
-}
+export default DeckLayout;

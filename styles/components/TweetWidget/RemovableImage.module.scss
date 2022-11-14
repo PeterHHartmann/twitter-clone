@@ -1,5 +1,6 @@
 .img {
   width: 100%;
+  height: auto;
   max-width: 500px;
   border-radius: 1rem;
 }
@@ -16,9 +17,8 @@
   transform: translateY(calc(2.2rem + 1rem));
   margin-left: 1rem;  
 
-  svg {
-      width: 1.2rem;
-      fill: white;
-      pointer-events: none;
+  img {
+    pointer-events: none;
+    width: 1.2rem;
   }
 }

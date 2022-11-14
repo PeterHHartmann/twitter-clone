@@ -1,18 +1,10 @@
-import type { ReactNode } from 'react';
-import LeftSidebar from '../components/LeftSidebar';
-import RightSidebar from '../components/RightSidebar';
-import style from '../styles/layouts/Main.module.scss';
+import type { PropsWithChildren } from 'react';
+import style from '../styles/layouts/MainLayout.module.scss';
 
-type MainLayoutProps = {
-  children: ReactNode | ReactNode[];
-};
-
-export default function Layout({ children }: MainLayoutProps) {
+export const Layout: React.FC<PropsWithChildren> = ({children}) => {
   return (
-    <div className={style.app}>
-      <LeftSidebar />
-      {children}
-      <RightSidebar />
-    </div>
+    <div className={style.app}>{children}</div>
   );
 }
+
+export default Layout;

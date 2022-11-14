@@ -1,0 +1,43 @@
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  border-radius: 4rem;
+  gap: 1.2rem;
+  margin: 0 3rem .3rem 0;
+  margin-block: 0 .3rem;
+  margin-inline: 0 3rem;
+  font-size: 1.275rem;
+  white-space: nowrap;
+  color: black;
+  font-weight: 400;
+
+  @media (max-width: 1021px) {
+    padding: .8rem;
+    margin-inline: 0;
+    width: min-content;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  > *:not(img){
+    margin: 0.8rem 0;
+
+    @media (max-width: 1021px) {
+      display: none;
+    }
+  }
+}
+
+.activelink {
+  @extend .link;
+  font-weight: 700;
+}
+
+.inactivelink {
+  @extend .link;
+  font-weight: 400;
+}

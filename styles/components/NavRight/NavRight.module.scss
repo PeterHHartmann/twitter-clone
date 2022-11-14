@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+
+    @media (max-width: 1021px) {
+        display: none;
+    }
+
+    > div {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        padding: 0 0 1rem 2rem;
+        z-index: 9;
+        grid-column: 3;
+        width: 24rem;
+    }
+}

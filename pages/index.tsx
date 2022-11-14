@@ -1,25 +1,30 @@
-import type { ReactElement } from 'react';
-import type { NextPageWithLayout } from './_app';
+import icon from '../public/icon/stars.svg'
 import DeckLayout from '../layouts/DeckLayout';
 import MainLayout from '../layouts/MainLayout';
 import Header from '../components/Header';
-import TweetForm from "../components/TweetForm";
+import TweetWidget from '../components/TweetWidget/TweetWidget';
+import { useSession } from "next-auth/react";
+import NavLeft from "../components/NavLeft/NavLeft";
+import NavRight from '../components/NavRight/NavRight';
 
-const Page: NextPageWithLayout = () => {
-  return (
-    <>
-      <Header name='Home' href='/' icon='/svg/stars.svg' />
-      <TweetForm />
-    </>
-  );
+export const Home = () => {
+  const { data } = useSession({
+    required: true,
+  });
+  if (data)  {
+    return (
+      <MainLayout>
+        <NavLeft path='/' user={data.user} />
+        <DeckLayout>
+          <Header name='Home' href='/' icon={icon} />
+          <TweetWidget />
+        </DeckLayout>
+        <NavRight />
+      </MainLayout>
+    );
+  } else {
+    return null
+  }
 };
 
-Page.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <MainLayout>
-      <DeckLayout>{page}</DeckLayout>
-    </MainLayout>
-  );
-};
-
-export default Page;
+export default Home;
