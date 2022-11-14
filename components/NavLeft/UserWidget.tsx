@@ -8,8 +8,8 @@ import { signOut } from "next-auth/react";
 
 export const UserWidget: React.FC<{user: any}> = ({user}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
-  
-  function handleClick() {
+
+  const handleClick = () => {
     setDisplayLogout(!displayLogout);
   }
 
