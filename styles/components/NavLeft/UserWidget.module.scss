@@ -1,4 +1,4 @@
-.container {
+%container {
   display: flex;
   flex-direction: column;
   width: calc(100% - 2rem);
@@ -16,7 +16,16 @@
     background-color: rgba(0, 0, 0, 0.1);
     transition: all ease-in-out .1s;
   }
-  
+}
+
+.closed {
+  @extend %container;
+  background-color: unset;
+}
+
+.open {
+  @extend %container;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .logout {
@@ -31,6 +40,7 @@
     padding: .5rem 1rem;
     border-radius: 3rem;
     font-weight: 700;
+    white-space: nowrap;
     cursor: pointer;
 
     background: black;
@@ -40,6 +50,11 @@
     &:hover {
         background: rgba(0, 0, 0, .8);
     }
+  }
+  @media (max-width: 1021px) {
+    position: fixed;
+    transform: translateY(-4rem);
+    padding-inline: .5rem;
   }
 }
 
