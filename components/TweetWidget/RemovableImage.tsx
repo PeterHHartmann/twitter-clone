@@ -15,7 +15,7 @@ export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImage
     const target = e.target as HTMLElement;
     const parent = target.parentElement;
     const index = Number(parent?.dataset.index);
-    setImages(images.filter((image) => images.indexOf(image) !== index));
+    setImages(images.filter((_, i) => i !== index));
   }
 
   return (
