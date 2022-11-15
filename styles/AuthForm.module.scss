@@ -19,13 +19,6 @@
   margin-top: .75rem;
   height: 4rem;
 
-  span {
-    color: rgba(0, 0, 0, 0.7);
-    user-select: none;
-    pointer-events: none;
-    margin-block: auto;
-  }
-
   &:focus-within span {
       color: rgba(29, 155, 240);
       font-weight: 500;
@@ -34,7 +27,15 @@
   }
 }
 
+%span {
+    color: rgba(0, 0, 0, 0.7);
+    user-select: none;
+    pointer-events: none;
+    margin-block: auto;
+}
+
 .spanNoInput{
+  @extend %span;
   font-size: 1.1rem;
   transform: translateY(1rem);
   transition-property: transform, font-size;
@@ -43,12 +44,14 @@
 }
 
 .spanAfterInput {
+  @extend %span;
   font-weight: 500;
   font-size: .8rem;
   transform: translateY(0);
 }
 
 .spanAfterInputError {
+  @extend %span;
   color: red !important;
   font-weight: 500;
   font-size: .8rem;
@@ -68,7 +71,6 @@
   color: red;
   margin-top: .2rem;
   font-size: .8rem;
-  // min-height: calc(.2rem + .8rem);
   padding-inline: .5rem;
 }
 
