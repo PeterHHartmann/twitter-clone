@@ -1,35 +1,39 @@
 import style from '../styles/AuthForm.module.scss';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import Link from 'next/link';
 
-export const SignUp = () => {
+export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null)
+  const refEmail = useRef<HTMLInputElement>(null);
+  const refUsername = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
     setEmail(value);
   };
 
   const handleUsernameChange = (e: FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
     setUsername(value);
   };
 
   const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
     setPassword(value);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const response = await fetch('http://localhost:8000/auth/signup', {
         method: 'post',
@@ -45,28 +49,57 @@ export const SignUp = () => {
       if (response.status === 201) {
         router.push('/signin');
       } else if (response.status === 409) {
-        const body = await response.json();
-        setError(body.field);
+        const { error } = await response.json();
+        setEmailError(null);
+        setUsernameError(null);
+        if (error.target === 'email') {
+          setEmailError(error.msg)
+        }
+        if (error.target === 'username') {
+          setUsernameError(error.msg)
+        }
       }
     } catch (e) {
       console.log(e);
     }
   };
 
+  useEffect(() => {
+    if (emailError) {
+      setEmailError(null);
+    }
+
+    const timeout = setTimeout(() => {
+      if (email && !refEmail.current?.checkValidity()) {
+        console.count('setting error');
+        setEmailError('Please enter a valid email')
+      }
+    }, 500);
+    return () => {clearTimeout(timeout)}
+  }, [email])
+
+  useEffect(() => {
+    if (usernameError) {
+      setUsernameError(null);
+    }
+
+    const timeout = setTimeout(() => {
+      if (username && !refUsername.current?.checkValidity()) {
+        setUsernameError('Please enter a valid email')
+      }
+    }, 500);
+    return () => {clearTimeout(timeout)}
+  }, [email])
+
   return (
     <AuthLayout>
       <form className={style.form} action='' method='post' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Join Twitter today</h1>
-        <label className={style.label} htmlFor='email'>
-          <span
-            className={
-              email ? (error === 'email' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
-            }
-          >
-            Email
-          </span>
+        <label className={style.label} htmlFor='email' data-error={email ? (emailError ? true : false) : null}>
+          <span>Email</span>
           <input
             className={style.input}
+            ref={refEmail}
             type='email'
             name='email'
             value={email}
@@ -74,17 +107,16 @@ export const SignUp = () => {
             required
           />
         </label>
-        <span className={style.error}>{error === 'email' ? 'Email is already taken' : ''}</span>
-        <label className={style.label} htmlFor='username'>
-          <span
-            className={
-              username ? (error === 'username' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
-            }
-          >
-            Username
-          </span>
+        <span className={style.error}>{emailError ? emailError : null}</span>
+        <label
+          className={style.label}
+          htmlFor='username'
+          data-error={username ? (usernameError ? true : false) : null}
+        >
+          <span>Username</span>
           <input
             className={style.input}
+            ref={refUsername}
             type='text'
             name='username'
             value={username}
@@ -93,15 +125,12 @@ export const SignUp = () => {
             required
           />
         </label>
-        <span className={style.error}>{error === 'username' ? 'Username is already taken' : ''}</span>
-        <label className={style.label} htmlFor='password'>
-          <span
-            className={
-              password ? (error === 'password' ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
-            }
-          >
-            Password
-          </span>
+        <span className={style.error}>{usernameError ? usernameError : null}</span>
+        <label
+          className={style.label}
+          htmlFor='password'
+        >
+          <span>Password</span>
           <input
             className={style.input}
             type='password'
