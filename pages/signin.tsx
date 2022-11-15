@@ -40,6 +40,11 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
     setEmail(value);
   };
 
+  const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    setPassword(value);
+  };
+
   useEffect(() => {
     if (emailError) {
       setEmailError(null);
@@ -54,10 +59,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
     };
   }, [email]);
 
-  const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    setPassword(value);
-  };
+
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,7 +86,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
         <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
         <label className={style.label} htmlFor='email' data-error={email ? (error || emailError ? true : false) : null}>
-          <span className={style.span}>Email</span>
+          <span>Email</span>
           <input
             className={style.input}
             id='email'
@@ -96,7 +98,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
             required
           />
         </label>
-        <span className={style.error}>{emailError ? emailError : null}</span>
+        <span>{emailError ? emailError : null}</span>
         <label
           className={style.label}
           htmlFor='password'
