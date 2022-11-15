@@ -6,12 +6,6 @@ import AuthLayout from '../layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-enum ErrorType {
-  ANY = 'any',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-}
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req, res } = context;
 
@@ -33,29 +27,36 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
-  const [error, setError] = useState('');
-  const [validEmail, setValidEmail] = useState(false)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null)
   const router = useRouter();
-  const emailSpan = useRef<HTMLSpanElement>(null);
-  const emailInput = useRef<HTMLInputElement>(null);
-
-  const handleEmailChange = async (e: FormEvent<HTMLInputElement>) => {
-    emailSpan.current!.className = style.spanAfterInput
+  const inputRef = useRef<HTMLInputElement>(null);
+  
+  const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const { value } = target;
-    if (value){
-      console.log('no value');
-      
-      setValidEmail(target.checkValidity());
-    } else {
-      console.log('value');
-      setValidEmail(true)
-    }
-    console.log(value);
     setEmail(value);
   };
+
+  useEffect(() => {
+    console.count('mounting');
+    if (emailError) {
+      setEmailError(null);
+    }
+    const timeout = setTimeout(() => {
+      if (inputRef.current?.value) {
+        if(!inputRef.current?.checkValidity()){
+          console.count('setting error');
+          setEmailError('Please enter a valid email');
+        }
+      }
+    }, 500);
+    return () => {
+      console.count('unmounting');
+      clearTimeout(timeout)};
+  }, [email])
 
   const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -64,7 +65,6 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
     const response = await signIn('credentials', {
       redirect: false,
       email: email,
@@ -77,25 +77,9 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
         setError(response.error as string);
       }
     } else {
-      setError('Something went wrong\n Please try again later');
+      setError('Something went wrong. Please try again later');
     }
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      const current = emailSpan.current!
-      if (email) {
-        if (error) {
-          current.className = style.spanAfterInputError;
-        } else {
-          current.className = validEmail ? style.spanAfterInput : style.spanAfterInputError;
-        }
-      } else {
-        console.log('input is empty');
-        current.className = style.spanNoInput;
-      }
-    }, 500)
-  }, [validEmail])
 
   return (
     <AuthLayout>
@@ -103,24 +87,26 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
       {error ? <span className={style.error}>{error}</span> : null}
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
         <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
-        <label className={style.label} htmlFor='email'>
-          <span
-            className={email ? (error ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput}
-            ref={emailSpan}
-          >
-            Email
-          </span>
+        <label className={style.label} htmlFor='email' data-error={email ? (error || emailError ? true : false) : null}>
+          <span className={style.span}>Email</span>
           <input
             className={style.input}
+            id='email'
             name='email'
             type='email'
             value={email}
             onChange={handleEmailChange}
+            ref={inputRef}
             required
           />
         </label>
-        <label className={style.label} htmlFor='password'>
-          <span className={password ? (error ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput}>
+        <span className={style.error}>{emailError && null}</span>
+        <label
+          className={style.label}
+          htmlFor='password'
+          data-error={password ? (error ? true : false) : null}
+        >
+          <span className={style.span} data-error={error ? true : false}>
             Password
           </span>
           <input
@@ -129,6 +115,8 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
             name='password'
             value={password}
             onChange={handlePasswordChange}
+            id='current-password'
+            autoComplete='current-password'
             required
           />
         </label>

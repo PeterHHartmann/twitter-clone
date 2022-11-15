@@ -12,50 +12,59 @@
   grid-auto-flow: row;
   grid-template-rows: 1fr 2fr;
   width: 100%;
-  border: solid rgba(0, 0, 0, 0.2) 1px;
+  outline: solid rgba(0, 0, 0, 0.2) 1px;
+
   border-radius: .375rem;
   padding-top: .25rem;
   padding-inline: .5rem;
   margin-top: .75rem;
   height: 4rem;
 
-  &:focus-within span {
+  span {
+    user-select: none;
+    pointer-events: none;
+    margin-block: auto;
+    font-size: 1.1rem;
+    transform: translateY(1rem);
+    transition-property: transform, font-size;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+  }
+
+  &[data-error=false]{
+    span {
       color: rgba(29, 155, 240);
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
+    }
   }
-}
 
-%span {
-    color: rgba(0, 0, 0, 0.7);
-    user-select: none;
-    pointer-events: none;
-    margin-block: auto;
-}
+  &[data-error=true]{
+    outline: solid red 2px;
+    span {
+      color: red!important;
+      font-weight: 500;
+      font-size: .8rem;
+      transform: translateY(0);
+    }
+  }
 
-.spanNoInput{
-  @extend %span;
-  font-size: 1.1rem;
-  transform: translateY(1rem);
-  transition-property: transform, font-size;
-  transition-duration: .2s;
-  transition-timing-function: ease-in-out;
-}
+  &:focus-within {
+    span {
+      color: rgba(29, 155, 240);
+      font-weight: 500;
+      font-size: .8rem;
+      transform: translateY(0);
+    }
 
-.spanAfterInput {
-  @extend %span;
-  font-weight: 500;
-  font-size: .8rem;
-  transform: translateY(0);
-}
-
-.spanAfterInputError {
-  @extend %span;
-  color: red !important;
-  font-weight: 500;
-  font-size: .8rem;
-  transform: translateY(0);
+    &[data-error=true]{
+      outline: solid red 2px;
+    }
+    &[data-error=false]{
+      outline: solid rgba(29, 155, 240) 2px;
+    }
+  }
 }
 
 .input {
@@ -69,9 +78,12 @@
 
 .error {
   color: red;
-  margin-top: .2rem;
   font-size: .8rem;
+  padding-block: .2rem 0;
   padding-inline: .5rem;
+  &:empty:before {
+    content: "\200b";
+  }
 }
 
 .button {
