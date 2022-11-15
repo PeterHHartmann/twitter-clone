@@ -41,22 +41,18 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
   };
 
   useEffect(() => {
-    console.count('mounting');
     if (emailError) {
       setEmailError(null);
     }
-    const timeout = setTimeout(() => {
-      if (inputRef.current?.value) {
-        if(!inputRef.current?.checkValidity()){
-          console.count('setting error');
-          setEmailError('Please enter a valid email');
-        }
+    const timeout = setTimeout(() => { 
+      if (email && !inputRef.current?.checkValidity()) {
+        setEmailError('Please enter a valid email');
       }
     }, 500);
     return () => {
-      console.count('unmounting');
-      clearTimeout(timeout)};
-  }, [email])
+      clearTimeout(timeout);
+    };
+  }, [email]);
 
   const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -100,7 +96,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
             required
           />
         </label>
-        <span className={style.error}>{emailError && null}</span>
+        <span className={style.error}>{emailError ? emailError : null}</span>
         <label
           className={style.label}
           htmlFor='password'
