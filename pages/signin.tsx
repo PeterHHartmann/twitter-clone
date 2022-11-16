@@ -1,6 +1,6 @@
 import style from '../styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getCsrfToken, getSession, signIn } from 'next-auth/react';
+import { getCsrfToken, getSession, signIn, SignInResponse } from 'next-auth/react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import Link from 'next/link';
@@ -59,24 +59,26 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
     };
   }, [email]);
 
-
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await signIn('credentials', {
-      redirect: false,
-      email: email,
-      password: password,
-    });
-    if (response) {
-      if (response.status === 200) {
-        router.push('/');
-      } else {
-        setError(response.error as string);
+    try {
+      const response = await signIn('credentials', {
+        redirect: false,
+        email: email,
+        password: password,
+      });
+      if (response) {
+        if (response.status === 200) {
+          router.push('/');
+        } else if (response.status === 422) {
+          setError(response.error as string);
+        }
       }
-    } else {
+    } catch(e) {
+      console.log(e);
       setError('Something went wrong. Please try again later');
     }
+
   };
 
   return (
@@ -91,14 +93,14 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
             className={style.input}
             id='email'
             name='email'
-            type='email'
+            type='text'
             value={email}
             onChange={handleEmailChange}
             ref={inputRef}
-            required
+            // required
           />
         </label>
-        <span>{emailError ? emailError : null}</span>
+        <span className={style.error}>{emailError ? emailError : null}</span>
         <label
           className={style.label}
           htmlFor='password'
@@ -115,7 +117,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
             onChange={handlePasswordChange}
             id='current-password'
             autoComplete='current-password'
-            required
+            // required
           />
         </label>
         <button className={style.button} type='submit'>

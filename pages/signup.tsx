@@ -58,6 +58,9 @@ export const SignUp: React.FC = () => {
         if (error.target === 'username') {
           setUsernameError(error.msg)
         }
+      } else {
+        const body = await response.json();
+        console.log(body);
       }
     } catch (e) {
       console.log(e);
@@ -100,7 +103,7 @@ export const SignUp: React.FC = () => {
           <input
             className={style.input}
             ref={refEmail}
-            type='email'
+            type='text'
             name='email'
             value={email}
             onChange={handleEmailChange}

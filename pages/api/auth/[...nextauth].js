@@ -30,10 +30,12 @@ export const authOptions = {
               displayname: data.displayname,
               access_token: data.access_token,
             };
+          } else {
+            const { error } = await response.json();
+            return Promise.reject(new Error(error))
           }
-          return Promise.reject(new Error('Wrong email or password'))
         } catch(e) { 
-          return null;
+          return Promise.reject(new Error('Something went wrong please try again later'));
         }
       },
     }),
