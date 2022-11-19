@@ -8,13 +8,14 @@ import NavLeft from "../components/NavLeft/NavLeft";
 import NavRight from '../components/NavRight/NavRight';
 
 export const Home = () => {
-  const { data } = useSession({
+  const { data: session, status } = useSession({
     required: true,
   });
-  if (data)  {
+
+  if (status === 'authenticated') {
     return (
       <MainLayout>
-        <NavLeft path='/' user={data.user} />
+        <NavLeft path='/' user={session.user} />
         <DeckLayout>
           <Header name='Home' href='/' icon={icon} />
           <TweetWidget />
@@ -22,9 +23,8 @@ export const Home = () => {
         <NavRight />
       </MainLayout>
     );
-  } else {
-    return null
   }
+  return <span>Redirecting</span>
 };
 
 export default Home;
