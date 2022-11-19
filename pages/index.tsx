@@ -3,28 +3,28 @@ import DeckLayout from '../layouts/DeckLayout';
 import MainLayout from '../layouts/MainLayout';
 import Header from '../components/Header';
 import TweetWidget from '../components/TweetWidget/TweetWidget';
-import { useSession } from "next-auth/react";
 import NavLeft from "../components/NavLeft/NavLeft";
 import NavRight from '../components/NavRight/NavRight';
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { getSession } from "../service/session-service";
 
-export const Home = () => {
-  const { data: session, status } = useSession({
-    required: true,
-  });
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
+  const session = await getSession(req, res)
+  if (!session) return { redirect: { destination: '/signin', permanent: true } };
+  return { props: {session}}
+}
 
-  if (status === 'authenticated') {
-    return (
-      <MainLayout>
-        <NavLeft path='/' user={session.user} />
-        <DeckLayout>
-          <Header name='Home' href='/' icon={icon} />
-          <TweetWidget />
-        </DeckLayout>
-        <NavRight />
-      </MainLayout>
-    );
-  }
-  return <span>Redirecting</span>
+export const Home: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({session}) => {
+  return (
+    <MainLayout>
+      <NavLeft path='/' user={session} />
+      <DeckLayout>
+        <Header name='Home' href='/' icon={icon} />
+        <TweetWidget />
+      </DeckLayout>
+      <NavRight />
+    </MainLayout>
+  );
 };
 
 export default Home;

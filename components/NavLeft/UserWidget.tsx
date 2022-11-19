@@ -4,20 +4,27 @@ import { useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '../../public/img/default-pfp.jpg'
 import icon from '../../public/icon/more.svg'
-import { signOut } from "next-auth/react";
+import { deleteSession } from "../../service/session-service";
+import { useRouter } from "next/router";
 
 export const UserWidget: React.FC<{user: any}> = ({user}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
+  const router = useRouter();
 
   const handleClick = () => {
     setDisplayLogout(!displayLogout);
+  }
+
+  const signOut = () => {
+    deleteSession();
+    router.push('/signin')
   }
 
   return (
     <div className={displayLogout ? style.open : style.closed}>
       {displayLogout && (
         <div className={style.logout}>
-          <button onClick={() => signOut()}>Sign out</button>
+          <button onClick={signOut}>Sign out</button>
         </div>
       )}
       <div className={style.user} onClick={handleClick}>

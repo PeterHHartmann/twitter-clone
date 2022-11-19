@@ -1,10 +1,11 @@
 import style from '../styles/AuthForm.module.scss';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import Link from 'next/link';
 
-export const SignUp: React.FC = () => {
+export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -111,11 +112,7 @@ export const SignUp: React.FC = () => {
           />
         </label>
         <span className={style.error}>{emailError ? emailError : null}</span>
-        <label
-          className={style.label}
-          htmlFor='username'
-          data-error={username ? (usernameError ? true : false) : null}
-        >
+        <label className={style.label} htmlFor='username' data-error={username ? (usernameError ? true : false) : null}>
           <span>Username</span>
           <input
             className={style.input}
@@ -129,10 +126,7 @@ export const SignUp: React.FC = () => {
           />
         </label>
         <span className={style.error}>{usernameError ? usernameError : null}</span>
-        <label
-          className={style.label}
-          htmlFor='password'
-        >
+        <label className={style.label} htmlFor='password'>
           <span>Password</span>
           <input
             className={style.input}
