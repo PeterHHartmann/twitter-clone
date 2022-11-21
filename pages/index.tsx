@@ -6,15 +6,18 @@ import TweetWidget from '@/components/TweetWidget/TweetWidget';
 import NavLeft from '@/components/NavLeft/NavLeft';
 import NavRight from '@/components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@/services/session-service';
+import { getSession } from '@/services/auth';
+import useSWR from 'swr'
+import { getToken } from "@/services/auth";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession(req, res);
-  if (!session) return { redirect: { destination: '/signin', permanent: true } };
-  return { props: { session } };
+  const session = await getSession(req)
+  if (!session) return { redirect: { destination: '/signin', permanent: false}}
+  return { props: { session: session } };
 };
 
-export const Home: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ session }) => {
+export const Home: React.FC<InferGetServerSidePropsType<any>> = ({session}) => {
+
   return (
     <MainLayout>
       <NavLeft path='/' user={session} />

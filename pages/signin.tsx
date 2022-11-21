@@ -4,10 +4,10 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '@/layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSession, setSession } from '@/services/session-service';
+import { getSession } from '@/services/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession(req, res);
+  const session = await getSession(req);
   if (session) return { redirect: { destination: '/', permanent: true }};
   return { props: {}};
 };
@@ -45,28 +45,23 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
     };
   }, [email]);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/auth/signin', {
+      const response = await fetch('/api/auth/signin', {
         method: 'post',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email: email, password: password }),
       });
-      if (response) {
-        if (response.status === 200) {
-          const { session, expires } = await response.json();
-          setSession(session, expires)
-          router.push('/');
-        } else if (response.status === 422) {
-          const { error } = await response.json();
-          setError(error as string);
-        }
+      if (response.ok) {
+        router.push('/');
+      } else {
+        const { error } = await response.json();
+        setError(error as string);
       }
     } catch (e) {
-      console.log(e);
       setError('Something went wrong. Please try again later');
     }
   };

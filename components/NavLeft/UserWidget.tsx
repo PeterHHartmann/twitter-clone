@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import default_pfp from '@/public/img/default-pfp.jpg'
 import icon from '@/public/icon/more.svg'
-import { deleteSession } from '@/services/session-service';
 import { useRouter } from "next/router";
 
 export const UserWidget: React.FC<{user: any}> = ({user}) => {
@@ -14,9 +13,17 @@ export const UserWidget: React.FC<{user: any}> = ({user}) => {
     setDisplayLogout(!displayLogout);
   }
 
-  const signOut = () => {
-    deleteSession();
-    router.push('/signin')
+  const signOut = async () => {
+    try {
+      const response = await fetch('/api/auth/signout', {
+        method: 'post',
+      });
+      if (response.ok) {
+        router.push('/signin')
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
