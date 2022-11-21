@@ -1,4 +1,4 @@
-import style from '../../styles/components/NavRight/FollowNav.module.scss'
+import style from '@styles/components/NavRight/FollowNav.module.scss'
 import default_pfp from '../../public/img/default-pfp.jpg'
 import Image from "next/image";
 

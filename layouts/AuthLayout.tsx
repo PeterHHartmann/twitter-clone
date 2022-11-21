@@ -1,4 +1,4 @@
-import style from '../styles/layouts/AuthLayout.module.scss'
+import style from '@styles/layouts/AuthLayout.module.scss'
 import logo from '../public/icon/logo.svg';
 import { PropsWithChildren } from "react";
 import Image from "next/image";

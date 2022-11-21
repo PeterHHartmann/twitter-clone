@@ -1,4 +1,4 @@
-import style from '../../styles/components/NavLeft/NavLeft.module.scss'
+import style from '@styles/components/NavLeft/NavLeft.module.scss'
 import logo from '../../public/icon/logo.svg'
 import home from '../../public/icon/home.svg'
 import hashtag from '../../public/icon/hashtag.svg'

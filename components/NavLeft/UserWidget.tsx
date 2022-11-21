@@ -1,4 +1,4 @@
-import style from '../../styles/components/NavLeft/UserWidget.module.scss'
+import style from '@styles/components/NavLeft/UserWidget.module.scss'
 
 import { useState } from 'react';
 import Image from 'next/image';

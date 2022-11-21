@@ -1,4 +1,4 @@
-import style from '../../styles/components/NavRight/NavRight.module.scss'
+import style from '@styles/components/NavRight/NavRight.module.scss'
 import FollowNav from "./FollowNav";
 import SearchBar from "./SearchBar"
 import TrendsNav from "./TrendsNav"

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import style from '../../styles/components/NavLeft/NavLink.module.scss';
+import style from '@styles/components/NavLeft/NavLink.module.scss';
 
 type NavLinkProps = {
   path: string;

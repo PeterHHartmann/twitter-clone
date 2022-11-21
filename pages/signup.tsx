@@ -1,4 +1,4 @@
-import style from '../styles/AuthForm.module.scss';
+import style from '@styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef, useState } from 'react';

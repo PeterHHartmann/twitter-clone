@@ -1,4 +1,4 @@
-import style from '../../styles/components/TweetWidget/Widget.module.scss';
+import style from '@styles/components/TweetWidget/Widget.module.scss';
 import ButtonUploadImage from './ButtonUploadImage'
 import RemovableImage from "./RemovableImage";
 import React, { useState } from 'react';

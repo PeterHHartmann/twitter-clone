@@ -1,4 +1,4 @@
-import style from '../../styles/components/TweetWidget/ButtonUploadImage.module.scss';
+import style from '@styles/components/TweetWidget/ButtonUploadImage.module.scss';
 import icon from '../../public/icon/photo.svg'
 import Image from "next/image";
 import React from "react";

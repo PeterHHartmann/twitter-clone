@@ -1,4 +1,4 @@
-import style from '../styles/AuthForm.module.scss';
+import style from '@styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
