@@ -1,5 +1,5 @@
 import style from '@styles/components/NavRight/TrendsNav.module.scss'
-import icon from '../../public/icon/more.svg'
+import icon from '@public/icon/more.svg'
 import Image from 'next/image';
 
 export const TrendsNav: React.FC = () => {

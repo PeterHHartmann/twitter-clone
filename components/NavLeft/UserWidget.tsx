@@ -2,9 +2,9 @@ import style from '@styles/components/NavLeft/UserWidget.module.scss'
 
 import { useState } from 'react';
 import Image from 'next/image';
-import default_pfp from '../../public/img/default-pfp.jpg'
-import icon from '../../public/icon/more.svg'
-import { deleteSession } from "../../service/session-service";
+import default_pfp from '@public/img/default-pfp.jpg'
+import icon from '@public/icon/more.svg'
+import { deleteSession } from '../../services/session-service';
 import { useRouter } from "next/router";
 
 export const UserWidget: React.FC<{user: any}> = ({user}) => {

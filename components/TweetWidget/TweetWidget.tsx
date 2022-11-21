@@ -4,7 +4,7 @@ import RemovableImage from "./RemovableImage";
 import React, { useState } from 'react';
 import TweetTextarea from "./TweetTextarea";
 import Image from 'next/image';
-import default_pfp from '../../public/img/default-pfp.jpg'
+import default_pfp from '@public/img/default-pfp.jpg'
 
 export const TweetWidget: React.FC = () => {
   const [text, setText] = useState<string | undefined>("")

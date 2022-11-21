@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSession, setSession } from "../service/session-service";
+import { getSession, setSession } from '../services/session-service';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req, res);

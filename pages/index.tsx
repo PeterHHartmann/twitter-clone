@@ -1,4 +1,4 @@
-import icon from '../public/icon/stars.svg'
+import icon from '@public/icon/stars.svg'
 import DeckLayout from '../layouts/DeckLayout';
 import MainLayout from '../layouts/MainLayout';
 import Header from '../components/Header';
@@ -6,7 +6,7 @@ import TweetWidget from '../components/TweetWidget/TweetWidget';
 import NavLeft from "../components/NavLeft/NavLeft";
 import NavRight from '../components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { getSession } from "../service/session-service";
+import { getSession } from '../services/session-service';
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   const session = await getSession(req, res)
