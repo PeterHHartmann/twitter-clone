@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import style from '@styles/components/TweetWidget/RemovableImage.module.scss'
-import icon from '@public/icon/remove.svg'
+import style from '@/styles/components/TweetWidget/RemovableImage.module.scss'
+import icon from '@/public/icon/remove.svg'
 
 type RemovableImageProps = {
   images: string[];

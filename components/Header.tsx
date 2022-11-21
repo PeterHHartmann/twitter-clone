@@ -1,4 +1,4 @@
-import style from '@styles/components/Header.module.scss';
+import style from '@/styles/components/Header.module.scss';
 import Image from 'next/image';
 
 type HeaderProps = {

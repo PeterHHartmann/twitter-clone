@@ -1,4 +1,4 @@
-import style from '@styles/components/TweetWidget/TweetTextarea.module.scss';
+import style from '@/styles/components/TweetWidget/TweetTextarea.module.scss';
 import { useRef, useState } from 'react';
 
 type TextareaProps = {

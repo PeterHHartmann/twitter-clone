@@ -1,5 +1,5 @@
-import style from '@styles/components/NavRight/SearchBar.module.scss'
-import icon from '@public/icon/search.svg'
+import style from '@/styles/components/NavRight/SearchBar.module.scss'
+import icon from '@/public/icon/search.svg'
 import Image from 'next/image'
 
 export const SearchBar: React.FC = () => {
