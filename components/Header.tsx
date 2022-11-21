@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ name, href, icon }) => {
       <a className={style.link} href={href}>
         {name}
       </a>
-      <Image src={icon} alt='' width={19} height={19} priority={true} />
+      {icon ? <Image src={icon} alt='' width={19} height={19} priority={true} /> : null}
     </header>
   );
 };

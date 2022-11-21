@@ -5,7 +5,7 @@ import default_pfp from '@/public/img/default-pfp.jpg'
 import icon from '@/public/icon/more.svg'
 import { useRouter } from "next/router";
 
-export const UserWidget: React.FC<{user: any}> = ({user}) => {
+export const UserWidget: React.FC<{session: any}> = ({session}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
   const router = useRouter();
 
@@ -36,8 +36,8 @@ export const UserWidget: React.FC<{user: any}> = ({user}) => {
       <div className={style.user} onClick={handleClick}>
         <Image className={style.profile} src={default_pfp} alt='your profile picture' width={48} height={48} />
         <div className={style.info}>
-          <div className={style.displayname}>{user?.displayname}</div>
-          <div className={style.username}>{user?.username}</div>
+          <div className={style.displayname}>{session?.displayname}</div>
+          <div className={style.username}>{session?.username}</div>
         </div>
         <Image className={style.more} src={icon} alt='' width={19} height={19} priority={true} />
       </div>

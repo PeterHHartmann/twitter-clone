@@ -16,16 +16,16 @@ import Link from "next/link"
 
 type NavLeftProps = {
   path: string;
-  user: any;
+  session: any;
 };
 
-export const NavLeft: React.FC<NavLeftProps> = ({ path, user }) => {
+export const NavLeft: React.FC<NavLeftProps> = ({ path, session }) => {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
         <div className={style.links}>
           <Link className={style.logo} href='/' prefetch={false}>
-            <Image src={logo} alt='' width={28} height={28} priority={true}/>
+            <Image src={logo} alt='' width={28} height={28} priority={true} />
           </Link>
           <NavLink path='/' icon={home} isActive={path === '/' ? true : false}>
             <p>Home</p>
@@ -45,7 +45,11 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, user }) => {
           <NavLink path='/' icon={list} isActive={path === '/lists' ? true : false}>
             <p>Lists</p>
           </NavLink>
-          <NavLink path='/profile' icon={profile} isActive={path === '/profile' ? true : false}>
+          <NavLink
+            path={`/${session.username}`}
+            icon={profile}
+            isActive={path === '/profile' ? true : false}
+          >
             <p>Profile</p>
           </NavLink>
           <NavLink path='/' icon={more} isActive={path === '/more' ? true : false}>
@@ -53,10 +57,10 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, user }) => {
           </NavLink>
           <button className={style.newTweet}>
             <span>Tweet</span>
-            <Image src={iconPen} alt='' width={22.5} height={22.5}/>
+            <Image src={iconPen} alt='' width={22.5} height={22.5} />
           </button>
         </div>
-        <UserWidget user={user}></UserWidget>
+        <UserWidget session={session}></UserWidget>
       </nav>
     </div>
   );

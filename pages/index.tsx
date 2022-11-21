@@ -7,8 +7,6 @@ import NavLeft from '@/components/NavLeft/NavLeft';
 import NavRight from '@/components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getSession } from '@/services/auth';
-import useSWR from 'swr'
-import { getToken } from "@/services/auth";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req)
@@ -20,7 +18,7 @@ export const Home: React.FC<InferGetServerSidePropsType<any>> = ({session}) => {
 
   return (
     <MainLayout>
-      <NavLeft path='/' user={session} />
+      <NavLeft path='/' session={session} />
       <DeckLayout>
         <Header name='Home' href='/' icon={icon} />
         <TweetWidget />
