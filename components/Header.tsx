@@ -1,6 +1,5 @@
 import style from '@styles/components/Header.module.scss';
 import Image from 'next/image';
-import { Session } from "next-auth";
 
 type HeaderProps = {
   name: string;
