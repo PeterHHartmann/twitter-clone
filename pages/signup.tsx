@@ -17,10 +17,14 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [usernameError, setUsernameError] = useState<string | null>(null)
-  const refEmail = useRef<HTMLInputElement>(null);
-  const refUsername = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState<string | null>(null);
+  const emailContainerRef = useRef<HTMLLabelElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const emailErrorRef = useRef<HTMLLabelElement>(null);
+  const usernameContainerRef = useRef<HTMLLabelElement>(null);
+  const usernameErrorRef = useRef<HTMLLabelElement>(null);
+  const passwordContainerRef = useRef<HTMLLabelElement>(null);
+  const passwordErrorRef = useRef<HTMLLabelElement>(null);
   const router = useRouter();
 
   const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
@@ -40,9 +44,12 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
     const { value } = target;
     setPassword(value);
   };
-
+  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    emailErrorRef.current!.innerText = '';
+    usernameErrorRef.current!.innerText = '';
+    passwordErrorRef.current!.innerText = '';
     try {
       const response = await fetch('http://localhost:8000/auth/signup', {
         method: 'post',
@@ -55,76 +62,93 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
           password: password,
         }),
       });
-      if (response.status === 201) {
+      if (response.ok) {
         router.push('/signin');
-      } else if (response.status === 409) {
-        const { error } = await response.json();
-        setEmailError(null);
-        setUsernameError(null);
-        if (error.target === 'email') {
-          setEmailError(error.msg)
-        }
-        if (error.target === 'username') {
-          setUsernameError(error.msg)
-        }
       } else {
-        const body = await response.json();
-        console.log(body);
+        const { error } = await response.json();
+        if (error.target === 'email') {
+          emailContainerRef.current!.dataset.error = 'true';
+          emailErrorRef.current!.innerText = error.msg;
+          usernameErrorRef.current!.innerText = error.msg;
+          passwordErrorRef.current!.innerText = error.msg;
+        } else if (error.target === 'username') {
+          usernameContainerRef.current!.dataset.error = 'true';
+          usernameErrorRef.current!.innerText = error.msg;
+          passwordErrorRef.current!.innerText = error.msg;
+        } else if (error.target === 'password') {
+          passwordContainerRef.current!.dataset.error = 'true';
+          passwordErrorRef.current!.innerText = error.msg;
+        } else {
+          setError('Something went wrong. Please try again later');
+        }
       }
     } catch (err) {
-      console.log(err);
+      setError('Something went wrong. Please try again later');
     }
   };
 
   useEffect(() => {
-    if (emailError) {
-      setEmailError(null);
+    const emailContainer = emailContainerRef.current!;
+    const emailError = emailErrorRef.current!;
+    if (email) {
+      emailContainer.dataset.error = 'false';
+    } else {
+      emailContainer.dataset.error = undefined;
     }
-
+    emailError.innerText = '';
     const timeout = setTimeout(() => {
-      if (email && !refEmail.current?.checkValidity()) {
-        console.count('setting error');
-        setEmailError('Please enter a valid email')
+      if (email && !emailInputRef.current!.checkValidity()) {
+        emailContainer.dataset.error = 'true';
+        emailError.innerText = 'Please enter a valid email';
       }
     }, 500);
-    return () => {clearTimeout(timeout)}
-  }, [email, emailError])
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [email]);
 
   useEffect(() => {
-    if (usernameError) {
-      setUsernameError(null);
+    const usernameContainer = usernameContainerRef.current!;
+    if (username) {
+      usernameContainer.dataset.error = 'false';
+    } else {
+      usernameContainer.dataset.error = undefined;
     }
+    return () => {};
+  }, [username]);
 
-    const timeout = setTimeout(() => {
-      if (username && !refUsername.current?.checkValidity()) {
-        setUsernameError('Please enter a valid email')
-      }
-    }, 500);
-    return () => {clearTimeout(timeout)}
-  }, [username, usernameError])
+  useEffect(() => {
+    const passwordContainer = passwordContainerRef.current!;
+    if (password) {
+      passwordContainer.dataset.error = 'false';
+    } else {
+      passwordContainer.dataset.error = undefined;
+    }
+    return () => {};
+  }, [password]);
 
   return (
     <AuthLayout>
       <form className={style.form} action='' method='post' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Join Twitter today</h1>
-        <label className={style.label} htmlFor='email' data-error={email ? (emailError ? true : false) : null}>
+        {error ? <span className={style.error}>{error}</span> : null}
+        <label className={style.label} htmlFor='email' ref={emailContainerRef} data-error={undefined}>
           <span>Email</span>
           <input
             className={style.input}
-            ref={refEmail}
-            type='text'
+            ref={emailInputRef}
+            type='email'
             name='email'
             value={email}
             onChange={handleEmailChange}
             required
           />
         </label>
-        <span className={style.error}>{emailError ? emailError : null}</span>
-        <label className={style.label} htmlFor='username' data-error={username ? (usernameError ? true : false) : null}>
+        <span className={style.error} ref={emailErrorRef}></span>
+        <label className={style.label} htmlFor='username' ref={usernameContainerRef} data-error={undefined}>
           <span>Username</span>
           <input
             className={style.input}
-            ref={refUsername}
             type='text'
             name='username'
             value={username}
@@ -133,8 +157,8 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
             required
           />
         </label>
-        <span className={style.error}>{usernameError ? usernameError : null}</span>
-        <label className={style.label} htmlFor='password'>
+        <span className={style.error} ref={usernameErrorRef}></span>
+        <label className={style.label} ref={passwordContainerRef} htmlFor='password'>
           <span>Password</span>
           <input
             className={style.input}
@@ -145,7 +169,7 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
             required
           />
         </label>
-        <span className={style.error}>{}</span>
+        <span className={style.error} ref={passwordErrorRef}></span>
         <button className={style.button} type='submit'>
           Sign Up
         </button>
