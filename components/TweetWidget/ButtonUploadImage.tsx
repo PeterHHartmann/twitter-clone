@@ -36,5 +36,3 @@ export const ButtonUploadImage: React.FC<ButtonProps>= ({images, setImages}) => 
     </div>
   );
 }
-
-export default ButtonUploadImage

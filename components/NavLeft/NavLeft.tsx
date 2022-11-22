@@ -1,18 +1,18 @@
-import style from '@/styles/components/NavLeft/NavLeft.module.scss'
-import logo from '@/public/icon/logo.svg'
-import home from '@/public/icon/home.svg'
-import hashtag from '@/public/icon/hashtag.svg'
-import bell from '@/public/icon/bell.svg'
-import mail from '@/public/icon/mail.svg'
-import bookmark from '@/public/icon/bookmark.svg'
-import list from '@/public/icon/list.svg'
-import profile from '@/public/icon/profile.svg'
-import more from '@/public/icon/more-circle.svg'
-import iconPen from '@/public/icon/pen.svg'
-import NavLink from '@/components/NavLeft/NavLink';
-import UserWidget from "@/components/NavLeft/UserWidget";
-import Image from 'next/image'
-import Link from "next/link"
+import style from '@/styles/components/NavLeft/NavLeft.module.scss';
+import logo from '@/public/icon/logo.svg';
+import home from '@/public/icon/home.svg';
+import hashtag from '@/public/icon/hashtag.svg';
+import bell from '@/public/icon/bell.svg';
+import mail from '@/public/icon/mail.svg';
+import bookmark from '@/public/icon/bookmark.svg';
+import list from '@/public/icon/list.svg';
+import profile from '@/public/icon/profile.svg';
+import more from '@/public/icon/more-circle.svg';
+import iconPen from '@/public/icon/pen.svg';
+import { NavLink } from '@/components/NavLeft/NavLink';
+import { UserWidget } from '@/components/NavLeft/UserWidget';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type NavLeftProps = {
   path: string;
@@ -45,11 +45,7 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, session }) => {
           <NavLink path='/' icon={list} isActive={path === '/lists' ? true : false}>
             <p>Lists</p>
           </NavLink>
-          <NavLink
-            path={`/${session.username}`}
-            icon={profile}
-            isActive={path === '/profile' ? true : false}
-          >
+          <NavLink path={`/${session.username}`} icon={profile} isActive={path === '/profile' ? true : false}>
             <p>Profile</p>
           </NavLink>
           <NavLink path='/' icon={more} isActive={path === '/more' ? true : false}>
@@ -64,6 +60,4 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, session }) => {
       </nav>
     </div>
   );
-}
-
-export default NavLeft
+};

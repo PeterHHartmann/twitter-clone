@@ -11,15 +11,15 @@ export const UserWidget: React.FC<{session: any}> = ({session}) => {
 
   const handleClick = () => {
     setDisplayLogout(!displayLogout);
-  }
+  };
 
   const signOut = async () => {
     fetch('/api/auth/signout', {
       method: 'post',
     })
-    .then(() => reload())
-    .catch();
-  }
+      .then(() => reload())
+      .catch();
+  };
 
   return (
     <div className={displayLogout ? style.open : style.closed}>
@@ -39,5 +39,3 @@ export const UserWidget: React.FC<{session: any}> = ({session}) => {
     </div>
   );
 }
-
-export default UserWidget

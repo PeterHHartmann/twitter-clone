@@ -4,12 +4,10 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSession } from '@/lib/auth';
-import { getCsrfToken } from '@/lib/auth';
+import { getSession, getCsrfToken } from '@/lib/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
-  console.log(session);
   if (session) return { redirect: { destination: '/', permanent: true } };
   const csrfToken = getCsrfToken(req);
   return { props: { csrfToken: csrfToken } };
@@ -46,7 +44,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
     return () => {
       clearTimeout(timeout);
     };
-  }, [email]);
+  }, [email, emailError]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,7 +106,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
           Sign in
         </button>
         <span className={style.option}>
-          Don't have an account?{' '}
+          Don&apos;t have an account?&nbsp;
           <Link href={'/signup'} prefetch={false}>
             Sign up
           </Link>

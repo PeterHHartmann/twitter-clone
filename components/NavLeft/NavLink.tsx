@@ -17,5 +17,3 @@ export const NavLink: React.FC<PropsWithChildren<NavLinkProps>> = ({ path, icon,
     </Link>
   );
 }
-
-export default NavLink

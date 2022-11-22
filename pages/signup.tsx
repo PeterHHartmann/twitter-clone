@@ -4,8 +4,7 @@ import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import Link from 'next/link';
-import { getSession } from '@/lib/auth';
-import { getCsrfToken } from '@/lib/auth';
+import { getSession, getCsrfToken } from '@/lib/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
@@ -89,7 +88,7 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
       }
     }, 500);
     return () => {clearTimeout(timeout)}
-  }, [email])
+  }, [email, emailError])
 
   useEffect(() => {
     if (usernameError) {
@@ -102,7 +101,7 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
       }
     }, 500);
     return () => {clearTimeout(timeout)}
-  }, [email])
+  }, [username, usernameError])
 
   return (
     <AuthLayout>

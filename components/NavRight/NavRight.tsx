@@ -1,9 +1,9 @@
 import style from '@/styles/components/NavRight/NavRight.module.scss'
-import FollowNav from '@/components/NavRight/FollowNav';
-import SearchBar from '@/components/NavRight/SearchBar';
-import TrendsNav from '@/components/NavRight/TrendsNav';
+import { FollowNav } from '@/components/NavRight/FollowNav';
+import { SearchBar } from '@/components/NavRight/SearchBar';
+import { TrendsNav } from '@/components/NavRight/TrendsNav';
 
-export const RightSidebar: React.FC = () => {
+export const NavRight: React.FC = () => {
   return (
     <div className={style.container}>
       <div>
@@ -13,6 +13,4 @@ export const RightSidebar: React.FC = () => {
       </div>
     </div>
   );
-}
-
-export default RightSidebar
+};

@@ -38,5 +38,3 @@ export const TweetTextarea: React.FC<TextareaProps> = ({ value, setValue }) => {
     ></textarea>
   );
 }
-
-export default TweetTextarea

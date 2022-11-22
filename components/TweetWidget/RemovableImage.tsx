@@ -27,5 +27,3 @@ export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImage
     </div>
   );
 }
-
-export default RemovableImage
