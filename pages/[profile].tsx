@@ -1,12 +1,12 @@
 import icon from '@/public/icon/stars.svg';
-import DeckLayout from '@/layouts/DeckLayout';
-import MainLayout from '@/layouts/MainLayout';
-import Header from '@/components/Header';
+import { DeckLayout } from '@/layouts/DeckLayout';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Header } from '@/components/Header';
 import TweetWidget from '@/components/TweetWidget/TweetWidget';
 import NavLeft from '@/components/NavLeft/NavLeft';
 import NavRight from '@/components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@/services/auth';
+import { getSession } from '@/lib/auth';
 import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async ({req, res, query}) => {
@@ -18,8 +18,8 @@ export const getServerSideProps: GetServerSideProps = async ({req, res, query}) 
       method:'get'
     })
     return { props: { session: session, profile: profile, data: await response.json() } };
-  } catch(e) {
-    console.log(e);
+  } catch(err) {
+    console.log(err);
   }
 
   return { props: { } };

@@ -1,21 +1,20 @@
 import icon from '@/public/icon/stars.svg';
-import DeckLayout from '@/layouts/DeckLayout';
-import MainLayout from '@/layouts/MainLayout';
-import Header from '@/components/Header';
+import { DeckLayout } from '@/layouts/DeckLayout';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Header } from '@/components/Header';
 import TweetWidget from '@/components/TweetWidget/TweetWidget';
 import NavLeft from '@/components/NavLeft/NavLeft';
 import NavRight from '@/components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@/services/auth';
+import { getSession } from '@/lib/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession(req)
-  if (!session) return { redirect: { destination: '/signin', permanent: false}}
+  const session = await getSession(req);
+  if (!session) return { redirect: { destination: '/signin', permanent: false } };
   return { props: { session: session } };
 };
 
-export const Home: React.FC<InferGetServerSidePropsType<any>> = ({session}) => {
-
+export const Home: React.FC<InferGetServerSidePropsType<any>> = ({ session }) => {
   return (
     <MainLayout>
       <NavLeft path='/' session={session} />

@@ -17,5 +17,3 @@ export const Header: React.FC<HeaderProps> = ({ name, href, icon }) => {
     </header>
   );
 };
-
-export default Header

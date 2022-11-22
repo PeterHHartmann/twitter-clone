@@ -7,23 +7,18 @@ import { useRouter } from "next/router";
 
 export const UserWidget: React.FC<{session: any}> = ({session}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
-  const router = useRouter();
+  const { reload } = useRouter();
 
   const handleClick = () => {
     setDisplayLogout(!displayLogout);
   }
 
   const signOut = async () => {
-    try {
-      const response = await fetch('/api/auth/signout', {
-        method: 'post',
-      });
-      if (response.ok) {
-        router.push('/signin')
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    fetch('/api/auth/signout', {
+      method: 'post',
+    })
+    .then(() => reload())
+    .catch();
   }
 
   return (

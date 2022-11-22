@@ -2,8 +2,17 @@ import style from '@/styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import AuthLayout from '@/layouts/AuthLayout';
+import { AuthLayout } from '@/layouts/AuthLayout';
 import Link from 'next/link';
+import { getSession } from '@/lib/auth';
+import { getCsrfToken } from '@/lib/auth';
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getSession(req);
+  if (session) return { redirect: { destination: '/', permanent: true } };
+  const csrfToken = getCsrfToken(req);
+  return { props: { csrfToken: csrfToken } };
+};
 
 export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
   const [email, setEmail] = useState('');
@@ -63,8 +72,8 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
         const body = await response.json();
         console.log(body);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 

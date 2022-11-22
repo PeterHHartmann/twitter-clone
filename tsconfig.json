@@ -16,6 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
       "@/public/*": ["public/*"],
       "@/components/*": ["components/*"],
@@ -26,9 +27,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "pages/api/auth/[...nextauth].js",
-    "components/NavLeft/UserWidget.tsx"
+    "**/*.tsx"
   ],
 
   "exclude": ["node_modules"]

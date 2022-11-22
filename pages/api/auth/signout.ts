@@ -1,18 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import cookie from 'cookie';
+import { expireSessionCookie } from '@/lib/auth';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method?.toLowerCase() !== 'post') return res.status(405).json({ success: false });
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== 'POST') return res.status(405).json({ success: false });
   try {
-    res.setHeader(
-      'Set-Cookie',
-      cookie.serialize('session', '', {
-        maxAge: -1,
-        path: '/',
-      })
-    );
+    res = expireSessionCookie(res);
     res.status(200).json({ success: true });
-  } catch (e) {
+  } catch (err) {
     res.status(500).json({ success: false, error: 'Something went wrong, please try again later' });
   }
 };
+
+export default handler;

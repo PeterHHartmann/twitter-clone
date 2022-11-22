@@ -13,5 +13,3 @@ export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
     </main>
   );
 }
-
-export default AuthLayout;

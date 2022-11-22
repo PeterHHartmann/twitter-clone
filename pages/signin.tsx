@@ -1,23 +1,26 @@
 import style from '@/styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import AuthLayout from '@/layouts/AuthLayout';
+import { AuthLayout } from '@/layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSession } from '@/services/auth';
+import { getSession } from '@/lib/auth';
+import { getCsrfToken } from '@/lib/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
-  if (session) return { redirect: { destination: '/', permanent: true }};
-  return { props: {}};
+  console.log(session);
+  if (session) return { redirect: { destination: '/', permanent: true } };
+  const csrfToken = getCsrfToken(req);
+  return { props: { csrfToken: csrfToken } };
 };
 
-export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({csrfToken}) => {
+export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
-  const router = useRouter();
+  const { reload } = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
@@ -56,12 +59,12 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
         body: JSON.stringify({ email: email, password: password }),
       });
       if (response.ok) {
-        router.push('/');
+        reload();
       } else {
         const { error } = await response.json();
         setError(error as string);
       }
-    } catch (e) {
+    } catch (err) {
       setError('Something went wrong. Please try again later');
     }
   };
@@ -71,7 +74,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Sign in to Twitter</h1>
         {error ? <span className={style.error}>{error}</span> : null}
-        {/* <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' /> */}
+        <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
         <label className={style.label} htmlFor='email' data-error={email ? (error || emailError ? true : false) : null}>
           <span>Email</span>
           <input
