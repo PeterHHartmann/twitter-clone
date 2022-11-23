@@ -69,12 +69,9 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
         if (error.target === 'email') {
           emailContainerRef.current!.dataset.error = 'true';
           emailErrorRef.current!.innerText = error.msg;
-          usernameErrorRef.current!.innerText = error.msg;
-          passwordErrorRef.current!.innerText = error.msg;
         } else if (error.target === 'username') {
           usernameContainerRef.current!.dataset.error = 'true';
           usernameErrorRef.current!.innerText = error.msg;
-          passwordErrorRef.current!.innerText = error.msg;
         } else if (error.target === 'password') {
           passwordContainerRef.current!.dataset.error = 'true';
           passwordErrorRef.current!.innerText = error.msg;
