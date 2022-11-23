@@ -1,4 +1,4 @@
-import icon from '@/public/icon/stars.svg';
+import stars_icon from '@/public/icon/stars.svg';
 import { DeckLayout } from '@/layouts/DeckLayout';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Header } from '@/components/Header';
@@ -17,9 +17,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 export const Home: React.FC<InferGetServerSidePropsType<any>> = ({ session }) => {
   return (
     <MainLayout>
-      <NavLeft path='/' session={session} />
+      <NavLeft session={session} />
       <DeckLayout>
-        <Header name='Home' href='/' icon={icon} />
+        <Header name='Home' href='/' icon={stars_icon} />
         <TweetWidget />
       </DeckLayout>
       <NavRight />

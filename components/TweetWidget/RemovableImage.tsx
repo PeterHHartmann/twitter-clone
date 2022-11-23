@@ -23,7 +23,7 @@ export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImage
       <button className={style.button} onClick={(e) => handleDeleteClicked(e)}>
         <Image src={icon} alt='' width={19} height={19} priority={true}></Image>
       </button>
-      <Image className={style.img} src={images[index]} alt='' width={100} height={100}/>
+      <Image className={style.img} src={images[index]} alt='' width={100} height={100} priority={true} />
     </div>
   );
 }

@@ -17,7 +17,7 @@ export const TweetWidget: React.FC = () => {
 
   return (
     <section className={style.section}>
-      <Image className={style.profile} src={default_pfp} alt='' />
+      <Image className={style.profile} src={default_pfp} alt='' priority={true}/>
       <form className={style.form} action='POST' onSubmit={handleSubmit}>
         <TweetTextarea value={text} setValue={setText} />
         <div className={style.imgs}>

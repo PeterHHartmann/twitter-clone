@@ -6,20 +6,21 @@ import bell from '@/public/icon/bell.svg';
 import mail from '@/public/icon/mail.svg';
 import bookmark from '@/public/icon/bookmark.svg';
 import list from '@/public/icon/list.svg';
-import profile from '@/public/icon/profile.svg';
+import profile_icon from '@/public/icon/profile.svg';
 import more from '@/public/icon/more-circle.svg';
 import iconPen from '@/public/icon/pen.svg';
 import { NavLink } from '@/components/NavLeft/NavLink';
 import { UserWidget } from '@/components/NavLeft/UserWidget';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Session } from '@/lib/auth/session';
+import { useRouter } from 'next/router';
 
-type NavLeftProps = {
-  path: string;
-  session: any;
-};
+export const NavLeft: React.FC<{ session: Session }> = ({ session }) => {
+  const router = useRouter();
+  const { profile } = router.query;
+  const pathname = profile ? profile : router.pathname;
 
-export const NavLeft: React.FC<NavLeftProps> = ({ path, session }) => {
   return (
     <div className={style.container}>
       <nav className={style.nav}>
@@ -27,33 +28,37 @@ export const NavLeft: React.FC<NavLeftProps> = ({ path, session }) => {
           <Link className={style.logo} href='/' prefetch={false}>
             <Image src={logo} alt='' width={28} height={28} priority={true} />
           </Link>
-          <NavLink path='/' icon={home} isActive={path === '/' ? true : false}>
+          <NavLink href='/' icon={home} isActive={pathname === '/' ? true : false}>
             <p>Home</p>
           </NavLink>
-          <NavLink path='/' icon={hashtag} isActive={path === '/explore' ? true : false}>
+          <NavLink href='/' icon={hashtag} isActive={pathname === '/explore' ? true : false}>
             <p>Explore</p>
           </NavLink>
-          <NavLink path='/' icon={bell} isActive={path === '/notifications' ? true : false}>
+          <NavLink href='/' icon={bell} isActive={pathname === '/notifications' ? true : false}>
             <p>Notifications</p>
           </NavLink>
-          <NavLink path='/' icon={mail} isActive={path === '/messages' ? true : false}>
+          <NavLink href='/' icon={mail} isActive={pathname === '/messages' ? true : false}>
             <p>Messages</p>
           </NavLink>
-          <NavLink path='/' icon={bookmark} isActive={path === '/bookmarks' ? true : false}>
+          <NavLink href='/' icon={bookmark} isActive={pathname === '/bookmarks' ? true : false}>
             <p>Bookmarks</p>
           </NavLink>
-          <NavLink path='/' icon={list} isActive={path === '/lists' ? true : false}>
+          <NavLink href='/' icon={list} isActive={pathname === '/lists' ? true : false}>
             <p>Lists</p>
           </NavLink>
-          <NavLink path={`/${session.username}`} icon={profile} isActive={path === '/profile' ? true : false}>
+          <NavLink
+            href={`/${session.username}`}
+            icon={profile_icon}
+            isActive={pathname === session.username ? true : false}
+          >
             <p>Profile</p>
           </NavLink>
-          <NavLink path='/' icon={more} isActive={path === '/more' ? true : false}>
+          <NavLink href='/' icon={more} isActive={pathname === '/more' ? true : false}>
             <p>More</p>
           </NavLink>
           <button className={style.newTweet}>
             <span>Tweet</span>
-            <Image src={iconPen} alt='' width={22.5} height={22.5} />
+            <Image src={iconPen} alt='' width={22.5} height={22.5} priority={true} />
           </button>
         </div>
         <UserWidget session={session}></UserWidget>
