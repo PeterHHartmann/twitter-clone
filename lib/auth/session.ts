@@ -4,9 +4,9 @@ import { SignJWT, jwtVerify, JWTPayload } from 'jose';
 import { SESSION_TOKEN, getSessionSecret, NextServerRequest } from './constants';
 import cookie from 'cookie';
 
-export type SessionJwtPayload = JWTPayload & {
-  userName: string;
-  displayName: string;
+export type Session = JWTPayload & {
+  username: string;
+  displayname: string;
   accessToken: string;
 };
 
@@ -17,7 +17,7 @@ export const getSession = async (req: NextServerRequest) => {
 
   try {
     const verified = await jwtVerify(token, new TextEncoder().encode(getSessionSecret()));
-    return verified.payload as SessionJwtPayload;
+    return verified.payload as Session;
   } catch (err) {
     console.log(err);
     console.log('Session token could not be verified');
