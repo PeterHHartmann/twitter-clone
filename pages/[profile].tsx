@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   return { props: { session: session, profile: profile, data: await response.json(), errorCode: errorCode } };
 };
 
-export const Profile: React.FC<InferGetServerSidePropsType<any>> = ({ session, profile, data, errorCode }) => {
+export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, profile, data, errorCode }) => {
   return (
     <MainLayout>
       <NavLeft session={session} />

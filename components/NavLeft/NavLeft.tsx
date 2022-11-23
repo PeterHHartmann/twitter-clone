@@ -15,8 +15,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Session } from '@/lib/auth/session';
 import { useRouter } from 'next/router';
+import { FC } from "react";
 
-export const NavLeft: React.FC<{ session: Session }> = ({ session }) => {
+export const NavLeft: FC<{ session: Session }> = ({ session }) => {
   const router = useRouter();
   const { profile } = router.query;
   const pathname = profile ? profile : router.pathname;

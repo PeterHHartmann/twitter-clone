@@ -2,8 +2,9 @@ import style from '@/styles/components/NavRight/FollowNav.module.scss'
 import default_pfp from '@/public/img/default-pfp.jpg'
 import Image from "next/image";
 import Link from "next/link";
+import { FC } from "react";
 
-const UserLink: React.FC = () => {
+const UserLink: FC = () => {
   return (
     <Link className={style.user} href='/' prefetch={false}>
       <Image className={style.img} src={default_pfp} alt='default profile picture' width={48} height={48}></Image>
@@ -16,7 +17,7 @@ const UserLink: React.FC = () => {
   );
 }
 
-export const FollowNav: React.FC = () => {
+export const FollowNav: FC = () => {
   return (
     <nav className={style.nav}>
       <h3>Who to follow</h3>

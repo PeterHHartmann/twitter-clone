@@ -1,6 +1,6 @@
 import style from '@/styles/layouts/MainLayout.module.scss';
-import type { PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
-export const MainLayout: React.FC<PropsWithChildren> = ({ children }) => {
+export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return <div className={style.app}>{children}</div>;
 };

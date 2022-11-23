@@ -2,8 +2,9 @@ import style from '@/styles/components/NavRight/TrendsNav.module.scss'
 import icon from '@/public/icon/more.svg'
 import Image from 'next/image';
 import Link from "next/link";
+import { FC } from "react";
 
-export const TrendsNav: React.FC = () => {
+export const TrendsNav: FC = () => {
   return (
     <nav className={style.nav}>
       <h3>Trends for you</h3>

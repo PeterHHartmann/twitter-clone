@@ -1,9 +1,9 @@
 import style from '@/styles/layouts/AuthLayout.module.scss'
 import logo from '@/public/icon/logo.svg';
-import { PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import Image from "next/image";
 
-export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
+export const AuthLayout: FC<PropsWithChildren> = ({children}) => {
   return (
     <main className={style.main}>
       <div className={style.container}>

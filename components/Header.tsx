@@ -1,5 +1,6 @@
 import style from '@/styles/components/Header.module.scss';
 import Image from 'next/image';
+import { FC } from "react";
 
 type HeaderProps = {
   name: string;
@@ -7,7 +8,7 @@ type HeaderProps = {
   icon?: any;
 };
 
-export const Header: React.FC<HeaderProps> = ({ name, href, icon }) => {
+export const Header: FC<HeaderProps> = ({ name, href, icon }) => {
   return (
     <header className={style.container}>
       <a className={style.link} href={href}>

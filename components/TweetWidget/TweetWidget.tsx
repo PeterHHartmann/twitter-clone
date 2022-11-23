@@ -1,12 +1,12 @@
 import style from '@/styles/components/TweetWidget/Widget.module.scss';
 import { ButtonUploadImage } from '@/components/TweetWidget/ButtonUploadImage';
 import { RemovableImage } from '@/components/TweetWidget/RemovableImage';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { TweetTextarea } from '@/components/TweetWidget/TweetTextarea';
 import Image from 'next/image';
 import default_pfp from '@/public/img/default-pfp.jpg';
 
-export const TweetWidget: React.FC = () => {
+export const TweetWidget: FC = () => {
   const [text, setText] = useState<string | undefined>('');
   const [images, setImages] = useState<string[]>([]);
 

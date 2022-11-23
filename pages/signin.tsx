@@ -1,6 +1,6 @@
 import style from '@/styles/AuthForm.module.scss';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return { props: { csrfToken: csrfToken } };
 };
 
-export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
+export const SignIn: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);

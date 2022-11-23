@@ -7,6 +7,7 @@ import { NavLeft } from '@/components/NavLeft/NavLeft';
 import { NavRight } from '@/components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getSession } from '@/lib/auth';
+import { FC } from "react";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
@@ -14,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return { props: { session: session } };
 };
 
-export const Home: React.FC<InferGetServerSidePropsType<any>> = ({ session }) => {
+export const Home: FC<InferGetServerSidePropsType<any>> = ({ session }) => {
   return (
     <MainLayout>
       <NavLeft session={session} />

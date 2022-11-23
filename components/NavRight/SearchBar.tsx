@@ -1,8 +1,9 @@
 import style from '@/styles/components/NavRight/SearchBar.module.scss'
 import icon from '@/public/icon/search.svg'
 import Image from 'next/image'
+import { FC } from "react"
 
-export const SearchBar: React.FC = () => {
+export const SearchBar: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault()
