@@ -10,13 +10,11 @@ interface CsrfJwtPayload {
   iat: number;
 }
 
-// returns the JWT string for double submit cookie use
 export const getCsrfToken = (req: IncomingMessage & { cookies: Partial<{ [key: string]: string }> }) => {
   const token = req.cookies[CSRF_TOKEN];
   return token ? token : null;
 };
 
-// Verifies the user's JWT token and returns its payload if it's valid.
 const verifyCsrfToken = async (token: string | undefined) => {
   if (!token) throw new AuthError('No csrfToken was supplied')
   try {
@@ -33,7 +31,6 @@ export const verifyRequest = async (req: NextApiRequest) => {
   if (verifiedBodyToken.jti !== verifiedCookieToken.jti) throw new AuthError('csrfToken mismatch');
 }
 
-// Adds the user token cookie to a response.
 export const setCsrfCookie = async (res: NextResponse) => {
   const jwt = await new SignJWT({})
     .setProtectedHeader({ alg: 'HS256' })
@@ -44,13 +41,12 @@ export const setCsrfCookie = async (res: NextResponse) => {
   res.cookies.set(CSRF_TOKEN, jwt, {
     httpOnly: true,
     sameSite: 'strict',
-    // secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production',
   });
 
   return res;
 };
 
-// Expires the user token cookie
 export const expireCsrfCookie = (res: NextResponse) => {
   res.cookies.set(CSRF_TOKEN, '', { httpOnly: true, maxAge: 0 });
   return res;

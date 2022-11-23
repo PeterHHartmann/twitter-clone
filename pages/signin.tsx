@@ -73,7 +73,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          csrfToken: 'llllll',
+          csrfToken: csrfToken,
           email: email,
           password: password,
         }),

@@ -12,9 +12,7 @@ export type Session = JWTPayload & {
 
 export const getSession = async (req: NextServerRequest) => {
   const token = req.cookies[SESSION_TOKEN];
-
   if (!token) return null;
-
   try {
     const verified = await jwtVerify(token, new TextEncoder().encode(getSessionSecret()));
     return verified.payload as Session;
@@ -25,16 +23,15 @@ export const getSession = async (req: NextServerRequest) => {
   }
 }
 
-// Adds the user token cookie to a response.
 export const setSessionCookie = async(res: NextApiResponse, payload: object, expires: number) => {
-  //TODO set token expiration time to 1 week & refresh token every time user opens the web
+  //refresh token every time user opens the web
   const token = await new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setJti(nanoid())
     .setExpirationTime(Date.now() + expires)
     .setIssuedAt()
     .sign(new TextEncoder().encode(getSessionSecret()));
-
+    
   res.setHeader(
     'Set-Cookie',
     cookie.serialize(SESSION_TOKEN, token, {
@@ -45,7 +42,6 @@ export const setSessionCookie = async(res: NextApiResponse, payload: object, exp
       path: '/',
     })
   );
-
   return res;
 }
 
