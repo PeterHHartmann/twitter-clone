@@ -1,8 +1,9 @@
-import type { NextRequest, NextResponse } from 'next/server';
+import type { NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
 import { SignJWT, jwtVerify } from 'jose';
 import { CSRF_TOKEN, getCsrfSecret, AuthError } from './constants';
 import { IncomingMessage } from 'http';
+import { NextApiRequest } from "next";
 
 interface CsrfJwtPayload {
   jti: string;
@@ -16,15 +17,20 @@ export const getCsrfToken = (req: IncomingMessage & { cookies: Partial<{ [key: s
 };
 
 // Verifies the user's JWT token and returns its payload if it's valid.
-export async function verifyCsrfToken(req: NextRequest) {
-  const token = req.cookies.get(CSRF_TOKEN)?.value;
-  if (!token) throw new AuthError('Missing csrf token');
+const verifyCsrfToken = async (token: string | undefined) => {
+  if (!token) throw new AuthError('No csrfToken was supplied')
   try {
     const verified = await jwtVerify(token, new TextEncoder().encode(getCsrfSecret()));
     return verified.payload as CsrfJwtPayload;
   } catch (err) {
-    throw new AuthError('Could not verify csrf token');
+    throw new AuthError('One of the supplied csrfTokens could not be verified');
   }
+}
+
+export const verifyRequest = async (req: NextApiRequest) => {
+  const verifiedBodyToken = await verifyCsrfToken(req.body.csrfToken);
+  const verifiedCookieToken = await verifyCsrfToken(req.cookies[CSRF_TOKEN]);
+  if (verifiedBodyToken.jti !== verifiedCookieToken.jti) throw new AuthError('csrfToken mismatch');
 }
 
 // Adds the user token cookie to a response.

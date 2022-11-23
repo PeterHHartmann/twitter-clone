@@ -72,7 +72,11 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({
+          csrfToken: 'llllll',
+          email: email,
+          password: password,
+        }),
       });
       if (response.ok) {
         reload();
@@ -94,7 +98,6 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Sign in to Twitter</h1>
         {error ? <span className={style.error}>{error}</span> : null}
-        <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
         <label className={style.label} htmlFor='email' ref={emailContainerRef} data-error={undefined}>
           <span>Email</span>
           <input
@@ -111,9 +114,7 @@ export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSidePr
         <span className={style.error} ref={emailErrorRef}></span>
         {/* <label className={style.label} htmlFor='password' data-error={password ? (error ? true : false) : null}> */}
         <label className={style.label} htmlFor='password' ref={passwordContainerRef} data-error={undefined}>
-          <span className={style.span}>
-            Password
-          </span>
+          <span className={style.span}>Password</span>
           <input
             className={style.input}
             type='password'

@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return { props: { csrfToken: csrfToken } };
 };
 
-export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
+export const SignUp: React.FC<InferGetServerSidePropsType<any>> = ({csrfToken}) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -51,12 +51,13 @@ export const SignUp: React.FC<InferGetServerSidePropsType<any>> = () => {
     usernameErrorRef.current!.innerText = '';
     passwordErrorRef.current!.innerText = '';
     try {
-      const response = await fetch('http://localhost:8000/auth/signup', {
+      const response = await fetch('/api/auth/signup', {
         method: 'post',
         headers: {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
+          csrfToken: csrfToken,
           email: email,
           username: username,
           password: password,
