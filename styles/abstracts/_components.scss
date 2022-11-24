@@ -6,11 +6,15 @@
   border-radius: 3rem;
   font-weight: 700;
   cursor: pointer;
+
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
 }
 
 %btn-light {
   @extend %btn;
-  background: white;
+  background-color: white;
   color: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.3);
 
@@ -21,7 +25,7 @@
 
 %btn-dark {
   @extend %btn;
-  background: black;
+  background-color: black;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0.3);
   

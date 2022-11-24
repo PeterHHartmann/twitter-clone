@@ -39,9 +39,112 @@
 .editProfile {
   @extend %btn-light;
   margin-block: auto;
+  font-size: .95rem;
+  font-weight: 700;
 }
 
 .follow {
   @extend %btn-dark;
   margin-block: auto;
+}
+
+.info {
+  display: grid;
+  gap: .9rem;
+  padding-inline: 1rem;
+  padding-block: 0 1rem;
+}
+
+.names {
+  color: rgb(0, 0, 0);
+
+  * {
+    font-size: 1rem;
+    white-space: no-wrap;
+  }
+  :nth-child(1) {
+    font-weight: 500;
+  }
+  :nth-child(2) {
+    filter: invert(20%);
+  }
+
+}
+
+.history {
+  display: flex;
+  gap: .5rem;
+  div {
+    display: flex;
+    align-items: center;
+    span {
+      font-size: .95rem;
+      filter: invert(20%);
+    }
+    img {
+      height: 1.2rem;
+      filter: invert(40%);
+    }
+  }
+}
+
+.followInfo {
+  display: flex;
+  gap: .5rem;
+  font-size: .9rem;
+  filter: invert(30%)
+}
+
+.userContent {
+  width: 100%;
+}
+
+.contentOptions {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+
+  @media (max-width: 540px){
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.option {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding-block: 1rem 0;
+  padding-inline: 1rem;
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+  border-bottom: 1px solid rgb(240, 240, 240);
+
+  &:hover {
+    background-color: darken(rgb(255, 255, 255), 7.5%)
+  }
+
+  span {
+    display: grid;
+    justify-items: center;
+    gap: auto;
+    width: max-content;
+  }
+}
+
+.optionCurrent {
+  @extend .option;
+  span::after {
+    content: ' ';
+    border-radius: 5rem;
+    background-color: rgb(29, 155, 240);
+    width: 110%;
+    height: .25rem;
+    margin-block: .9rem .05rem;
+  }
+}
+
+.userContent {
+
 }
