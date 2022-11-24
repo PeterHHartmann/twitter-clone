@@ -16,12 +16,14 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
-      "@/public/*": ["public/*"],
-      "@/components/*": ["components/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/services/*": ["services/*"]
+      "@lib/*": ["lib/*"],
+      "@styles/*": ["styles/*"],
+      "@public/*": ["public/*"],
+      "@icon/*": ["public/icon/*"],
+      "@image/*": ["public/img/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@services/*": ["services/*"]
     }
   },
   "include": [

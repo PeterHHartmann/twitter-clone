@@ -1,4 +1,4 @@
-import style from '@/styles/AuthForm.module.scss';
+import style from '@styles/AuthForm.module.scss';
 import { Dispatch, FC, FormEvent, SetStateAction, useEffect, useRef, useState } from 'react';
 
 type Props = {

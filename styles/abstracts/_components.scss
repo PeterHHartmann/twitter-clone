@@ -1,0 +1,31 @@
+@use "./colors" as color;
+
+%btn {
+  height: fit-content;
+  padding: .5rem 1rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+%btn-light {
+  @extend %btn;
+  background: white;
+  color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  &:hover {
+      background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+%btn-dark {
+  @extend %btn;
+  background: black;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+      background: rgba(0, 0, 0, .8);
+  }
+}

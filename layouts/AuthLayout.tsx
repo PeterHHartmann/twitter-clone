@@ -1,5 +1,5 @@
-import style from '@/styles/layouts/AuthLayout.module.scss'
-import logo from '@/public/icon/logo.svg';
+import style from '@styles/layouts/AuthLayout.module.scss'
+import logo from '@icon/logo.svg';
 import { FC, PropsWithChildren } from "react";
 import Image from "next/image";
 

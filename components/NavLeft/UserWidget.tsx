@@ -1,10 +1,10 @@
-import style from '@/styles/components/NavLeft/UserWidget.module.scss'
+import style from '@styles/components/NavLeft/UserWidget.module.scss'
 import { FC, useState } from 'react';
 import Image from 'next/image';
-import default_pfp from '@/public/img/default-pfp.jpg'
-import icon from '@/public/icon/more.svg'
+import default_pfp from '@image/default-pfp.jpg'
+import icon from '@icon/more.svg'
 import { useRouter } from "next/router";
-import { Session } from "@/lib/auth/session";
+import { Session } from "@lib/auth/session";
 
 export const UserWidget: FC<{session: Session}> = ({session}) => {
   const [displayLogout, setDisplayLogout] = useState(false);
