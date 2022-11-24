@@ -1,5 +1,5 @@
-import style from '@/styles/components/NavRight/FollowNav.module.scss'
-import default_pfp from '@/public/img/default-pfp.jpg'
+import style from '@styles/components/NavRight/FollowNav.module.scss'
+import default_pfp from '@image/default-pfp.jpg'
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";

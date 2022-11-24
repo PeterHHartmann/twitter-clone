@@ -1,11 +1,11 @@
-import style from '@/styles/AuthForm.module.scss';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import style from '@styles/AuthForm.module.scss';
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType } from 'next';
 import { FC, FormEvent, useEffect, useState } from 'react';
-import { AuthLayout } from '@/layouts/AuthLayout';
+import { AuthLayout } from '@layouts/AuthLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSession, getCsrfToken } from '@/lib/auth';
-import { FormInput } from "@/components/Auth/FormInput";
+import { getSession, getCsrfToken } from '@lib/auth';
+import { FormInput } from "@components/Auth/FormInput";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);

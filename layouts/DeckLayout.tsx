@@ -1,4 +1,4 @@
-import style from '@/styles/layouts/DeckLayout.module.scss';
+import style from '@styles/layouts/DeckLayout.module.scss';
 import type { FC, PropsWithChildren } from 'react';
 
 export const DeckLayout: FC<PropsWithChildren> = ({ children }) => {

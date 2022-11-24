@@ -1,4 +1,4 @@
-import style from '@/styles/components/NavLeft/NavLink.module.scss';
+import style from '@styles/components/NavLeft/NavLink.module.scss';
 import Image from "next/image";
 import Link from "next/link";
 import { FC, PropsWithChildren } from "react";

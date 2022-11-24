@@ -1,5 +1,5 @@
-import { verifyRequest } from "@/lib/auth";
-import { AuthError } from "@/lib/auth/constants";
+import { verifyRequest } from "@lib/auth";
+import { AuthError } from "@lib/auth/constants";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {

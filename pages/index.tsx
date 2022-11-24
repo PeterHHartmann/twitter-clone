@@ -1,13 +1,13 @@
-import stars_icon from '@/public/icon/stars.svg';
-import { DeckLayout } from '@/layouts/DeckLayout';
-import { MainLayout } from '@/layouts/MainLayout';
-import { Header } from '@/components/Header';
-import { TweetWidget } from '@/components/TweetWidget/TweetWidget';
-import { NavLeft } from '@/components/NavLeft/NavLeft';
-import { NavRight } from '@/components/NavRight/NavRight';
+import stars_icon from '@icon/stars.svg';
+import { DeckLayout } from '@layouts/DeckLayout';
+import { MainLayout } from '@layouts/MainLayout';
+import { DeckHeader } from '@components/DeckHeader';
+import { TweetWidget } from '@components/TweetWidget/TweetWidget';
+import { NavLeft } from '@components/NavLeft/NavLeft';
+import { NavRight } from '@components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@/lib/auth';
-import { FC } from "react";
+import { getSession } from '@lib/auth';
+import { FC } from 'react';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
@@ -20,7 +20,7 @@ export const Home: FC<InferGetServerSidePropsType<any>> = ({ session }) => {
     <MainLayout>
       <NavLeft session={session} />
       <DeckLayout>
-        <Header name='Home' href='/' icon={stars_icon} />
+        <DeckHeader title='Home' href='/' icon={stars_icon} />
         <TweetWidget />
       </DeckLayout>
       <NavRight />

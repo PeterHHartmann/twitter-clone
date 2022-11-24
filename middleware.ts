@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { setCsrfCookie } from '@/lib/auth';
+import { setCsrfCookie } from '@lib/auth';
 import { jsonResponse } from './lib/utils';
 import { CSRF_TOKEN } from "./lib/auth/constants";
 
