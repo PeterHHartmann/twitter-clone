@@ -1,7 +1,9 @@
+@use '../abstracts/borders' as borders;
+
 .deck {
   grid-column: 2;
-  border-left: 1px solid rgb(240, 240, 240);
-  border-right: 1px solid rgb(240, 240, 240);
+  border-left: borders.$layout;
+  border-right: borders.$layout;
   width: clamp(400px, 100vw, 600px);
   display: flex;
   flex-direction: column;

@@ -1,6 +1,9 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
 .nav {
   margin-top: 1rem;
-  background: rgba(0, 100, 100, 0.05);
+  background: lighten(colors.$backgrounds, 45%);
   border-radius: 1.1rem;
   overflow: hidden;
 
@@ -19,7 +22,7 @@
   gap: .8rem;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: lighten(colors.$backgrounds, 42%);
   }
 }
 
@@ -30,7 +33,7 @@
 .displayname {
   font-size: 1rem;
   font-weight: 500;
-  color: black;
+  color: colors.$dark;
   margin: 0;
 
   &:hover {
@@ -42,24 +45,12 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
+  color: invert(colors.$dark, 20%);
   margin: 0;
 }
 
 .button {
-  height: fit-content;
-  padding: .5rem 1rem;
-  border-radius: 3rem;
-  font-weight: 700;
-  cursor: pointer;
+  @extend %btn-dark;
   margin-left: auto;
   margin-block: auto;
-
-  background: black;
-  color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  
-  &:hover {
-      background: rgba(0, 0, 0, .8);
-  }
 }

@@ -1,8 +1,10 @@
+@use '../../abstracts/colors' as colors;
+
 .container {
     z-index: 20;
     position: sticky;
     top: 0;
-    background: white;
+    background: colors.$light;
     padding: 0.3rem 0;
     border: unset;
 }
@@ -11,9 +13,9 @@
     display: flex;
     gap: 1rem;
     border-radius: 10rem;
-    color: rgba(0, 0, 0, 1);
-    background: rgba(0, 100, 100, 0.05);
-    padding: .5rem 1rem;
+    color: colors.$dark;
+    background: lighten(colors.$backgrounds, 43%);
+    padding: .375rem 1rem;
 }
 
 .icon {

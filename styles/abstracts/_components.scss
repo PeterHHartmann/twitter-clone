@@ -1,4 +1,4 @@
-@use "./colors" as color;
+@use "./colors" as colors;
 
 %btn {
   height: fit-content;
@@ -14,22 +14,22 @@
 
 %btn-light {
   @extend %btn;
-  background-color: white;
-  color: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-
+  background-color: colors.$light;
+  color: invert(colors.$dark, 30%);
+  border: 1px solid invert(colors.$dark, 80%);
+  
   &:hover {
-      background: rgba(0, 0, 0, 0.1);
+      background: invert(colors.$light, 10%);
   }
 }
 
 %btn-dark {
   @extend %btn;
-  background-color: black;
-  color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: colors.$dark;
+  color: colors.$light;
+  border: 1px solid invert(colors.$light, 80%);
   
   &:hover {
-      background: rgba(0, 0, 0, .8);
+      background: invert(colors.$light, 80%);
   }
 }

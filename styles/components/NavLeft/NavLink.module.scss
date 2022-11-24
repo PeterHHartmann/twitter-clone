@@ -1,3 +1,5 @@
+@use '../../abstracts/colors' as colors;
+
 .link {
   display: flex;
   align-items: center;
@@ -10,7 +12,7 @@
   margin-inline: 0 3rem;
   font-size: 1.275rem;
   white-space: nowrap;
-  color: black;
+  color: colors.$dark;
   font-weight: 400;
 
   @media (max-width: 1021px) {
@@ -20,7 +22,7 @@
   }
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: invert(colors.$light, 10%);
   }
 
   > *:not(img){

@@ -1,3 +1,5 @@
+@use '../../abstracts/colors' as colors;
+
 .container {
   display: flex;
   justify-content: flex-end;
@@ -28,9 +30,9 @@
 
 .newTweet {
   border: none;
-  padding: 1rem;
-  color: white;
-  background-color: rgb(29, 155, 240);
+  padding: .85rem;
+  color: colors.$light;
+  background-color: colors.$primary;
   font-size: 1.2rem;
   font-weight: 500;
   border-radius: 4rem;
@@ -39,7 +41,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(19, 145, 230);
+    background-color: darken(colors.$primary, 10%);
     transition: all ease-in-out .1s;
   }
 

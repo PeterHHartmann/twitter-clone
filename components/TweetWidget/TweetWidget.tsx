@@ -1,4 +1,4 @@
-import style from '@styles/components/TweetWidget/Widget.module.scss';
+import style from '@styles/components/TweetWidget/TweetWidget.module.scss';
 import { ButtonUploadImage } from '@components/TweetWidget/ButtonUploadImage';
 import { RemovableImage } from '@components/TweetWidget/RemovableImage';
 import React, { FC, useState } from 'react';
@@ -27,7 +27,7 @@ export const TweetWidget: FC = () => {
         </div>
         <div className={style.bottom}>
           <ButtonUploadImage images={images} setImages={setImages} />
-          <button className={style.submit}>
+          <button className={style.submit} data-active={(text || images.length > 0) ? true : null}>
             <span>Tweet</span>
           </button>
         </div>

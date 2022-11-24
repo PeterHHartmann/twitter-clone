@@ -1,3 +1,5 @@
+@use 'abstracts/colors' as colors;
+
 .form {
   width: 100%;
   display: grid;
@@ -12,7 +14,7 @@
   grid-auto-flow: row;
   grid-template-rows: 1fr 2fr;
   width: 100%;
-  outline: solid rgba(0, 0, 0, 0.2) 1px;
+  outline: solid transparentize(colors.$dark, .8) 1px;
 
   border-radius: .375rem;
   padding-top: .25rem;
@@ -33,7 +35,7 @@
 
   &[data-error=false]{
     span {
-      color: rgba(29, 155, 240);
+      color: colors.$primary;
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
@@ -41,9 +43,9 @@
   }
 
   &[data-error=true]{
-    outline: solid red 2px;
+    outline: solid colors.$error 2px;
     span {
-      color: red!important;
+      color: color.$error!important;
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
@@ -52,17 +54,17 @@
 
   &:focus-within {
     span {
-      color: rgba(29, 155, 240);
+      color: colors.$primary;
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
     }
 
     &[data-error=true]{
-      outline: solid red 2px;
+      outline: solid colors.$error 2px;
     }
     &[data-error=false]{
-      outline: solid rgba(29, 155, 240) 2px;
+      outline: solid colors.$primary 2px;
     }
   }
 }
@@ -77,7 +79,7 @@
 }
 
 .error {
-  color: red;
+  color: colors.$error;
   font-size: .8rem;
   padding-block: .2rem 0;
   padding-inline: .5rem;
@@ -92,16 +94,16 @@
   padding-block: 1rem;
   padding-inline: 3rem;
   width: fit-content;
-  border: solid white 1px;
-  color: white;
+  border: solid colors.$light 1px;
+  color: colors.$light;
   font-size: 1rem;
   font-weight: 600;
-  background: rgb(29, 155, 240);
+  background: color.$primary;
   border-radius: 2rem;
   padding-block: 1rem;
 
   &:hover {
-      background-color: rgb(19, 145, 230)
+      background-color: lighten(colors.$primary, 5%)
   }
 }
 
@@ -110,6 +112,10 @@
 
   a {
     font-weight: 500;
-    color: rgb(29, 155, 240);
+    color: colors.$primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
