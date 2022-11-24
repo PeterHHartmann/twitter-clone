@@ -45,7 +45,7 @@
   &[data-error=true]{
     outline: solid colors.$error 2px;
     span {
-      color: color.$error!important;
+      color: colors.$error!important;
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
@@ -98,7 +98,7 @@
   color: colors.$light;
   font-size: 1rem;
   font-weight: 600;
-  background: color.$primary;
+  background: colors.$primary;
   border-radius: 2rem;
   padding-block: 1rem;
 

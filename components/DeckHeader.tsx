@@ -17,7 +17,7 @@ export const DeckHeader: FC<Props> = ({ title, subtitle, href, icon, referer }) 
     <header className={style.container}>
       <div className={style.left}>
         {referer ? (
-          <Link href={referer} className={style.back}>
+          <Link href={href} className={style.back}>
             <Image src={backIcon} alt='Back' width={20} height={20} priority={true}></Image>
           </Link>
         ) : null}
