@@ -77,14 +77,16 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
-  height: 200px;
   width: 100%;
+  height: 200px;
   background-color: lighten(colors.$backgrounds, 32%);
   position: relative;
   filter: brightness(90%);
 
   > img {
     width: 100%;
+    height: auto;
+    min-height: 100%;
     position: absolute;
     top: -9999px;
     bottom: -9999px;
@@ -105,6 +107,7 @@
 }
 
 .avatar {
+  position: relative;
   display: flex;
   justify-content: center;
   transform: translateY(-50%);
@@ -114,6 +117,18 @@
   height: 120px;
   width: 120px;
   filter: brightness(90%);
+  
+  > img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+  }
 }
 
 .addImageBtn {
@@ -217,4 +232,37 @@
   &:empty:before {
     content: "\200b";
   }
+}
+
+.fileLabel {
+  display: flex;
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  padding: .5rem;
+  margin: auto;
+  border-radius: 100%;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid invert(colors.$light, 50%);
+  background-color: transparentize(colors.$dark, .5);
+
+  &:hover {
+    background-color: transparentize(colors.$dark, .7);
+  }
+
+  > img {
+    filter: invert(100%);
+  }
+}
+
+.fileInput[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
 }

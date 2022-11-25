@@ -5,7 +5,7 @@ import { DeckHeader } from '@components/DeckHeader';
 import { NavLeft } from '@components/NavLeft/NavLeft';
 import { NavRight } from '@components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@lib/auth';
+import { getCsrfToken, getSession } from '@lib/auth';
 import { FC } from 'react';
 import { Error404 } from '@components/Profile/Error404';
 import Image from "next/image";
@@ -20,6 +20,7 @@ import { EditProfile } from "@components/Profile/EditProfile";
 export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
   const session = await getSession(req);
   if (!session) return { redirect: { destination: '/signin', permanent: false } };
+  const csrfToken = getCsrfToken(req);
   const { profile } = query;
   const response = await fetch(`http://127.0.0.1:8000/profile/${profile}`, {
     method: 'get',
@@ -31,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   return {
     props: {
       session: session,
+      csrfToken: csrfToken,
       profile: profile,
       data: await response.json(),
       errorCode: errorCode,
@@ -39,12 +41,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   };
 };
 
-export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, profile, data, errorCode, referer }) => {
+export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfToken, profile, data, errorCode, referer }) => {
   const joinedAt = new Date(data.created_at).toLocaleString('default', { month: 'long', year: 'numeric' });
-  const [editOpen, setEditOpen] = useState<boolean>(true);
+  const [editOpen, setEditOpen] = useState<boolean>(false);
   const following = '137';
   const followers = '36';
-  const location = 'Copenhagen, Denmark'
 
   return (
     <>
@@ -60,7 +61,7 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, profile
           content='initial-scale=1.0, width=device-width, maximum-scale=1, user-scalable=0, viewport-fit=cover'
         />
       </Head>
-      {editOpen ? <EditProfile setIsOpen={setEditOpen} session={session} data={data} /> : null}
+      {editOpen ? <EditProfile csrfToken={csrfToken} setIsOpen={setEditOpen} session={session} data={data} /> : null}
       <MainLayout>
         <NavLeft session={session} />
         <DeckLayout>
@@ -69,9 +70,9 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, profile
           ) : (
             <>
               <DeckHeader title={profile} subtitle={'773 tweets'} href='/' referer={referer} />
-              <div className={style.banner}>{data.banner ? <Image src={data.banner} alt='' /> : null}</div>
+              <div className={style.banner}>{data.banner ? <img src={'http://127.0.0.1:8000' + data.banner} alt='' /> : null}</div>
               <div className={style.avatarContainer}>
-                <Image className={style.avatar} src={defaultPfp} alt='User Avatar' width={140} height={140} />
+                <Image className={style.avatar} src={data.avatar || defaultPfp} alt='User Avatar' width={140} height={140} priority={true}/>
                 {session.username === profile ? (
                   <button className={style.editBtn} onClick={() => setEditOpen(true)}>
                     Edit Profile
@@ -87,10 +88,10 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, profile
                 </div>
                 {data.bio ? <span className={style.bio}>{data.bio}</span> : null}
                 <div className={style.history}>
-                  {location ? (
+                  {data.location ? (
                     <div>
                       <Image src={locationIcon} alt='' width={19.2} height={19.2} />
-                      <span>{location}</span>
+                      <span>{data.location}</span>
                     </div>
                   ) : null}
                   {joinedAt ? (

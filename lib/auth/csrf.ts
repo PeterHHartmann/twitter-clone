@@ -26,7 +26,7 @@ const verifyCsrfToken = async (token: string | undefined) => {
 }
 
 export const verifyCsrfTokens = async (req: NextApiRequest) => {
-  const verifiedBodyToken = await verifyCsrfToken(req.body.csrfToken);
+  const verifiedBodyToken = await verifyCsrfToken(req.headers['x-csrf-token'] as string);
   const verifiedCookieToken = await verifyCsrfToken(req.cookies[CSRF_TOKEN]);
   if (verifiedBodyToken.jti !== verifiedCookieToken.jti) throw new AuthError('csrfToken mismatch');
 };
