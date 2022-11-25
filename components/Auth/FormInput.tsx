@@ -2,6 +2,7 @@ import style from '@styles/AuthForm.module.scss';
 import { Dispatch, FC, FormEvent, SetStateAction, useEffect, useRef, useState } from 'react';
 
 type Props = {
+  name: string;
   type: string;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
@@ -9,7 +10,7 @@ type Props = {
   checkValid?: boolean;
 };
 
-export const FormInput: FC<Props> = ({ type, value, setValue, serverError, checkValid }) => {
+export const FormInput: FC<Props> = ({ name, type, value, setValue, serverError, checkValid }) => {
   const [errorVisible, setErrorVisible] = useState<boolean | null>(false);
   const timeoutRef = useRef<any | null>(null);
 
@@ -38,23 +39,23 @@ export const FormInput: FC<Props> = ({ type, value, setValue, serverError, check
     return () => clearTimeout(timeoutRef.current!);
   }, []);
 
-  const label = type.charAt(0).toUpperCase() + type.slice(1);
+  const label = name.charAt(0).toUpperCase() + name.slice(1);
 
   return (
     <>
-      <label className={style.label} htmlFor={type} data-error={serverError ? true : (value ? errorVisible : '')}>
+      <label className={style.label} htmlFor={name} data-error={serverError ? true : (value ? errorVisible : '')}>
         <span>{label}</span>
         <input
           className={style.input}
-          id={type}
-          name={type}
+          id={name}
+          name={name}
           type={type}
           value={value}
           onChange={handleValueChange}
           required
         />
       </label>
-      <span className={style.error}>{errorVisible ? `Please enter a valid ${type}` : serverError}</span>
+      <span className={style.error}>{errorVisible ? `Please enter a valid ${name}` : serverError}</span>
     </>
   );
 };

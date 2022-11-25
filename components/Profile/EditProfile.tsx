@@ -5,6 +5,7 @@ import Image from 'next/image';
 import defaultPfp from '@image/default-pfp.jpg';
 import closeIcon from '@icon/remove.svg';
 import addImageIcon from '@icon/add-image.svg';
+import { FormInput } from "@components/Auth/FormInput";
 
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -62,49 +63,9 @@ export const EditProfile: FC<PropsWithChildren<Props>> = ({ setIsOpen, session, 
               </div>
             </div>
           </div>
-          <label
-            className={style.label}
-            htmlFor='displayname'
-            data-error={serverError ? true : displayname ? false : ''}
-          >
-            <span>Name</span>
-            <input
-              className={style.input}
-              id='displayname'
-              name='displayname'
-              type='text'
-              value={displayname}
-              onChange={(event) => setDisplayName(event.target.value)}
-              required
-            />
-          </label>
-          <span className={style.error}>{}</span>
-          <label className={style.label} htmlFor='bio' data-error={serverError ? true : bio ? false : ''}>
-            <span>Bio</span>
-            <input
-              className={style.input}
-              id='bio'
-              name='bio'
-              type='text'
-              value={bio}
-              onChange={(event) => setBio(event.target.value)}
-              required
-            />
-          </label>
-          <span className={style.error}>{}</span>
-          <label className={style.label} htmlFor='location' data-error={serverError ? true : location ? false : ''}>
-            <span>Location</span>
-            <input
-              className={style.input}
-              id='location'
-              name='location'
-              type='location'
-              value={location}
-              onChange={(event) => setLocation(event.target.value)}
-              required
-            />
-          </label>
-          <span className={style.error}>{}</span>
+          <FormInput name="name" type="text" value={displayname} setValue={setDisplayName} serverError={serverError}/>
+          <FormInput name="bio" type="text" value={bio} setValue={setBio} serverError={serverError}/>
+          <FormInput name="location" type="text" value={location} setValue={setLocation} serverError={serverError}/>
         </div>
       </form>
     </div>

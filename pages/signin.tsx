@@ -56,8 +56,8 @@ export const SignIn: FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Sign in to Twitter</h1>
         {serverError ? <span className={style.error}>{serverError}</span> : null}
-        <FormInput type='email' value={email} setValue={setEmail} serverError={serverInputError} checkValid={true}/>
-        <FormInput type='password' value={password} setValue={setPassword} serverError={serverInputError} />
+        <FormInput name='email' type='email' value={email} setValue={setEmail} serverError={serverInputError} checkValid={true}/>
+        <FormInput name='password' type='password' value={password} setValue={setPassword} serverError={serverInputError} />
         <button className={style.button} type='submit'>
           Sign in
         </button>

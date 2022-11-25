@@ -72,9 +72,9 @@ export const SignUp: FC<InferGetServerSidePropsType<any>> = ({ csrfToken }) => {
       <form className={style.form} action='' method='post' onSubmit={handleSubmit}>
         <h1 className={style.heading}>Join Twitter today</h1>
         {serverError ? <span className={style.error}>{serverError}</span> : null}
-        <FormInput type='email' value={email} setValue={setEmail} serverError={serverEmailError} checkValid={true} />
-        <FormInput type='username' value={username} setValue={setUsername} serverError={serverUsernameError} />
-        <FormInput type='password' value={password} setValue={setPassword} serverError={serverPasswordError} />
+        <FormInput name='email' type='email' value={email} setValue={setEmail} serverError={serverEmailError} checkValid={true} />
+        <FormInput name='username' type='text' value={username} setValue={setUsername} serverError={serverUsernameError} />
+        <FormInput name='password' type='password' value={password} setValue={setPassword} serverError={serverPasswordError} />
         <button className={style.button} type='submit'>
           Sign Up
         </button>
