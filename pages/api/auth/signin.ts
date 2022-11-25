@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { setSessionCookie, verifyRequest } from '@lib/auth';
+import { setSessionCookie, verifyCsrfTokens } from '@lib/auth';
 import { AuthError } from '@lib/auth/constants';
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') return res.status(405).json({ success: false });
   try {
-    await verifyRequest(req);
+    await verifyCsrfTokens(req);
     const response = await fetch('http://127.0.0.1:8000/auth/signin', {
       method: 'post',
       headers: {

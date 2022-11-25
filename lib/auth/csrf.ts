@@ -25,11 +25,11 @@ const verifyCsrfToken = async (token: string | undefined) => {
   }
 }
 
-export const verifyRequest = async (req: NextApiRequest) => {
+export const verifyCsrfTokens = async (req: NextApiRequest) => {
   const verifiedBodyToken = await verifyCsrfToken(req.body.csrfToken);
   const verifiedCookieToken = await verifyCsrfToken(req.cookies[CSRF_TOKEN]);
   if (verifiedBodyToken.jti !== verifiedCookieToken.jti) throw new AuthError('csrfToken mismatch');
-}
+};
 
 export const setCsrfCookie = async (res: NextResponse) => {
   const jwt = await new SignJWT({})
