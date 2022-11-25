@@ -13,7 +13,6 @@
   font-size: 1.275rem;
   white-space: nowrap;
   color: colors.$dark;
-  font-weight: 400;
 
   @media (max-width: 1021px) {
     padding: .8rem;
@@ -36,10 +35,10 @@
 
 .activelink {
   @extend .link;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .inactivelink {
   @extend .link;
-  font-weight: 400;
+  font-weight: normal;
 }
