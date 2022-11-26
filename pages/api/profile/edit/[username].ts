@@ -1,7 +1,8 @@
 import { getSession, verifyCsrfTokens } from '@lib/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { IncomingForm, File, Files } from 'formidable';
-import { readFileSync } from 'fs';
+import { IncomingForm, File, Files, Fields } from 'formidable';
+import { readFile } from 'fs/promises';
+import { readFileSync } from "fs";
 
 export const config = {
   api: {
@@ -10,10 +11,10 @@ export const config = {
 };
 
 type ImageFile = File & {
-  filepath: string
-  originalFilename: string
-  mimetype: string
-}
+  filepath: string;
+  originalFilename: string;
+  mimetype: string;
+};
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') return res.status(405).json({ success: false });
@@ -47,14 +48,12 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     });
 
-    const formData = await parseForm;
-
     const response = await fetch(`http://127.0.0.1:8000/profile/${username}`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${session!.accessToken}`,
       },
-      body: formData,
+      body: await parseForm,
     });
     if (response.ok) {
       return res.status(200).json({ success: true });

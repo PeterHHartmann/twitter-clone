@@ -70,9 +70,23 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfTok
           ) : (
             <>
               <DeckHeader title={profile} subtitle={'773 tweets'} href='/' referer={referer} />
-              <div className={style.banner}>{data.banner ? <img src={'http://127.0.0.1:8000' + data.banner} alt='' /> : null}</div>
+              <div className={style.banner}>
+                {data.banner ? <img src={'http://127.0.0.1:8000' + data.banner} alt='' /> : null}
+              </div>
               <div className={style.avatarContainer}>
-                <Image className={style.avatar} src={data.avatar || defaultPfp} alt='User Avatar' width={140} height={140} priority={true}/>
+                {data.avatar ? (
+                  <img className={style.avatar} width={140} height={140} src={'http://127.0.0.1:8000' + data.avatar} alt='' />
+                ) : (
+                  <Image
+                    className={style.avatar}
+                    src={defaultPfp}
+                    alt='User Avatar'
+                    width={140}
+                    height={140}
+                    priority={true}
+                  />
+                )}
+
                 {session.username === profile ? (
                   <button className={style.editBtn} onClick={() => setEditOpen(true)}>
                     Edit Profile
