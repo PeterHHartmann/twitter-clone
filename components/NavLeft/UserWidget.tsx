@@ -30,14 +30,19 @@ export const UserWidget: FC<{session: Session}> = ({session}) => {
         </div>
       )}
       <div className={style.user} onClick={handleClick}>
-        <Image
-          className={style.profile}
+        <div className={style.avatar}>
+          {session.avatar 
+          ? 
+          <img src={`http://localhost:8000${session.avatar}`} alt=''/>
+          : 
+          <Image
           src={default_pfp}
           alt='your profile picture'
           width={48}
           height={48}
           priority={true}
-        />
+          />}
+        </div>
         <div className={style.info}>
           <div className={style.displayname}>{session.displayname}</div>
           <div className={style.username}>{session.username}</div>

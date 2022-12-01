@@ -28,6 +28,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       Authorization: `Bearer ${session.accessToken}`,
     },
   });
+  const tweetsResponse = await fetch(`http://localhost:8000/tweet/${profile}`, {
+    method: 'get'
+  })
+  const tweets = await tweetsResponse.json();
+  
   const errorCode = response.ok ? false : 404;
   return {
     props: {
@@ -37,11 +42,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       data: await response.json(),
       errorCode: errorCode,
       referer: req.headers.referer || '/',
+      tweets: tweets
     },
   };
 };
 
-export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfToken, profile, data, errorCode, referer }) => {
+export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfToken, profile, data, errorCode, referer, tweets }) => {
   const joinedAt = new Date(data.created_at).toLocaleString('default', { month: 'long', year: 'numeric' });
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const following = '137';

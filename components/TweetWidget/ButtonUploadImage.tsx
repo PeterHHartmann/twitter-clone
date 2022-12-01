@@ -4,19 +4,22 @@ import Image from "next/image";
 import React, { FC } from "react";
 
 type ButtonProps =  {
-  images: string[]
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
+  imageUrls: string[]
+  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>
+  imageFiles: File[]
+  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>
 }
 
-export const ButtonUploadImage: FC<ButtonProps>= ({images, setImages}) => {
+export const ButtonUploadImage: FC<ButtonProps>= ({imageUrls, setImageUrls, imageFiles, setImageFiles}) => {
 
   function handleImageUpload(e: React.ChangeEvent) {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files[0]) {
       const i = target.files[0];
       const src = URL.createObjectURL(i);
-      if (images.length < 4) {
-        setImages(images.concat(src));
+      if (imageUrls.length < 4) {
+        setImageUrls(imageUrls.concat(src));
+        setImageFiles(imageFiles.concat(i))
         target.value = '';
       }
     }

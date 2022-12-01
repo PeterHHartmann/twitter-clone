@@ -4,19 +4,22 @@ import icon from '@icon/remove.svg'
 import { FC } from "react";
 
 type RemovableImageProps = {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  imageUrls: string[];
+  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  imageFiles: File[]
+  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>
   index: number
 };
 
-export const RemovableImage: FC<RemovableImageProps> = ({ images, setImages, index }) => {
+export const RemovableImage: FC<RemovableImageProps> = ({ imageUrls, setImageUrls, imageFiles, setImageFiles, index }) => {
 
   function handleDeleteClicked(e: React.MouseEvent) {
     e.preventDefault();
     const target = e.target as HTMLElement;
     const parent = target.parentElement;
     const index = Number(parent?.dataset.index);
-    setImages(images.filter((_, i) => i !== index));
+    setImageUrls(imageUrls.filter((_, i) => i !== index));
+    setImageFiles(imageFiles.filter((_, i) => i !== index));
   }
 
   return (
@@ -24,7 +27,7 @@ export const RemovableImage: FC<RemovableImageProps> = ({ images, setImages, ind
       <button className={style.button} onClick={(e) => handleDeleteClicked(e)}>
         <Image src={icon} alt='' width={19} height={19} priority={true}></Image>
       </button>
-      <Image className={style.img} src={images[index]} alt='' width={100} height={100} priority={true} />
+      <Image className={style.img} src={imageUrls[index]} alt='' width={100} height={100} priority={true} />
     </div>
   );
 }

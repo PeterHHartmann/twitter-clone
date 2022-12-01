@@ -5,29 +5,57 @@ import React, { FC, useState } from 'react';
 import { TweetTextarea } from '@components/TweetWidget/TweetTextarea';
 import Image from 'next/image';
 import default_pfp from '@image/default-pfp.jpg';
+import { Session } from '@lib/auth';
 
-export const TweetWidget: FC = () => {
+export const TweetWidget: FC<{session: Session, csrfToken: string}> = ({session, csrfToken}) => {
   const [text, setText] = useState<string | undefined>('');
-  const [images, setImages] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageFiles, setImageFiles] = useState<File[]>([])
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('form submitted');
+    try {
+      const formData = new FormData();
+      if (text) {
+        formData.append('text', text);
+      }
+      if (imageFiles) {
+        for (const file of imageFiles) {
+          formData.append(`image-${imageFiles.indexOf(file)}`, file)
+        }
+      }
+      const response = await fetch('/api/profile/tweet', {
+        method: 'post',
+        headers: {
+          'x-csrf-token': csrfToken
+        },
+        body: formData
+      })
+      
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     <section className={style.section}>
-      <Image className={style.profile} src={default_pfp} alt='' priority={true}/>
+      <div className={style.avatar}>
+        {session.avatar 
+        ? <img src={`http://localhost:8000${session.avatar}`} alt='' />
+        : <Image src={default_pfp} alt='' priority={true}/>
+        }
+      </div>
       <form className={style.form} action='POST' onSubmit={handleSubmit}>
         <TweetTextarea value={text} setValue={setText} />
         <div className={style.imgs}>
-          {images.map((_, index) => (
-            <RemovableImage key={index} images={images} setImages={setImages} index={index} />
+          {imageUrls.map((_, index) => (
+            <RemovableImage key={index} imageUrls={imageUrls} setImageUrls={setImageUrls} imageFiles={imageFiles} setImageFiles={setImageFiles} index={index} />
           ))}
         </div>
         <div className={style.bottom}>
-          <ButtonUploadImage images={images} setImages={setImages} />
-          <button className={style.submit} data-active={(text || images.length > 0) ? true : null}>
+          <ButtonUploadImage imageUrls={imageUrls} setImageUrls={setImageUrls} imageFiles={imageFiles} setImageFiles={setImageFiles}/>
+          <button className={style.submit} data-active={(text || imageUrls.length > 0) ? true : null}>
             <span>Tweet</span>
           </button>
         </div>

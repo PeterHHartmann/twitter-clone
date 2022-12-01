@@ -7,6 +7,7 @@ import cookie from 'cookie';
 export type Session = JWTPayload & {
   username: string;
   displayname: string;
+  avatar: string;
   accessToken: string;
 };
 

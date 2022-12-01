@@ -6,17 +6,18 @@ import { TweetWidget } from '@components/TweetWidget/TweetWidget';
 import { NavLeft } from '@components/NavLeft/NavLeft';
 import { NavRight } from '@components/NavRight/NavRight';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getSession } from '@lib/auth';
+import { getCsrfToken, getSession } from '@lib/auth';
 import { FC } from 'react';
 import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
   if (!session) return { redirect: { destination: '/signin', permanent: false } };
-  return { props: { session: session } };
+  const csrfToken = getCsrfToken(req);
+  return { props: { session: session, csrfToken: csrfToken} };
 };
 
-export const Home: FC<InferGetServerSidePropsType<any>> = ({ session }) => {
+export const Home: FC<InferGetServerSidePropsType<any>> = ({ session, csrfToken }) => {
   return (
     <>
       <Head>
@@ -27,7 +28,7 @@ export const Home: FC<InferGetServerSidePropsType<any>> = ({ session }) => {
         <NavLeft session={session} />
         <DeckLayout>
           <DeckHeader title='Home' href='/' icon={stars_icon} />
-          <TweetWidget />
+          <TweetWidget session={session} csrfToken={csrfToken} />
         </DeckLayout>
         <NavRight />
       </MainLayout>
