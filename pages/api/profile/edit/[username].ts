@@ -1,7 +1,6 @@
 import { getSession, verifyCsrfTokens } from '@lib/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingForm, File, Files, Fields } from 'formidable';
-import { readFile } from 'fs/promises';
 import { readFileSync } from "fs";
 
 export const config = {
