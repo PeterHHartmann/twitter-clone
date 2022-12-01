@@ -21,6 +21,7 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res = await setSessionCookie(res, { ...user, accessToken }, accessTokenExpires);
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log(err);
     if (err instanceof AuthError) {
       return res.status(403).json({ success: false, error: 'Something went wrong, please try again later' });
     }

@@ -32,6 +32,7 @@ export const SignIn: FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
+          'x-csrf-token': csrfToken
         },
         body: JSON.stringify({
           csrfToken: csrfToken,
