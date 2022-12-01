@@ -1,0 +1,5 @@
+$primary: rgb(29, 155, 240);
+$dark: black;
+$light: white;
+$error: rgb(255, 0, 0);
+$backgrounds: desaturate(adjust-hue($primary, -10), 70%)

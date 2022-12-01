@@ -1,20 +1,8 @@
+@use '../../abstracts/colors' as colors;
+
 .container {
   transform: translateX(-.5rem);
   padding: .5rem 0;
-
-  label {
-    border-radius: 100%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      background: rgba(29, 155, 240, 0.1);
-    }
-  }
 }
 
 .label {
@@ -27,13 +15,8 @@
   cursor: pointer;
 
   &:hover {
-    background: rgba(29, 155, 240, 0.1);
+    background: transparentize(colors.$primary, .9);
   }
-}
-
-.icon {
-  width: 1.3rem;
-  fill: rgb(29, 155, 240);
 }
 
 .input[type="file"] {

@@ -1,16 +1,8 @@
-import '../styles/globals.scss'
+import '@styles/globals.scss'
 import type { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
-import { Session } from "next-auth";
 
-type MyAppProps = AppProps & {
-  session: Session;
-};
-
-export default function App({ Component, pageProps, session}: MyAppProps) {
+export default function App({ Component, pageProps}: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <Component {...pageProps} />
   );
 }

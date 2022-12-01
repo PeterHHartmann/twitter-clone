@@ -1,3 +1,5 @@
+@use '../../abstracts/colors' as colors;
+
 .img {
   width: 100%;
   height: auto;
@@ -9,8 +11,8 @@
   width: 2.2rem;
   height: 2.2rem;
   border-radius: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  border: none;
+  background: invert(colors.$dark, 25%);
+  border: 1px solid invert(colors.$light, 25%);
   display: flex;
   justify-content: center;
   align-items: center;

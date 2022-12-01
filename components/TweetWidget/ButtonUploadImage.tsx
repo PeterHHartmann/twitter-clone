@@ -1,14 +1,14 @@
-import style from '../../styles/components/TweetWidget/ButtonUploadImage.module.scss';
-import icon from '../../public/icon/photo.svg'
+import style from '@styles/components/TweetWidget/ButtonUploadImage.module.scss';
+import icon from '@icon/photo.svg'
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 
 type ButtonProps =  {
   images: string[]
   setImages: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-export const ButtonUploadImage: React.FC<ButtonProps>= ({images, setImages}) => {
+export const ButtonUploadImage: FC<ButtonProps>= ({images, setImages}) => {
 
   function handleImageUpload(e: React.ChangeEvent) {
     const target = e.target as HTMLInputElement;
@@ -36,5 +36,3 @@ export const ButtonUploadImage: React.FC<ButtonProps>= ({images, setImages}) => 
     </div>
   );
 }
-
-export default ButtonUploadImage

@@ -1,3 +1,5 @@
+@use 'abstracts/colors' as colors;
+
 .form {
   width: 100%;
   display: grid;
@@ -12,7 +14,8 @@
   grid-auto-flow: row;
   grid-template-rows: 1fr 2fr;
   width: 100%;
-  border: solid rgba(0, 0, 0, 0.2) 1px;
+  outline: solid transparentize(colors.$dark, .8) 1px;
+
   border-radius: .375rem;
   padding-top: .25rem;
   padding-inline: .5rem;
@@ -20,39 +23,50 @@
   height: 4rem;
 
   span {
-    color: rgba(0, 0, 0, 0.7);
     user-select: none;
     pointer-events: none;
     margin-block: auto;
+    font-size: 1.1rem;
+    transform: translateY(1rem);
+    transition-property: transform, font-size;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
   }
 
-  &:focus-within span {
-      color: rgba(29, 155, 240);
+  &[data-error=false]{
+    span {
+      color: colors.$primary;
       font-weight: 500;
       font-size: .8rem;
       transform: translateY(0);
+    }
   }
-}
 
-.spanNoInput{
-  font-size: 1.1rem;
-  transform: translateY(1rem);
-  transition-property: transform, font-size;
-  transition-duration: .2s;
-  transition-timing-function: ease-in-out;
-}
+  &[data-error=true]{
+    outline: solid colors.$error 2px;
+    span {
+      color: colors.$error!important;
+      font-weight: 500;
+      font-size: .8rem;
+      transform: translateY(0);
+    }
+  }
 
-.spanAfterInput {
-  font-weight: 500;
-  font-size: .8rem;
-  transform: translateY(0);
-}
+  &:focus-within {
+    span {
+      color: colors.$primary;
+      font-weight: 500;
+      font-size: .8rem;
+      transform: translateY(0);
+    }
 
-.spanAfterInputError {
-  color: red !important;
-  font-weight: 500;
-  font-size: .8rem;
-  transform: translateY(0);
+    &[data-error=true]{
+      outline: solid colors.$error 2px;
+    }
+    &[data-error=false]{
+      outline: solid colors.$primary 2px;
+    }
+  }
 }
 
 .input {
@@ -65,11 +79,13 @@
 }
 
 .error {
-  color: red;
-  margin-top: .2rem;
+  color: colors.$error;
   font-size: .8rem;
-  // min-height: calc(.2rem + .8rem);
+  padding-block: .2rem 0;
   padding-inline: .5rem;
+  &:empty:before {
+    content: "\200b";
+  }
 }
 
 .button {
@@ -78,16 +94,16 @@
   padding-block: 1rem;
   padding-inline: 3rem;
   width: fit-content;
-  border: solid white 1px;
-  color: white;
+  border: solid colors.$light 1px;
+  color: colors.$light;
   font-size: 1rem;
   font-weight: 600;
-  background: rgb(29, 155, 240);
+  background: colors.$primary;
   border-radius: 2rem;
   padding-block: 1rem;
 
   &:hover {
-      background-color: rgb(19, 145, 230)
+      background-color: lighten(colors.$primary, 5%)
   }
 }
 
@@ -96,6 +112,10 @@
 
   a {
     font-weight: 500;
-    color: rgb(29, 155, 240);
+    color: colors.$primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

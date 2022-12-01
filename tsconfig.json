@@ -13,14 +13,24 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": ["lib/*"],
+      "@styles/*": ["styles/*"],
+      "@public/*": ["public/*"],
+      "@icon/*": ["public/icon/*"],
+      "@image/*": ["public/img/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@services/*": ["services/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "pages/api/auth/[...nextauth].js",
-    "components/NavLeft/UserWidget.tsx"
+    "**/*.tsx"
   ],
+
   "exclude": ["node_modules"]
 }

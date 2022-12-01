@@ -1,3 +1,6 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
 %container {
   display: flex;
   flex-direction: column;
@@ -14,6 +17,7 @@
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
+    background-color: lighten(colors.$backgrounds, 35%);
     transition: all ease-in-out .1s;
   }
 }
@@ -25,7 +29,7 @@
 
 .open {
   @extend %container;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: lighten(colors.$backgrounds, 35%);
 }
 
 .logout {
@@ -34,23 +38,10 @@
   padding: 1rem 1rem .5rem 1rem;
 
   button {
-    font-size: 1rem;
-    font-weight: 300;
-    height: fit-content;
-    padding: .5rem 1rem;
-    border-radius: 3rem;
-    font-weight: 700;
+    @extend %btn-dark;
     white-space: nowrap;
-    cursor: pointer;
-
-    background: black;
-    color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    
-    &:hover {
-        background: rgba(0, 0, 0, .8);
-    }
   }
+
   @media (max-width: 1021px) {
     position: fixed;
     transform: translateY(-4rem);
@@ -88,13 +79,12 @@
 .displayname {
   font-size: 1rem;
   font-weight: 500;
-  color: rgb(0, 0, 0);
+  color: colors.$dark;
   white-space: no-wrap;
 }
 
 .username {
   font-size: 1rem;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
+  color: invert(colors.$dark, 20%);
   white-space: no-wrap;
 }

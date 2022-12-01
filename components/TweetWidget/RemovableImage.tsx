@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import style from '../../styles/components/TweetWidget/RemovableImage.module.scss'
-import icon from '../../public/icon/remove.svg'
+import style from '@styles/components/TweetWidget/RemovableImage.module.scss'
+import icon from '@icon/remove.svg'
+import { FC } from "react";
 
 type RemovableImageProps = {
   images: string[];
@@ -8,7 +9,7 @@ type RemovableImageProps = {
   index: number
 };
 
-export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImages, index }) => {
+export const RemovableImage: FC<RemovableImageProps> = ({ images, setImages, index }) => {
 
   function handleDeleteClicked(e: React.MouseEvent) {
     e.preventDefault();
@@ -23,9 +24,7 @@ export const RemovableImage: React.FC<RemovableImageProps> = ({ images, setImage
       <button className={style.button} onClick={(e) => handleDeleteClicked(e)}>
         <Image src={icon} alt='' width={19} height={19} priority={true}></Image>
       </button>
-      <Image className={style.img} src={images[index]} alt='' width={100} height={100}/>
+      <Image className={style.img} src={images[index]} alt='' width={100} height={100} priority={true} />
     </div>
   );
 }
-
-export default RemovableImage

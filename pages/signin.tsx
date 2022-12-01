@@ -1,101 +1,68 @@
-import style from '../styles/AuthForm.module.scss';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getCsrfToken, getSession, signIn } from 'next-auth/react';
-import { FormEvent, useState } from 'react';
-import AuthLayout from '../layouts/AuthLayout';
+import style from '@styles/AuthForm.module.scss';
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType } from 'next';
+import { FC, FormEvent, useEffect, useState } from 'react';
+import { AuthLayout } from '@layouts/AuthLayout';
 import Link from 'next/link';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+import { getSession, getCsrfToken } from '@lib/auth';
+import { FormInput } from "@components/Auth/FormInput";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req, res } = context;
-
-  const session = await getSession({ req });
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-      },
-      props: {},
-    };
-  }
-  const csrfToken = await getCsrfToken(context);
-  return {
-    props: {
-      csrfToken: csrfToken,
-    },
-  };
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getSession(req);
+  if (session) return { redirect: { destination: '/', permanent: true } };
+  const csrfToken = getCsrfToken(req);
+  return { props: { csrfToken: csrfToken } };
 };
 
-export const SignIn: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
-  const [error, setError] = useState('');
+export const SignIn: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ csrfToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [serverError, setServerError] = useState('');
+  const [serverInputError, setServerInputError] = useState<string | boolean | null>(null);
+  const { reload } = useRouter();
 
-  const handleEmailChange = (e: FormEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
-  };
+  useEffect(() => {
+    return () => setServerInputError(null);
+  }, [email, password]);
 
-  const handlePasswordChange = (e: FormEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const response = await signIn('credentials', {
-      redirect: false,
-      email: email,
-      password: password, 
-    })
-    if (response) {
-      if (response.status === 200) {
-        router.push('/');
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/auth/signin', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          csrfToken: csrfToken,
+          email: email,
+          password: password,
+        }),
+      });
+      if (response.ok) {
+        reload();
       } else {
-        setError(response.error as string)
+        const { error } = await response.json();
+        setServerInputError(true);
+        setServerError(error as string);
       }
-    } else {
-      setError('Something went wrong\n Please try again later')
+    } catch (err) {
+      setServerError('Something went wrong. Please try again later');
     }
-  }
+  };
 
   return (
     <AuthLayout>
-      <h1 className={style.heading}>Sign in to Twitter</h1>
-      {error && <span className={style.error}>{error}</span>}
       <form className={style.form} action='/signin' method='post' autoComplete='off' onSubmit={handleSubmit}>
-        <input type='hidden' name='csrfToken' defaultValue={csrfToken} autoComplete='off' />
-        <label className={style.label} htmlFor='email'>
-          <span
-            className={
-              email ? (error ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
-            }
-          >
-            Email
-          </span>
-          <input className={style.input} name='email' type='text' value={email} onChange={handleEmailChange} required />
-        </label>
-        <label className={style.label} htmlFor='password'>
-          <span
-            className={
-              password ? (error ? style.spanAfterInputError : style.spanAfterInput) : style.spanNoInput
-            }
-          >
-            Password
-          </span>
-          <input
-            className={style.input}
-            type='password'
-            name='password'
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </label>
+        <h1 className={style.heading}>Sign in to Twitter</h1>
+        {serverError ? <span className={style.error}>{serverError}</span> : null}
+        <FormInput name='email' type='email' value={email} setValue={setEmail} serverError={serverInputError} checkValid={true}/>
+        <FormInput name='password' type='password' value={password} setValue={setPassword} serverError={serverInputError} />
         <button className={style.button} type='submit'>
           Sign in
         </button>
         <span className={style.option}>
-          Don't have an account?{' '}
+          Don&apos;t have an account?&nbsp;
           <Link href={'/signup'} prefetch={false}>
             Sign up
           </Link>

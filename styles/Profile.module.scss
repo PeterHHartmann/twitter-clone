@@ -1,0 +1,154 @@
+@use 'abstracts/colors' as colors;
+@use 'abstracts/borders' as borders;
+@use 'abstracts/components';
+
+.banner {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 200px;
+  width: 100%;
+  background-color: lighten(colors.$backgrounds, 32%);
+  position: relative;
+
+  img {
+    width: 100%;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+  }
+
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: space-between;
+  max-height: 80px;
+  width: 100%;
+  padding-inline: 1rem;
+}
+
+.avatar {
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  transform: translateY(-50%);
+  border: 4px solid colors.$light;
+}
+
+.editBtn {
+  @extend %btn-light;
+  margin-block: auto;
+  font-size: .95rem;
+  font-weight: bold;
+}
+
+.followBtn {
+  @extend %btn-dark;
+  margin-block: auto;
+}
+
+.info {
+  width: 100%;
+  display: grid;
+  gap: .9rem;
+  padding-inline: 1rem;
+  padding-block: 0 1rem;
+}
+
+.names {
+  color: rgb(0, 0, 0);
+
+  * {
+    font-size: 1rem;
+    white-space: no-wrap;
+  }
+  :nth-child(1) {
+    font-weight: 500;
+  }
+  :nth-child(2) {
+    filter: invert(20%);
+  }
+
+}
+
+.history {
+  display: flex;
+  gap: .5rem;
+  div {
+    display: flex;
+    gap: .1rem;
+    align-items: center;
+    span {
+      font-size: .95rem;
+      filter: invert(20%);
+    }
+    img {
+      height: 1.2rem;
+      filter: invert(40%);
+    }
+  }
+}
+
+.followInfo {
+  display: flex;
+  gap: .5rem;
+  font-size: .9rem;
+  filter: invert(30%)
+}
+
+.userContent {
+  width: 100%;
+}
+
+.contentOptions {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+
+  @media (max-width: 540px){
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.option {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding-block: 1rem 0;
+  padding-inline: 1rem;
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+  border-bottom: borders.$layout;
+
+  &:hover {
+    background-color: darken(colors.$light, 7.5%)
+  }
+
+  span {
+    display: grid;
+    justify-items: center;
+    gap: auto;
+    width: max-content;
+  }
+}
+
+.optionCurrent {
+  @extend .option;
+  span::after {
+    content: ' ';
+    border-radius: 5rem;
+    background-color: colors.$primary;
+    width: 110%;
+    height: .25rem;
+    margin-block: .9rem .05rem;
+  }
+}
+
+// .userContent {
+
+// }
