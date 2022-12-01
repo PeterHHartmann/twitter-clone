@@ -74,19 +74,20 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfTok
                 {data.banner ? <img src={'http://127.0.0.1:8000' + data.banner} alt='' /> : null}
               </div>
               <div className={style.avatarContainer}>
-                {data.avatar ? (
-                  <img className={style.avatar} width={140} height={140} src={'http://127.0.0.1:8000' + data.avatar} alt='' />
-                ) : (
-                  <Image
-                    className={style.avatar}
-                    src={defaultPfp}
-                    alt='User Avatar'
-                    width={140}
-                    height={140}
-                    priority={true}
-                  />
-                )}
-
+                <div className={style.avatar}>
+                  {data.avatar ? (
+                    <img width={140} height={140} src={'http://127.0.0.1:8000' + data.avatar} alt='' />
+                  ) : (
+                    <Image
+                      className={style.avatar}
+                      src={defaultPfp}
+                      alt='User Avatar'
+                      width={140}
+                      height={140}
+                      priority={true}
+                    />
+                  )}
+                </div>
                 {session.username === profile ? (
                   <button className={style.editBtn} onClick={() => setEditOpen(true)}>
                     Edit Profile

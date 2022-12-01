@@ -20,7 +20,6 @@
     right: -9999px;
     margin: auto;
   }
-
 }
 
 .avatarContainer {
@@ -32,10 +31,27 @@
 }
 
 .avatar {
-  aspect-ratio: 1 / 1;
-  border-radius: 100%;
+  width: 140px;
+  height: 140px;
+  position: relative;
+  display: flex;
+  justify-content: center;
   transform: translateY(-50%);
+  border-radius: 100%;
   border: 4px solid colors.$light;
+  overflow: hidden;
+
+  > img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+  }
 }
 
 .editBtn {
