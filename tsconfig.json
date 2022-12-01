@@ -30,7 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "sum.test.ts"  ],
 
   "exclude": ["node_modules"]
 }
