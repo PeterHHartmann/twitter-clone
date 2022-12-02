@@ -31,17 +31,11 @@ export const UserWidget: FC<{session: Session}> = ({session}) => {
       )}
       <div className={style.user} onClick={handleClick}>
         <div className={style.avatar}>
-          {session.avatar 
-          ? 
-          <img src={`http://localhost:8000${session.avatar}`} alt=''/>
-          : 
-          <Image
-          src={default_pfp}
-          alt='your profile picture'
-          width={48}
-          height={48}
-          priority={true}
-          />}
+          {session.avatar ? (
+            <Image src={session.avatar} alt='' width={48} height={48} priority={true} />
+          ) : (
+            <Image src={default_pfp} alt='your profile picture' width={48} height={48} priority={true} />
+          )}
         </div>
         <div className={style.info}>
           <div className={style.displayname}>{session.displayname}</div>

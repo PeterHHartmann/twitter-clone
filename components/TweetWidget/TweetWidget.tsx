@@ -41,21 +41,34 @@ export const TweetWidget: FC<{session: Session, csrfToken: string}> = ({session,
   return (
     <section className={style.section}>
       <div className={style.avatar}>
-        {session.avatar 
-        ? <img src={`http://localhost:8000${session.avatar}`} alt='' />
-        : <Image src={default_pfp} alt='' priority={true}/>
-        }
+        {session.avatar ? (
+          <Image src={session.avatar} alt='' width={48} height={48} priority={true} />
+        ) : (
+          <Image src={default_pfp} alt='' width={48} height={48} priority={true} />
+        )}
       </div>
       <form className={style.form} action='POST' onSubmit={handleSubmit}>
         <TweetTextarea value={text} setValue={setText} />
         <div className={style.imgs}>
           {imageUrls.map((_, index) => (
-            <RemovableImage key={index} imageUrls={imageUrls} setImageUrls={setImageUrls} imageFiles={imageFiles} setImageFiles={setImageFiles} index={index} />
+            <RemovableImage
+              key={index}
+              imageUrls={imageUrls}
+              setImageUrls={setImageUrls}
+              imageFiles={imageFiles}
+              setImageFiles={setImageFiles}
+              index={index}
+            />
           ))}
         </div>
         <div className={style.bottom}>
-          <ButtonUploadImage imageUrls={imageUrls} setImageUrls={setImageUrls} imageFiles={imageFiles} setImageFiles={setImageFiles}/>
-          <button className={style.submit} data-active={(text || imageUrls.length > 0) ? true : null}>
+          <ButtonUploadImage
+            imageUrls={imageUrls}
+            setImageUrls={setImageUrls}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+          />
+          <button className={style.submit} data-active={text || imageUrls.length > 0 ? true : null}>
             <span>Tweet</span>
           </button>
         </div>

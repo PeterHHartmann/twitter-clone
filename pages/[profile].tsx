@@ -52,7 +52,7 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfTok
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const following = '137';
   const followers = '36';
-
+  
   return (
     <>
       <Head>
@@ -77,15 +77,14 @@ export const Profile: FC<InferGetServerSidePropsType<any>> = ({ session, csrfTok
             <>
               <DeckHeader title={profile} subtitle={'773 tweets'} href='/' referer={referer} />
               <div className={style.banner}>
-                {data.banner ? <img src={'http://127.0.0.1:8000' + data.banner} alt='' /> : null}
+                {data.banner ? <img src={data.banner} alt='' /> : null}
               </div>
               <div className={style.avatarContainer}>
                 <div className={style.avatar}>
                   {data.avatar ? (
-                    <img width={140} height={140} src={'http://127.0.0.1:8000' + data.avatar} alt='' />
+                    <Image width={140} height={140} src={data.avatar} alt=''/>
                   ) : (
                     <Image
-                      className={style.avatar}
                       src={defaultPfp}
                       alt='User Avatar'
                       width={140}
