@@ -1,0 +1,52 @@
+@use '../../abstracts/colors' as colors;
+
+.form {
+  width: 100%;
+  display: grid;
+}
+
+.heading {
+  margin-inline: auto;
+}
+
+.button {
+  margin-block: 1rem;
+  margin-inline: auto;
+  padding-block: 1rem;
+  padding-inline: 3rem;
+  width: fit-content;
+  border: solid colors.$light 1px;
+  color: colors.$light;
+  font-size: 1rem;
+  font-weight: 600;
+  background: colors.$primary;
+  border-radius: 2rem;
+  padding-block: 1rem;
+
+  &:hover {
+    background-color: lighten(colors.$primary, 5%);
+  }
+}
+
+.option {
+  text-align: center;
+
+  a {
+    font-weight: 500;
+    color: colors.$primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.error {
+  color: colors.$error;
+  font-size: 0.8rem;
+  padding-block: 0.2rem 0;
+  padding-inline: 0.5rem;
+  &:empty:before {
+    content: '\200b';
+  }
+}

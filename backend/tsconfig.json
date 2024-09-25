@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "typeRoots": ["./types"]
+  },
+  "exclude": ["jest.config.ts"]
+}

@@ -1,0 +1,17 @@
+# Node Modules
+node_modules
+
+# Keep environment variables out of version control
+.env*
+
+# Compiled TypeScript directory
+dist
+
+yarn-error.log
+
+.DS_Store
+
+/static
+/media
+
+/coverage

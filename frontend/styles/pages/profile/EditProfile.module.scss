@@ -1,0 +1,220 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
+.modal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 5%;
+  background-color: transparentize(colors.$dark, 0.6);
+}
+
+.form {
+  max-width: 600px;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  background-color: colors.$light;
+  margin-inline: auto;
+  overflow: hidden;
+
+  > div {
+    overflow-y: auto;
+    box-sizing: content-box;
+    padding-bottom: 1rem;
+    > label {
+      width: calc(100% - 2rem);
+      margin-inline: auto;
+    }
+  }
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+
+  > div {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+.closeBtn {
+  @extend %btn-icon;
+  padding: 0.5rem;
+  border: none;
+  background-color: colors.$light;
+
+  &:hover {
+    background-color: invert(colors.$light, 10%);
+  }
+
+  > img {
+    filter: invert(100%);
+  }
+}
+
+.saveBtn {
+  @extend %btn-dark;
+}
+
+.banner {
+  @extend %banner;
+  background-color: lighten(colors.$backgrounds, 32%);
+  filter: brightness(90%);
+}
+
+.avatarContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-height: 80px;
+  width: 100%;
+  padding-inline: 1rem;
+}
+
+.avatar {
+  @extend %avatar;
+  height: 120px;
+  width: 120px;
+  filter: brightness(90%);
+  transform: translateY(-50%);
+}
+
+.addImageBtn {
+  @extend %btn-icon;
+  z-index: 2;
+  padding: 0.5rem;
+  border: 1px solid invert(colors.$light, 50%);
+  background-color: transparentize(colors.$dark, 0.5);
+
+  &:hover {
+    background-color: transparentize(colors.$dark, 0.7);
+  }
+
+  > img {
+    filter: invert(100%);
+  }
+}
+
+.label {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 1fr 2fr;
+  width: 100%;
+  outline: solid transparentize(colors.$dark, 0.8) 1px;
+
+  border-radius: 0.375rem;
+  padding-top: 0.25rem;
+  padding-inline: 0.5rem;
+  margin-top: 0.75rem;
+  height: 4rem;
+
+  span {
+    user-select: none;
+    pointer-events: none;
+    margin-block: auto;
+    font-size: 1.1rem;
+    transform: translateY(1rem);
+    transition-property: transform, font-size;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+  }
+
+  &[data-error='false'] {
+    span {
+      color: colors.$primary;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transform: translateY(0);
+    }
+  }
+
+  &[data-error='true'] {
+    outline: solid colors.$error 2px;
+    span {
+      color: colors.$error !important;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transform: translateY(0);
+    }
+  }
+
+  &:focus-within {
+    span {
+      color: colors.$primary;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transform: translateY(0);
+    }
+
+    &[data-error='true'] {
+      outline: solid colors.$error 2px;
+    }
+    &[data-error='false'] {
+      outline: solid colors.$primary 2px;
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  border: none;
+  line-height: 1.1rem;
+  padding-block: 0 0.25rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.error {
+  color: colors.$error;
+  font-size: 0.8rem;
+  padding-block: 0.2rem 0;
+  padding-inline: 0.5rem;
+  &:empty:before {
+    content: '\200b';
+  }
+}
+
+// .fileLabel {
+//   display: flex;
+//   position: absolute;
+//   top: -1px;
+//   bottom: -1px;
+//   left: -1px;
+//   right: -1px;
+//   padding: 0.5rem;
+//   margin: auto;
+//   border-radius: 100%;
+//   width: fit-content;
+//   height: fit-content;
+//   border: 1px solid invert(colors.$light, 50%);
+//   background-color: transparentize(colors.$dark, 0.5);
+
+//   &:hover {
+//     background-color: transparentize(colors.$dark, 0.7);
+//   }
+
+//   > img {
+//     filter: invert(100%);
+//   }
+// }
+
+.fileInput[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
+}

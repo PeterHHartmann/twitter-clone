@@ -1,0 +1,62 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
+.nav {
+  margin-top: 1rem;
+  background: lighten(colors.$backgrounds, 45%);
+  border-radius: 1.1rem;
+  overflow: hidden;
+
+  h3 {
+    margin-block: 1rem 0.75rem;
+    padding-inline: 1rem;
+  }
+
+  > .user {
+    padding: 1rem;
+  }
+}
+
+.user {
+  display: flex;
+  gap: 0.8rem;
+
+  &:hover {
+    background: lighten(colors.$backgrounds, 42%);
+  }
+
+  img {
+    border-radius: 100%;
+  }
+}
+
+.displayname {
+  font-size: 1rem;
+  font-weight: 500;
+  color: colors.$dark;
+  margin: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.username {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+  color: invert(colors.$dark, 20%);
+  margin: 0;
+}
+
+.followBtn {
+  @extend %btn-dark;
+  margin-left: auto;
+  margin-block: auto;
+}
+
+.unfollowBtn {
+  @extend %btn-light;
+  margin-left: auto;
+  margin-block: auto;
+}

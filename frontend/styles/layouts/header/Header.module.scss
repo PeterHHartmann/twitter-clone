@@ -1,0 +1,141 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100vh;
+
+  z-index: 9;
+  grid-column: 1;
+  position: sticky;
+  top: 0;
+}
+
+.links {
+  display: grid;
+  padding: 0 1rem;
+
+  @media (max-width: 1024px) {
+    padding-inline: 0.2rem;
+  }
+}
+
+.newTweet {
+  border: none;
+  padding: 0.85rem;
+  color: colors.$light;
+  background-color: colors.$primary;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 4rem;
+  margin-block: 1rem;
+  width: 14rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(colors.$primary, 10%);
+    transition: all ease-in-out 0.1s;
+  }
+
+  @media (max-width: 1024px) {
+    margin: auto;
+    margin-block: 1rem;
+    width: auto;
+
+    span {
+      display: none;
+    }
+
+    img {
+      display: block !important;
+    }
+  }
+
+  img {
+    display: none;
+  }
+}
+
+.logo {
+  @extend %btn-icon;
+  width: min-content;
+  padding: 1rem;
+  &:hover {
+    background-color: rgba(29, 155, 240, 0.1);
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  border-radius: 4rem;
+  gap: 1.2rem;
+  margin: 0 3rem 0.3rem 0;
+  margin-block: 0 0.3rem;
+  margin-inline: 0 3rem;
+  font-size: 1.275rem;
+  white-space: nowrap;
+  color: colors.$dark;
+
+  @media (max-width: 1024px) {
+    padding: 0.8rem;
+    margin-inline: 0;
+    width: min-content;
+  }
+
+  &:hover {
+    background-color: invert(colors.$light, 10%);
+  }
+
+  > *:not(img) {
+    margin: 0.8rem 0;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.activelink {
+  @extend .link;
+  font-weight: bold;
+}
+
+.inactivelink {
+  @extend .link;
+  font-weight: normal;
+}
+
+.modal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20%;
+  background-color: transparentize(colors.$dark, 0.6);
+}
+
+.wrapper {
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background: colors.$light;
+  max-width: 600px;
+  margin: auto;
+
+  h2 {
+    margin-block: 0.5rem;
+    padding-block: 0.5rem;
+  }
+}

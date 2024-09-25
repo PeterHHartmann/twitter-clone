@@ -1,0 +1,190 @@
+@use '../abstracts/components';
+@use '../abstracts/colors' as colors;
+
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.avatar {
+  @extend %avatar;
+  width: 48px;
+  height: 48px;
+}
+
+.content {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.info {
+  a {
+    :first-child {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    :not(:first-child) {
+      font-size: 0.95rem;
+      color: transparentize(colors.$dark, 0.3);
+    }
+  }
+}
+
+.moreBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 3rem;
+  margin-block: auto;
+  margin-inline: auto 0;
+  position: relative;
+
+  &:hover {
+    background-color: lighten(colors.$primary, 42%);
+  }
+
+  img {
+    display: flex;
+  }
+}
+
+.moreOpen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  background-color: lighten(colors.$primary, 42%);
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding-block: 0.4rem 1rem;
+  padding-inline: 0.5rem 0.5rem;
+  border-radius: 1rem;
+
+  > * {
+    margin-inline: auto 0;
+  }
+}
+
+.editBtn {
+  @extend %btn-dark;
+  width: 100%;
+}
+
+.deleteBtn {
+  @extend %btn;
+  width: 100%;
+  background-color: colors.$error;
+  color: colors.$light;
+  border: none;
+
+  &:hover {
+    background: darken(colors.$error, 10%);
+  }
+}
+
+.report {
+  display: flex;
+  gap: 0.5rem;
+  margin: auto;
+  white-space: nowrap;
+}
+
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  > :only-child {
+    width: 100%;
+  }
+}
+
+.image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: calc(50% - 0.5rem);
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  :only-child & {
+    grid-template-columns: auto;
+  }
+
+  img {
+    object-fit: cover;
+    max-width: calc(600px - 2rem);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: transparent;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20%;
+  background-color: transparentize(colors.$dark, 0.6);
+}
+
+.deleteConfirmation {
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background: colors.$light;
+  max-width: 350px;
+  margin: auto;
+  p {
+    font-size: 0.95rem;
+    color: transparentize(colors.$dark, 0.3);
+  }
+  h2 {
+    margin-block: 0.5rem;
+  }
+}
+
+.cancelBtn {
+  @extend %btn-light;
+  margin-block: 1rem 1rem;
+  width: 100%;
+}
+
+.editContainer {
+  max-width: 600px;
+  background: colors.$light;
+  padding: 1rem 2rem;
+  margin: auto;
+  border-radius: 1rem;
+}

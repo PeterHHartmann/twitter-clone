@@ -1,0 +1,16 @@
+@use '../abstracts/colors' as colors;
+@use '../abstracts/components';
+
+.container {
+  width: 100%;
+}
+
+.loadMoreBtn {
+  @extend %btn-light;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding-block: 1rem 1rem;
+  background-color: colors.$light;
+  border-radius: unset;
+}

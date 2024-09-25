@@ -1,0 +1,21 @@
+@use '../../abstracts/borders' as borders;
+@use '../../abstracts/components';
+
+.main {
+  display: grid;
+  grid-template-columns: auto 600px auto;
+}
+
+.deck {
+  width: 100%;
+  margin-inline: auto;
+  border-left: borders.$layout;
+  border-right: borders.$layout;
+}
+
+.logout {
+  @extend %btn-dark;
+  white-space: nowrap;
+  margin: 2rem;
+  width: 8rem;
+}

@@ -1,0 +1,96 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique @db.VarChar(50)
+  email      String   @unique @db.VarChar(50)
+  password   String   @unique @db.VarChar(60)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  profile    profile?
+}
+
+model avatar {
+  id            Int       @id @default(autoincrement())
+  profile_id    Int       @unique
+  path          String    @db.VarChar(200)
+  last_modified DateTime? @default(now()) @db.Timestamp(6)
+  profile       profile   @relation(fields: [profile_id], references: [id], onDelete: Cascade, map: "avatar_profile_id_profile_id_fkey")
+
+  @@index([profile_id], map: "fki_avatar_profile_id_profile_id_fkey")
+}
+
+model banner {
+  id            Int       @id @default(autoincrement())
+  profile_id    Int       @unique
+  path          String    @db.VarChar(200)
+  last_modified DateTime? @default(now()) @db.Timestamp(6)
+  profile       profile   @relation(fields: [profile_id], references: [id], onDelete: Cascade, map: "banner_profile_id_profile_id")
+
+  @@index([profile_id], map: "fki_banner_profile_id_profile_id")
+}
+
+model following {
+  follower                             Int
+  recipient                            Int
+  followed_at                          DateTime? @default(now()) @db.Timestamp(6)
+  profile_following_followerToprofile  profile   @relation("following_followerToprofile", fields: [follower], references: [id], onDelete: Cascade, map: "following_follower_profile_id_fkey")
+  profile_following_recipientToprofile profile   @relation("following_recipientToprofile", fields: [recipient], references: [id], onDelete: Cascade, map: "following_recipient_profile_id_fkey")
+
+  @@id([follower, recipient], map: "follower_recipient_pkey")
+  @@index([follower], map: "fki_following_follower_profile_id_fkey")
+  @@index([recipient], map: "fki_following_recipient_profile_id_fkey")
+}
+
+model profile {
+  id                                     Int         @id @default(autoincrement())
+  username                               String      @unique(map: "username_unique") @db.VarChar(50)
+  bio                                    String?     @db.VarChar(160)
+  created_at                             DateTime    @default(now()) @db.Timestamp(6)
+  last_modified                          DateTime    @default(now()) @db.Timestamp(6)
+  displayname                            String      @db.VarChar(50)
+  location                               String?     @db.VarChar(30)
+  isPrivate                              Boolean     @default(false)
+  avatar                                 avatar?
+  banner                                 banner?
+  following_following_followerToprofile  following[] @relation("following_followerToprofile")
+  following_following_recipientToprofile following[] @relation("following_recipientToprofile")
+  account                                account     @relation(fields: [username], references: [username], onDelete: Cascade, map: "profile_username_account_username_fkey")
+  tweet                                  tweet[]
+
+  @@index([username], map: "fki_profile_username_account_username_fkey")
+}
+
+model tweet {
+  id            Int           @id @default(autoincrement())
+  text          String?       @db.VarChar(280)
+  created_at    DateTime      @default(now()) @db.Timestamp(6)
+  last_modified DateTime      @default(now()) @db.Timestamp(6)
+  author        Int?
+  private       Boolean       @default(false)
+  profile       profile?      @relation(fields: [author], references: [id], onDelete: Cascade, map: "tweet_author_profile_id")
+  tweet_image   tweet_image[]
+
+  @@index([author], map: "fki_tweet_author_profile_id")
+}
+
+model tweet_image {
+  id            Int      @id @default(autoincrement())
+  path          String   @db.VarChar(50)
+  last_modified DateTime @default(now()) @db.Timestamp(6)
+  tweet_id      Int
+  tweet         tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade, map: "tweet_image_tweet_id_tweet_id_fkey")
+}
+
+model admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique(map: "admin_username_unique") @db.VarChar(50)
+  password String @db.VarChar(255)
+}

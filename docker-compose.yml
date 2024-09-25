@@ -1,0 +1,76 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - ./backend/.env.db
+    networks:
+      - database_network
+    volumes:
+      - ./db_backups/dump-twitter-202401101631.sql:/docker-entrypoint-initdb.d/backup.sql
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    stdin_open: true
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    hostname: backend
+    ports:
+      - 8000
+    networks:
+      - nginx_network
+      - database_network
+      - backend_network
+    volumes:
+      - user-images:/app/media
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  frontend:
+    stdin_open: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - 3000
+    networks:
+      - nginx_network
+      - backend_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  nginx:
+    build: ./nginx/
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./nginx/${RTE:-dev}/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./certs/:/etc/letsencrypt/
+    networks:
+      - nginx_network
+    depends_on:
+      - backend
+      - frontend
+
+networks:
+  database_network:
+    driver: bridge
+  backend_network:
+    driver: bridge
+  nginx_network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  user-images:

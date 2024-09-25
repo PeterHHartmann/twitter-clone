@@ -1,0 +1,92 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
+%container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 2rem);
+  border-radius: 2rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  margin-inline: 1rem;
+
+  @media (max-width: 1024px) {
+    margin-inline: 0;
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    background-color: lighten(colors.$backgrounds, 35%);
+    transition: all ease-in-out 0.1s;
+  }
+}
+
+.closed {
+  @extend %container;
+  background-color: unset;
+}
+
+.open {
+  @extend %container;
+  background-color: lighten(colors.$backgrounds, 35%);
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem 0.5rem 1rem;
+
+  button {
+    @extend %btn-dark;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1024px) {
+    position: fixed;
+    transform: translateY(-4rem);
+    padding-inline: 0.5rem;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 4rem;
+}
+
+.more {
+  margin-inline: auto 1rem;
+  filter: invert(30%);
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.avatar {
+  @extend %avatar;
+  width: 48px;
+  height: 48px;
+}
+
+.info {
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.displayname {
+  font-size: 1rem;
+  font-weight: 500;
+  color: colors.$dark;
+  white-space: no-wrap;
+}
+
+.username {
+  font-size: 1rem;
+  color: invert(colors.$dark, 20%);
+  white-space: no-wrap;
+}

@@ -1,0 +1,140 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/borders' as borders;
+@use '../../abstracts/components';
+
+.banner {
+  @extend %banner;
+  background-color: lighten(colors.$backgrounds, 32%);
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: space-between;
+  max-height: 80px;
+  width: 100%;
+  padding-inline: 1rem;
+}
+
+.avatar {
+  @extend %avatar;
+  width: 140px;
+  height: 140px;
+  transform: translateY(-50%);
+
+  > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.editBtn {
+  @extend %btn-light;
+  margin-block: auto;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.followBtn {
+  @extend %btn-dark;
+  margin-block: auto;
+}
+
+.unfollowBtn {
+  @extend %btn-light;
+  margin-block: auto;
+}
+
+.info {
+  width: 100%;
+  display: grid;
+  gap: 0.9rem;
+  padding-inline: 1rem;
+  padding-block: 0 1rem;
+}
+
+.names {
+  color: rgb(0, 0, 0);
+
+  * {
+    font-size: 1rem;
+    white-space: no-wrap;
+  }
+  :nth-child(1) {
+    font-weight: 500;
+  }
+  :nth-child(2) {
+    filter: invert(20%);
+  }
+}
+
+.history {
+  display: flex;
+  gap: 0.5rem;
+  div {
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    span {
+      font-size: 0.95rem;
+      filter: invert(20%);
+    }
+    img {
+      height: 1.2rem;
+      filter: invert(40%);
+    }
+  }
+}
+
+.followInfo {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  filter: invert(30%);
+}
+
+.contentOptions {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.option {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding-block: 1rem 0;
+  padding-inline: 1rem;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  border-bottom: borders.$layout;
+
+  &:hover {
+    background-color: darken(colors.$light, 7.5%);
+  }
+
+  span {
+    display: grid;
+    justify-items: center;
+    gap: auto;
+    width: max-content;
+  }
+}
+
+.optionCurrent {
+  @extend .option;
+  span::after {
+    content: ' ';
+    border-radius: 5rem;
+    background-color: colors.$primary;
+    width: 110%;
+    height: 0.25rem;
+    margin-block: 0.9rem 0.05rem;
+  }
+}

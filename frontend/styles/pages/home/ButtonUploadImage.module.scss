@@ -1,0 +1,27 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/components';
+
+.container {
+  transform: translateX(-0.5rem);
+  padding: 0.5rem 0;
+}
+
+.label {
+  @extend %btn-icon;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background: transparentize(colors.$primary, 0.9);
+  }
+}
+
+.input[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
+}

@@ -1,0 +1,80 @@
+stages:
+  - setup
+  - test
+  - documentation
+
+default:
+  image: node:lts
+
+# Caches
+.backend-node_modules-cache: &backend-node_modules-cache
+  key: 
+    files:
+      - backend/yarn.lock
+  paths:
+    - backend/node_modules
+  policy: pull
+
+.backend-yarn-cache: &backend-yarn-cache
+  key: backend-yarn-$CI_JOB_IMAGE
+  paths:
+    - backend/.yarn
+
+.backend-test-cache: &backend-test-cache
+  key: backend-test-$CI_JOB_IMAGE
+  paths:
+    - backend/.jestcache
+  policy: pull-push
+
+setup-backend:
+  stage: setup
+  script:
+    - cd backend && 
+      yarn install --frozen-lockfile --cache-folder .yarn
+  cache:
+    - <<: *backend-node_modules-cache
+      policy: pull-push
+    - <<: *backend-yarn-cache
+  only: 
+    - main
+    - merge_requests
+
+# Jobs
+test-backend:
+  stage: test
+  cache:
+  - <<: *backend-node_modules-cache
+  - <<: *backend-test-cache
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  script:
+    - cd backend && 
+      yarn test --cacheDirectory ".jestcache"
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: backend/coverage/cobertura-coverage.xml
+  only: 
+    - main
+    - merge_requests
+
+pages:
+  image: ruby:latest
+  stage: documentation
+  variables:
+    JEKYLL_ENV: production
+    LC_ALL: C.UTF-8
+  before_script:
+    - cd documentation
+    - gem install bundler
+    - gem install jekyll-feed
+    - bundle install
+    - bundle update minima
+  script:
+    - bundle exec jekyll build -d ../public
+  artifacts:
+    paths:
+      - public
+  only:
+  - main

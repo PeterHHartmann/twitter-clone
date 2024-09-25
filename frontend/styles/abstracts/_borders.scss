@@ -1,0 +1,3 @@
+@use 'colors' as color;
+
+$layout: 1px solid invert(color.$light, 5%);

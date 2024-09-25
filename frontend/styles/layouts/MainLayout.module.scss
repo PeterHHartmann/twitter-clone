@@ -1,0 +1,55 @@
+@use '../abstracts/borders' as borders;
+
+.app {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 4fr auto;
+  margin-inline: auto;
+  width: fit-content;
+  height: 150vh;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 19fr;
+  }
+}
+
+.container {
+  width: 100%;
+}
+
+.main {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.deck {
+  border-left: borders.$layout;
+  border-right: borders.$layout;
+  width: clamp(400px, 100vw, 600px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    width: clamp(320px, 100vw, calc(100% - 1rem));
+  }
+}
+
+.aside {
+  display: flex;
+  justify-content: flex-start;
+  padding-inline: 2rem 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+
+  > div {
+    min-width: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    z-index: 8;
+  }
+}

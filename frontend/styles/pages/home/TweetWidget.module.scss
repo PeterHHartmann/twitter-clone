@@ -1,0 +1,136 @@
+@use '../../abstracts/colors' as colors;
+@use '../../abstracts/borders' as borders;
+@use '../../abstracts/components';
+
+.section {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: borders.$layout;
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.avatar {
+  @extend %avatar;
+  width: 48px;
+  height: 48px;
+}
+
+.form {
+  width: calc(100% - 3rem - 1rem);
+}
+
+.textarea {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.225rem 0;
+  padding-top: 1rem;
+
+  border: none;
+  outline: none;
+
+  font-size: 1.2rem;
+  resize: none;
+  line-height: 1.4;
+  overflow: auto;
+  height: inherit;
+}
+
+.imgs {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: borders.$layout;
+}
+
+.privateSwitch {
+  p {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-block: 0.1rem;
+    color: lighten(colors.$dark, 30%);
+  }
+
+  label {
+    $slider-size: 18px;
+    $slider-space: 4px;
+
+    $container-width: calc($slider-size * 2 + $slider-space * 2);
+    $container-height: calc($slider-size + $slider-space * 2);
+    position: relative;
+    display: inline-block;
+    width: $container-width;
+    height: $container-height;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &[checked] {
+        background-color: colors.$primary;
+
+        + span {
+          background-color: colors.$primary;
+
+          &:before {
+            transform: translateX($slider-size);
+          }
+        }
+      }
+    }
+
+    span {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: darken(colors.$light, 25%);
+      transition: 0.4s;
+      border-radius: $container-height;
+
+      &:before {
+        position: absolute;
+        content: '';
+        height: $slider-size;
+        width: $slider-size;
+        left: $slider-space;
+        bottom: $slider-space;
+        background-color: colors.$light;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.submit {
+  margin-inline: auto 0;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  color: colors.$light;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 3rem;
+  background: lighten(colors.$primary, 20%);
+  &[data-active='true'] {
+    cursor: pointer;
+    background: colors.$primary;
+    &:hover {
+      background: rgb(19, 145, 230);
+      background: darken(colors.$primary, 10%);
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@use '../../abstracts/colors' as colors;
+
+.nav {
+  margin-top: 0.7rem;
+  background: lighten(colors.$backgrounds, 45%);
+  border-radius: 1.1rem;
+  overflow: hidden;
+
+  h3 {
+    margin-block: 1rem 0.5rem;
+    padding-inline: 1rem;
+  }
+}
+
+.trend {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+
+  &:hover {
+    background: lighten(colors.$backgrounds, 42%);
+  }
+}
+
+.text {
+  font-size: 0.825rem;
+  font-weight: normal;
+  color: invert(colors.$dark, 30%);
+
+  :nth-child(2) {
+    font-size: 1rem;
+    font-weight: 500;
+    color: colors.$dark;
+  }
+
+  p {
+    margin-block: 0;
+  }
+}
+
+.icon {
+  filter: invert(30%);
+  margin-block: auto;
+}
